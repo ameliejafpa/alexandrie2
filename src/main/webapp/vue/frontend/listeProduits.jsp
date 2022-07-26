@@ -163,9 +163,7 @@
 	                                                                <li class="wishlist"><a href="#"
 	                                                                        title="Add to Wishlist"><span
 	                                                                            class="pe-7s-like"></span></a></li>
-	                                                                <li class="quick_button"><a href="#" title="Quick View"
-	                                                                        data-bs-toggle="modal"
-	                                                                        data-bs-target="#modal_box"> <span
+	                                                                <li class="quick_button"><a href="produit?id=${produit.id }" title="Quick View"> <span
 	                                                                            class="pe-7s-look"></span></a></li>
 	                                                            </ul>
 	                                                        </div>
@@ -198,8 +196,7 @@
 	                                                            <li class="wishlist"><a href="#"
 	                                                                    title="Add to Wishlist"><span
 	                                                                        class="pe-7s-like"></span></a></li>
-	                                                            <li class="quick_button"><a href="#" title="Quick View"
-	                                                                    data-bs-toggle="modal" data-bs-target="#modal_box">
+	                                                            <li class="quick_button"><a href="produit?id=${produit.id }" title="Quick View">
 	                                                                    <span class="pe-7s-look"></span></a></li>
 	                                                        </ul>
 	                                                    </div>
@@ -230,8 +227,7 @@
 	                                                            <li class="wishlist"><a href="#"
 	                                                                    title="Add to Wishlist"><span
 	                                                                        class="pe-7s-like"></span></a></li>
-	                                                            <li class="quick_button"><a href="#" title="Quick View"
-	                                                                    data-bs-toggle="modal" data-bs-target="#modal_box">
+	                                                            <li class="quick_button"><a href="produit?id=${produit.id }" title="Quick View">
 	                                                                    <span class="pe-7s-look"></span></a></li>
 	                                                        </ul>
 	                                                    </div>
