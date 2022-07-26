@@ -13,6 +13,7 @@ import dao.ImageD;
 import dao.ProduitD;
 import modele.ImageM;
 import modele.ProduitM;
+import modele.SousCategorieM;
 
 /**
  * Servlet implementation class ProduitC
@@ -43,6 +44,13 @@ public class ProduitC extends HttpServlet {
 		ImageD imageD = new ImageD();
 		ArrayList<ImageM> listeImages = new ArrayList<>();
 		listeImages = imageD.findByIdProduct(idProduit);
+		
+		
+		SousCategorieM sousCategorie = new SousCategorieM();
+		sousCategorieD sousCategorieD = new sousCategorieD();
+		sousCategorie = produitD.getSubCategory(idProduit);
+		ArrayList<ProduitM> listeProduits = new ArrayList<>();
+		listeProduits = sousCategorieD.findById(sousCategorie);
 		request.setAttribute("listeImages", listeImages);
 		
 		request.getRequestDispatcher("vue/frontend/produit.jsp").forward(request, response);

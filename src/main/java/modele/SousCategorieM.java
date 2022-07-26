@@ -7,6 +7,9 @@ public class SousCategorieM {
 	
 	public SousCategorieM() {
 	}
+	public SousCategorieM(int id) {
+		this.id = id;
+	}
 	public SousCategorieM(String titre, CategorieM idCategorie) {
 		this.titre = titre;
 		this.idCategorie = idCategorie;

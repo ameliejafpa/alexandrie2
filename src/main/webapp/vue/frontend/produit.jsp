@@ -47,12 +47,11 @@
  <jsp:include page="/headerC" />
  
     <!-- breadcrumbs area start -->
-    <div class="breadcrumbs_aree breadcrumbs_bg mb-100" data-bgimg="vue/frontend/assets/img/others/breadcrumbs-bg.png">
+    <div class="breadcrumbs_aree breadcrumbs_bg mb-50">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumbs_text">
-                        <h1>Single Product</h1>
                         <ul>
                             <li><a href="accueil">Accueil </a></li>
                             <li> // Produit</li>
@@ -123,9 +122,6 @@
 	                            <a class="serch_btn" href="#"><i class="pe-7s-search"></i></a>
                             
                         </form>
-                        <div class="product_paypal">
-                            <img src="vue/frontend/assets/img/others/paypal.png" alt="payments">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -214,10 +210,7 @@
     <div class="product_section mb-80">
         <div class="container">
             <div class="section_title text-center mb-55">
-                <h2>Related Products</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <br> tempor
-                    incididunt ut
-                    labore et dolore magna</p>
+                <h2>Produits qui pourraient vous intéresser</h2>
             </div>
             <div class="row product_slick slick_navigation slick__activation" data-slick='{
                 "slidesToShow": 4,
