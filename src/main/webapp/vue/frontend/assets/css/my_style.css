@@ -1,0 +1,19 @@
+button.add_to_cart {
+	width: auto;
+	padding: 0 37px;
+	border-radius: 25px;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-left: 12px;
+	line-height: 53px;
+	text-align: center;
+	color: #ffffff;
+	background: #2b4174;
+	border: none;
+}
+
+button.add_to_cart:hover {
+	background: #fc7c7c;
+	
+}

@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="vue/frontend/assets/css/jquery-ui.min.css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="vue/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="vue/frontend/assets/css/my_style.css">
+    
 
     <!--modernizr min js here-->
     <script src="vue/frontend/assets/js/vendor/modernizr-3.11.2.min.js"></script>
@@ -116,8 +118,8 @@
 	                                <input type="text" value="1">
 	                            </div>
 	                            <button class="add_to_cart " type="submit" name="padd" >Ajouter au panier</button>
-	                            <a class="add_to_cart " href="#">add to cart</a>
-	                            <a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
+<!-- 	                            <a class="add_to_cart " href="#">add to cart</a>
+ -->	                            <a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
 	                            <a class="serch_btn" href="#"><i class="pe-7s-search"></i></a>
                             
                         </form>
