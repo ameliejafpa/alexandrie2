@@ -29,6 +29,3 @@ build/
 # Connection file
 src/main/java/dao/ConnectMySql.java
 
-.classpath
-
-.settings\org.eclipse.wst.common.project.facet.core.xml
