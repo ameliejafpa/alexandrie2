@@ -34,7 +34,9 @@
   
   <!-- variables-->
 <c:url value="/productlistadmin" var="productList"/>
+<c:url value="/listecatadmin" var="categoryList"/>
 <c:url value="/deconnexionadmin" var="deconnexion"/>
+<c:url value="/accueiladmin" var="accueil"/>
 
 <!--start wrapper-->
   <div class="wrapper">
@@ -55,7 +57,7 @@
           <div class="top-navbar d-none d-xl-block ms-3">
           <ul class="navbar-nav align-items-center">
             <li class="nav-item">
-            <a class="nav-link" href="#">Accueil</a>
+            <a class="nav-link" href="${accueil }">Accueil</a>
             </li>      
             <li class="nav-item">
             <a class="nav-link" href="javascript:;">Produits</a>
@@ -241,11 +243,11 @@
               <div class="menu-title">Produits</div>
             </a>
             <ul>
-              <li> <a href="#"><i class="bi bi-arrow-right-short"></i>liste des produits</a>
+              <li> <a href="${productList }"><i class="bi bi-arrow-right-short"></i>liste des produits</a>
               </li>
 			  <li> <a href="#"><i class="bi bi-arrow-right-short"></i>ajout produit</a>
               </li>
-              <li> <a href="#"><i class="bi bi-arrow-right-short"></i>Listes categories</a>
+              <li> <a href="${categoryList }"><i class="bi bi-arrow-right-short"></i>Listes categories</a>
               </li>
               <li> <a href="#"><i class="bi bi-arrow-right-short"></i>stocks</a>
               </li>
