@@ -344,7 +344,7 @@
 			                                            </div>
 			                                        </div>
 			                                        <figcaption class="product_content text-center">
-			                                            <h4><a href="single-product.html">${produit.titre }</a></h4>
+			                                            <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
 			                                            <div class="price_box">
 			                                                <span class="current_price">${produit.prix } €</span>
 			                                            </div>
