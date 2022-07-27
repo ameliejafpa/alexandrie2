@@ -158,20 +158,20 @@ public class ProduitD implements IDao<ProduitM> {
 		return produit;
 	}
 	
-	public SousCategorieM getSubCategory(int id) {
-		SousCategorieM sousCategorie = null;
+	public int getSubCategory(int id) {
+		int idSousCategorie = 0;
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT idSousCategorie FROM produit WHERE id = ?");
 			sql.setInt(1, id);
 			ResultSet res = sql.executeQuery();
 			if (res.next()) {
-				sousCategorie = new SousCategorieM(res.getInt("prduit.idSousCategorie"));
+				idSousCategorie = res.getInt("produit.idSousCategorie");
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return sousCategorie;
+		return idSousCategorie;
 	}
 	
 	public int totalParCategorie() {

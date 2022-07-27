@@ -226,206 +226,31 @@
                   {"breakpoint":500, "settings": { "slidesToShow": 1 } }  
                  ]                                                     
             }'>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product1.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Products Name Here</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$22.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product2.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Lorem, ipsum dolor.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$24.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product3.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Praesentium vero nesciu.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$28.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product4.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Sit amet consectetur elit.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$32.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product5.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Atque earum ullam non.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$35.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product6.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Modi excepturi ut ipsam.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$38.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product7.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Provident odio, are Unde.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$28.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product1.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Products Name Here</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$22.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
+                <c:forEach items="${listeProduits }" var="produit">
+	                <div class="col-lg-3">
+	                    <article class="single_product">
+	                        <figure>
+	                            <div class="product_thumb">
+	                                <a href="produit?id=${produit.id }"><img src="${produit.image }" alt=""></a>
+	                                <div class="action_links">
+	                                    <ul class="d-flex justify-content-center">
+	                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
+	                                                    class="pe-7s-shopbag"></span></a></li>
+	                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
+	                                                    class="pe-7s-like"></span></a></li>
+	                                    </ul>
+	                                </div>
+	                            </div>
+	                            <figcaption class="product_content text-center">
+	                                <h4><a href="sproduit?id=${produit.id }">${produit.titre }</a></h4>
+	                                <div class="price_box">
+	                                    <span class="current_price">${produit.prix } €</span>
+	                                </div>
+	                            </figcaption>
+	                        </figure>
+	                    </article>
+	                </div>
+                </c:forEach> 
             </div>
         </div>
     </div>

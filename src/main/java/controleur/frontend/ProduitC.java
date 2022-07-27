@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ImageD;
 import dao.ProduitD;
+import dao.SousCategorieD;
 import modele.ImageM;
 import modele.ProduitM;
 import modele.SousCategorieM;
@@ -35,23 +36,25 @@ public class ProduitC extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//afichage du produit
 		ProduitD produitD = new ProduitD();
 		int idProduit = Integer.parseInt(request.getParameter("id"));
 		ProduitM produit = new ProduitM();
 		produit = produitD.findById(idProduit);
 		request.setAttribute("produit", produit);
 		
+		//affichage des images du produit
 		ImageD imageD = new ImageD();
 		ArrayList<ImageM> listeImages = new ArrayList<>();
 		listeImages = imageD.findByIdProduct(idProduit);
-		
-		
-		SousCategorieM sousCategorie = new SousCategorieM();
-		sousCategorieD sousCategorieD = new sousCategorieD();
-		sousCategorie = produitD.getSubCategory(idProduit);
-		ArrayList<ProduitM> listeProduits = new ArrayList<>();
-		listeProduits = sousCategorieD.findById(sousCategorie);
 		request.setAttribute("listeImages", listeImages);
+		
+		//affichage des produits en relation
+		int idSousCategorie = produit.getIdSousCategorie().getId();
+		ArrayList<ProduitM> listeProduits = new ArrayList<>();
+		listeProduits = produitD.readBySubCategory(idSousCategorie);
+		listeProduits.removeIf(prod -> prod.getId() == idProduit);
+		request.setAttribute("listeProduits", listeProduits);
 		
 		request.getRequestDispatcher("vue/frontend/produit.jsp").forward(request, response);
 	}

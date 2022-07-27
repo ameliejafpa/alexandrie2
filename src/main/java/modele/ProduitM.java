@@ -92,6 +92,12 @@ public class ProduitM {
 	public void setStockMinimum(int stockMinimum) {
 		this.stockMinimum = stockMinimum;
 	}
+	@Override
+	public String toString() {
+		return "ProduitM [id=" + id + ", titre=" + titre + ", description=" + description + ", prix=" + prix
+				+ ", image=" + image + ", idSousCategorie=" + idSousCategorie + ", stock=" + stock + ", stockMinimum="
+				+ stockMinimum + "]";
+	}
 	
 
 }
