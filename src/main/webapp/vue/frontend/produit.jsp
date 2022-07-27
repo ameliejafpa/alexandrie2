@@ -118,7 +118,9 @@
 	                            </div>
 	                            <button class="add_to_cart" type="submit" name="padd" >Ajouter au panier</button>
 <!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->
-								<button class="wishlist__btn" type="submit" name="pwhish" ><i class="pe-7s-like"></i></button>                       
+								<c:if test="${isConnected }">
+									<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>
+								</c:if>
 <!-- 							<a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
 	                            <a class="serch_btn" href="#"><i class="pe-7s-search"></i></a>
  -->                            
@@ -233,14 +235,14 @@
 	                        <figure>
 	                            <div class="product_thumb">
 	                                <a href="produit?id=${produit.id }"><img src="${produit.image }" alt=""></a>
-	                                <div class="action_links">
+	                                <!-- <div class="action_links">
 	                                    <ul class="d-flex justify-content-center">
 	                                    	<li><button class="add_to_cart" type="submit" name="padd" ><span class="pe-7s-shopbag"></span></button></li>
-	                                        <!-- <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span class="pe-7s-shopbag"></span></a></li> -->
+	                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span class="pe-7s-shopbag"></span></a></li>
 	                                        <li><button class="wishlist__btn" type="submit" name="pwhish" ><span class="pe-7s-like"></span></button></li>
-	                                        <!-- <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="pe-7s-like"></span></a></li> -->
+	                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="pe-7s-like"></span></a></li>
 	                                    </ul>
-	                                </div>
+	                                </div> -->
 	                            </div>
 	                            <figcaption class="product_content text-center">
 	                                <h4><a href="sproduit?id=${produit.id }">${produit.titre }</a></h4>
