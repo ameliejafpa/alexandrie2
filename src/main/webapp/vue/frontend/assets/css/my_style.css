@@ -28,3 +28,19 @@ button.add_to_cart {
 button.add_to_cart:hover {
 	background: #fc7c7c;
 }
+
+li button.add_to_cart {
+	font-size: 24px;
+	color: #ffffff;
+	width: 40px;
+	height: 40px;
+	line-height: 44px;
+	text-align: center;
+	background: #2b4174;
+	display: inline-block;
+	border-radius: 6px;
+	border: none;
+	padding: unset;
+	margin: unset;
+}
+
