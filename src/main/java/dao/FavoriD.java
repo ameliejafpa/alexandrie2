@@ -32,11 +32,11 @@ public class FavoriD implements IDao<FavoriM>{
 		ArrayList<FavoriM> listeFavori = new ArrayList<>();
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM favori INNER JOIN produit ON "
-					+ "favori.idProduit=produit.id INNER JOIN favori.idUtilisateur=utilisateur.id ");
+					+ "favori.idProduit=produit.id INNER JOIN utilisateur ON favori.idUtilisateur=utilisateur.id ");
 			ResultSet res = sql.executeQuery(); 			
 			while (res.next()) {
 				FavoriM favori = new FavoriM(res.getInt("favori.id"), new ProduitM(res.getInt("produit.id"), 
-					res.getString("produit.titre")), new UtilisateurM(res.getInt("id"),res.getString("nom"), res.getString("prenom"),
+					res.getString("produit.titre"),res.getFloat("produit.prix"), res.getString("produit.image")), new UtilisateurM(res.getInt("id"),res.getString("nom"), res.getString("prenom"),
 					res.getString("dateInscription"), res.getString("email"), res.getString("motDePasse")));
 				listeFavori.add(favori);
 			}			

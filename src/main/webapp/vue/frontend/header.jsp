@@ -107,7 +107,9 @@
                         <div class="header_account">
                             <ul class="d-flex">
                                 <li class="header_search"><a href="javascript:void(0)"><i class="pe-7s-search"></i></a></li>
-                                <li class="header_wishlist"><a href="wishlist.html"><i class="pe-7s-like"></i></a></li>   
+                                <c:if test="${isConnected }">
+                                	<li class="header_wishlist"><a href="listeFavoris?idUtilisateur=${userId }"><i class="pe-7s-like"></i></a></li>
+                                </c:if>  
                                 <li class="shopping_cart"><a href="javascript:void(0)"><i class="pe-7s-shopbag"></i></a>
                                     <span class="item_count">${panier.count() }</span>
                                 </li>

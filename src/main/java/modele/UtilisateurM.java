@@ -76,6 +76,11 @@ public class UtilisateurM {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
+	@Override
+	public String toString() {
+		return "UtilisateurM [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateInscription=" + dateInscription
+				+ ", email=" + email + ", motDePasse=" + motDePasse + "]";
+	}
 	
 
 }

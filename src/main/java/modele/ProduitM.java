@@ -43,6 +43,12 @@ public class ProduitM {
 		this.id = id;
 		this.titre = titre;
 	}
+	public ProduitM(int id, String titre, float prix, String image) {
+		this.id = id;
+		this.titre = titre;
+		this.prix = prix;
+		this.image = image;
+	}
 	
 	public int getId() {
 		return id;
