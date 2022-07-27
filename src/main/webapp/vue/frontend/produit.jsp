@@ -116,11 +116,12 @@
 	                            <div class="pro-qty border">
 	                                <input type="text" value="1">
 	                            </div>
-	                            <button class="add_to_cart " type="submit" name="padd" >Ajouter au panier</button>
-<!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->	                        
-								<a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
+	                            <button class="add_to_cart" type="submit" name="padd" >Ajouter au panier</button>
+<!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->
+								<button class="wishlist__btn" type="submit" name="pwhish" ><i class="pe-7s-like"></i></button>                       
+<!-- 							<a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
 	                            <a class="serch_btn" href="#"><i class="pe-7s-search"></i></a>
-                            
+ -->                            
                         </form>
                     </div>
                 </div>
@@ -234,9 +235,10 @@
 	                                <a href="produit?id=${produit.id }"><img src="${produit.image }" alt=""></a>
 	                                <div class="action_links">
 	                                    <ul class="d-flex justify-content-center">
-	                                    	<li class="add_to_cart"><button class="add_to_cart " type="submit" name="padd" > <span class="pe-7s-shopbag"></span></button></li>
+	                                    	<li><button class="add_to_cart" type="submit" name="padd" ><span class="pe-7s-shopbag"></span></button></li>
 	                                        <!-- <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span class="pe-7s-shopbag"></span></a></li> -->
-	                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="pe-7s-like"></span></a></li>
+	                                        <li><button class="wishlist__btn" type="submit" name="pwhish" ><span class="pe-7s-like"></span></button></li>
+	                                        <!-- <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="pe-7s-like"></span></a></li> -->
 	                                    </ul>
 	                                </div>
 	                            </div>
