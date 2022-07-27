@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CommentaireD;
 import dao.FavoriD;
 import dao.ImageD;
 import dao.ProduitD;
+import modele.CommentaireM;
 import modele.FavoriM;
 import modele.ImageM;
 import modele.ProduitM;
@@ -69,7 +71,18 @@ public class ProduitC extends HttpServlet {
 			favoriD.create(new FavoriM(produit,utilisateur));
 		}
 		
-		
+		//ajout commentaire
+		if (request.getParameter("btnCommentaire") != null) {
+			HttpSession session = request.getSession(true);
+			int userId = (int) session.getAttribute("userId");
+			produit.setId(idProduit);
+			UtilisateurM utilisateur = new UtilisateurM();
+			utilisateur.setId(userId);
+			String commentaire = request.getParameter("commentaire");
+			int note = Integer.valueOf(request.getParameter("note"));
+			CommentaireD comentaireD= new CommentaireD();
+			comentaireD.create(new CommentaireM(commentaire,note,produit,utilisateur));
+		}
 		
 		
 		request.getRequestDispatcher("vue/frontend/produit.jsp").forward(request, response);

@@ -138,27 +138,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="reviews__wrapper">
-	                    <h2>Write Your Own Review</h2>
+	                    <h2>Commentaires</h2> 
 	                    <div class="customer__reviews d-flex justify-content-between mb-20">
-	                        <div class="customer_reviews_left">
-	                            <div class="comment__title">
-	                                <h2>Add a review </h2>
-	                                <p>Your email address will not be published. Required fields are marked
-	                                </p>
-	                            </div>
-	                            <div class="reviews__ratting">
-	                                <h3>Your rating</h3>
-	                                <ul class="d-flex">
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                        <div class="customer_reviews_right">
-	                            <h2 class="reviews__title">Customer Reviews</h2>
 	                            <div class="reviews__ratting">
 	                                <ul class="d-flex">
 	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
@@ -178,30 +159,35 @@
 	                                    ea
 	                                    commodo consequat.</p>
 	                            </div>
-	                        </div>
+	                        
 	                    </div>
-	
-	                    <div class="product_review_form">
-	                        <form action="#">
-	                            <div class="row">
-	                                <div class="col-12">
-	                                    <label for="review_comment">Your review </label>
-	                                    <textarea class="border" name="comment" id="review_comment"></textarea>
-	                                </div>
-	                                <div class="col-lg-6 col-md-6">
-	                                    <label for="author">Name</label>
-	                                    <input class="border" id="author" type="text">
-	
-	                                </div>
-	                                <div class="col-lg-6 col-md-6">
-	                                    <label for="email">Email </label>
-	                                    <input class="border" id="email" type="text">
-	                                </div>
-	                            </div>
-	                            <button class="btn custom-btn text-white" data-hover="Submit"
-	                                type="submit">Submit</button>
-	                        </form>
-	                    </div>
+	                    <c:if test="${!isConnected }">
+							<div class="comment__title">
+                                <h2>Connexion/inscription</h2>
+                                <p>Vous devez vous connecter ou vous inscrire pour laisse un commentaire
+                                </p>
+                                <a class="login" href="login">Connexion/Inscription</a>
+                            </div>
+								</c:if>
+						<c:if test="${isConnected }">
+							<div class="comment__title">
+                                <h2>Ajouter un commentaire </h2>
+                            </div>
+		                    <div class="product_review_form">
+		                        <form method="post">
+		                            <div class="row">
+		                                <div class="col-12">
+		                                    <label for="review_comment">Votre commentaire</label>
+		                                    <textarea class="border" name="commentaire" id="review_comment"></textarea>
+		                                    <label for="reviews__ratting">Votre notation</label>
+		                                	<input type="number" id=reviews__ratting" name="note" min="1" max="5"/>
+		                                </div>
+		                            </div>
+		                            <button class="btn custom-btn text-white" data-hover="Submit"
+		                                type="submit" name="btnCommentaire">Envoyer</button>
+		                        </form>
+		                    </div>
+	                    </c:if>
 	                </div>
 	             </div>
             </div>

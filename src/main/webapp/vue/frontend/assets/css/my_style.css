@@ -54,7 +54,23 @@ button.wishlist__btn {
 	border: none;
 }
 
-button.add_to_cart:hover, button.wishlist__btn:hover {
+.reviews__wrapper .login {
+	display:inline-block;
+	width: auto;
+	padding: 0 37px;
+	border-radius: 25px;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-left: 12px;
+	line-height: 53px;
+	text-align: center;
+	color: #ffffff;
+	background: #2b4174;
+
+}
+
+button.add_to_cart:hover, button.wishlist__btn:hover, .customer__reviews .login:hover {
 	background: #fc7c7c;
 }
 
