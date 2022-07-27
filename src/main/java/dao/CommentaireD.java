@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modele.CommentaireM;
+import modele.ImageM;
 import modele.ProduitM;
 import modele.UtilisateurM;
 
@@ -103,6 +104,24 @@ public class CommentaireD implements IDao<CommentaireM>{
 		}
 		return commentaire;
 	}
-
+	
+	public ArrayList<CommentaireM> findByIdProduct(int id) {
+		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();		
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM commentaire INNER JOIN produit ON commentaire.idProduit=produit.id INNER JOIN utilisateur ON commentaire.idUtilisateur = utilisateur.id WHERE produit.id= ?");	
+			sql.setInt(1,id);	
+			ResultSet res = sql.executeQuery();			
+			while(res.next()) {
+				CommentaireM commentaire = new CommentaireM(res.getInt("commentaire.id"),res.getString("commentaire.commentaire"),
+						res.getInt("commentaire.note"), new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")), new UtilisateurM(res.getInt("utilisateur.id"),res.getString("nom"),res.getString("prenom"),res.getString("dateInscription"), res.getString("email"),res.getString("motDePasse")));
+				listeCommentaires.add(commentaire);		
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return listeCommentaires;
+	}
+	
+	
 
 } // fin CommentaireD

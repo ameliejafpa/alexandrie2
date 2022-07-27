@@ -98,7 +98,7 @@
                         <div class="price_box">
                             <span class="current_price">${produit.prix } €</span>
                         </div>
-                        <div class="quickview__info mb-0">
+                        <!-- <div class="quickview__info mb-0">
                             <p class="product_review d-flex align-items-center">
                                 <span class="review_icon d-flex">
                                     <i class="ion-ios-star"></i>
@@ -109,7 +109,7 @@
                                 </span>
                                 <span class="review__text"> (5 reviews)</span>
                             </p>
-                        </div>
+                        </div> -->
                         <p class="product_details_desc">${produit.description }</p>
                         <form method="post" class="product_pro_button quantity d-flex align-items-center">
                         	
@@ -138,29 +138,26 @@
             <div class="row">
                 <div class="col-12">
                     <div class="reviews__wrapper">
-	                    <h2>Commentaires</h2> 
-	                    <div class="customer__reviews d-flex justify-content-between mb-20">
-	                            <div class="reviews__ratting">
-	                                <ul class="d-flex">
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                </ul>
-	                            </div>
-	                            <div class="reviews__desc">
-	                                <h3>Lorem ipsum dolor sit amet</h3>
-	                                <span>Deate on July 22, 2020</span>
-	                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-	                                    eiusmod
-	                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-	                                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-	                                    ea
-	                                    commodo consequat.</p>
-	                            </div>
-	                        
-	                    </div>
+	                    <h2>Commentaires</h2>
+	                    <c:forEach items="${listeCommentaires }" var="commentaire">
+		                    <div class="customer__reviews d-flex justify-content-between mb-20">
+		                            <div class="reviews__ratting">
+		                            	<p>${commentaire.note }/5 <i class="ion-ios-star"></li></i></p>
+		                                <ul class="d-flex">
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                </ul>
+		                            </div>
+		                            <div class="reviews__desc">
+		                                <h3>${commentaire.utilisateur.prenom } ${commentaire.utilisateur.nom }</h3>
+		                                <p>${commentaire.commentaire }</p>
+		                            </div>
+		                        
+		                    </div>
+	                    </c:forEach>
 	                    <c:if test="${!isConnected }">
 							<div class="comment__title">
                                 <h2>Connexion/inscription</h2>

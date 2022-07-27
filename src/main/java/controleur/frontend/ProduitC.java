@@ -14,6 +14,7 @@ import dao.CommentaireD;
 import dao.FavoriD;
 import dao.ImageD;
 import dao.ProduitD;
+import dao.UtilisateurD;
 import modele.CommentaireM;
 import modele.FavoriM;
 import modele.ImageM;
@@ -80,9 +81,18 @@ public class ProduitC extends HttpServlet {
 			utilisateur.setId(userId);
 			String commentaire = request.getParameter("commentaire");
 			int note = Integer.valueOf(request.getParameter("note"));
+			request.setAttribute("listeProduits", produitD.read());
+			UtilisateurD utilisateurD = new UtilisateurD();
+			request.setAttribute("listeUtilisateurs", utilisateurD.read());
 			CommentaireD comentaireD= new CommentaireD();
 			comentaireD.create(new CommentaireM(commentaire,note,produit,utilisateur));
 		}
+		
+		//affichage des commentaires
+		CommentaireD commentaireD = new CommentaireD();
+		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();
+		listeCommentaires = commentaireD.findByIdProduct(idProduit);
+		request.setAttribute("listeCommentaires", listeCommentaires);
 		
 		
 		request.getRequestDispatcher("vue/frontend/produit.jsp").forward(request, response);
