@@ -64,7 +64,9 @@
                      <div class="col-12 col-lg-4 d-flex">
                        <div class="card border shadow-none w-100">
                          <div class="card-body">
-
+                         
+                         <!-- formulaire ajout -->
+                           <c:if test="${showCategorie==null && showSousCat==null }"> 
                            <form class="row g-3" method="post" action="listecatadmin">
                              <div class="col-12">
                                <label class="form-label">Nom</label>
@@ -80,6 +82,7 @@
                             <div class="col-12">
                               <label class="form-label">Categorie parent</label>
                               <select class="form-select" name="inputCatParent">
+
                                 <option selected>aucune</option>
                                 <c:forEach var="i" begin="0" end="${listeCategorie.size() }">
 									<c:if test=" ${listeCategorie[i].id==Null }">
@@ -89,16 +92,64 @@
 										value="${listeCategorie[i].id }">
 										${listeCategorie[i].titre }</option>
 									</c:if>
-								</c:forEach>
-                                
+								</c:forEach>  
                               </select> 
-                            </div>
+                            </div>                    
                             <div class="col-12">
                               <div class="d-grid">
                                 <button class="btn btn-primary">Add Category</button>
                               </div>
                             </div>
                            </form>
+                         </c:if>
+                         
+                         <!-- formulaire edit categorie -->
+                           <c:if test="${showCategorie!=null && showSousCat==null }"> 
+                           <form class="row g-3" method="post" action="listecatadmin">
+                             <div class="col-12">
+                               <label class="form-label">Nom</label>
+                               <input type="text" class="form-control" placeholder="Category name" name="inputName" value="${showCategorie.titre }">
+                             </div>                  
+                            <div class="col-12">
+                              <div class="d-grid">
+                                <button class="btn btn-primary" name="inputIdCat" value="${showCategorie.id }">Update Category</button>
+                              </div>
+                            </div>
+                           </form>
+                         </c:if>
+                         
+                         <!-- formulaire edit sous cat -->
+                           <c:if test="${showCategorie==null && showSousCat!=null }"> 
+                           <form class="row g-3" method="post" action="listecatadmin">
+                             <div class="col-12">
+                               <label class="form-label">Nom</label>
+                               <input type="text" class="form-control" placeholder="Category name" name="inputName" value=${showSousCat.titre }>
+                             </div>
+                            <div class="col-12">
+                              <label class="form-label">Categorie parent</label>
+                              <select class="form-select" name="inputCatParent">
+                                <option selected value="${showSousCat.idCategorie.id }">${showSousCat.idCategorie.titre }</option>
+                                <c:forEach var="i" begin="0" end="${listeCategorie.size() }">
+									<c:if test=" ${listeCategorie[i].id==Null }">
+									</c:if>
+									<c:if test="${listeCategorie[i].id!=Null }">
+										<option 
+										value="${listeCategorie[i].id }">
+										${listeCategorie[i].titre }</option>
+									</c:if>
+								</c:forEach> 
+                              </select> 
+                            </div>                    
+                            <div class="col-12">
+                              <div class="d-grid">
+                                <button class="btn btn-primary" name="inputIdSousCat" value="${showSousCat.id }">Update Sub-Category</button>
+                              </div>
+                            </div>
+                           </form>
+                         </c:if>                         
+                         
+                         
+              
                          </div>
                        </div>
                      </div>
@@ -116,25 +167,64 @@
                                    <th>Action</th>
                                  </tr>
                                </thead>
-                               <tbody>
-                                  <c:forEach var="i" begin="0" end="${listeSousCategorie.size() }">
-									<c:if test=" ${listeSousCategorie[i].id==Null }">
-									</c:if>
-									<c:if test="${listeSousCategorie[i].id!=Null }">	
-										<tr>
-		                                   <td><input class="form-check-input" type="checkbox"></td>
-		                                   <td>${listeSousCategorie[i].idCategorie.titre }</td>
-		                                   <td>${listeSousCategorie[i].titre }</td>
-		                                   <td>
-		                                    <div class="d-flex align-items-center gap-3 fs-6">
-		                                      <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-		                                      <a href="listecatadmin?delete=${listeSousCategorie[i].id }" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill" name="delete"></i></a>
-		                                    </div>
-		                                   </td>
-		                                 </tr>																	
-									</c:if>
-								</c:forEach>
-                               </tbody>
+                                <tbody>
+								    <!-- lister les categories -->
+								    <c:forEach items="${listeCategorie}" var ="categorie">
+								        <tr>
+								            <td><input class="form-check-input" type="checkbox"></td>
+								            <td>${categorie.titre }</td>
+								            <td></td>
+								            <td>
+								                <div class="d-flex align-items-center gap-3 fs-6">
+								                    <a href="listecatadmin?updateCategorie=${categorie.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateCategorie"><i class="bi bi-pencil-fill"></i></a>
+								                    <!-- declencheur modal suppression -->
+								                    <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteCatModal${categorie.id }"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
+								                </div>
+								            </td>
+								        </tr>	
+								        <!-- modal suppression catégorie-->
+								        <div class="modal fade" id="deleteCatModal${categorie.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								            <div class="modal-dialog">
+								                <div class="modal-content">
+								                    <div class="modal-body">Voulez-vous confirmer la suppression de ${categorie.titre } ?</div>
+								                    <div class="modal-footer">
+								                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+								                        <a href="listecatadmin?deleteCategorie=${categorie.id }"><button type="button" class="btn btn-primary" name="deleteCategorie">Confirmer</button></a>
+								                    </div>
+								                </div>
+								            </div>
+								        </div>	        
+								        <!-- lister les sous categories -->
+								        <c:forEach items="${listeSousCategorie}" var ="sousCategorie">
+								            <c:if test="${sousCategorie.idCategorie.id == categorie.id }">	
+								                <tr>
+								                    <td><input class="form-check-input" type="checkbox"></td>
+								                    <td>${sousCategorie.idCategorie.titre }</td>
+								                    <td>${sousCategorie.titre }</td>
+								                    <td>
+								                        <div class="d-flex align-items-center gap-3 fs-6">
+								                            <a href="listecatadmin?updateSousCat=${sousCategorie.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateSousCat"><i class="bi bi-pencil-fill"></i></a>
+								                            <!-- declencheur modal suppression -->
+								                            <a  class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteSousCatModal${sousCategorie.id }" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>     
+								                        </div>
+								                    </td>
+								                </tr>
+								                <!-- modal suppression catégorie-->                
+								                <div class="modal fade" id="deleteSousCatModal${sousCategorie.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								                    <div class="modal-dialog">
+								                        <div class="modal-content">
+								                            <div class="modal-body">Voulez-vous confirmer la suppression de ${sousCategorie.titre }  ?</div>
+								                            <div class="modal-footer">
+								                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+								                                <a href="listecatadmin?deleteSousCategorie=${sousCategorie.id }"><button type="button" class="btn btn-primary" name="deleteSousCategorie">Confirmer</button></a>
+								                            </div>
+								                        </div>
+								                    </div>
+								                </div>																
+								            </c:if>
+								        </c:forEach> <!-- fin liste sous categories-->
+								    </c:forEach> <!-- fin liste categories-->
+                                 </tbody>
                              </table>
                           </div>
                           <nav class="float-end mt-0" aria-label="Page navigation">
@@ -152,6 +242,7 @@
                    </div><!--end row-->
                 </div>
               </div>
+              
 
           </main>
        <!--end page main-->

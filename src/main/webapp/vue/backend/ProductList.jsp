@@ -72,7 +72,7 @@
                   <div class="row align-items-center m-0">
                     <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
                         <select class="form-select">
-                            <option selected>Toutes les catégories</option>
+                            <option selected value=0>Toutes les catégories</option>
                             <c:forEach var="i" begin="0" end="${listeCategorie.size() }">
 								<c:if test=" ${listeCategorie[i].id==Null }">
 								</c:if>
