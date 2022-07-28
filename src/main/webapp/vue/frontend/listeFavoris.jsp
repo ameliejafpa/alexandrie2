@@ -68,40 +68,53 @@
                 <div class="col-12">
                     <form action="#">
                         <div class="table-content table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="product_remove">Supprimer</th>
-                                        <th class="product-thumbnail">Images</th>
-                                        <th class="cart-product-name">Produit</th>
-                                        <th class="product-price">Prix unitaire</th>
-                                        <th class="product-stock-status">État du Stock</th>
-                                        <th class="cart_btn">Ajouter au panier</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                	<c:forEach items="${listeFavoris }" var="favori">
-                                    <tr>
-                                        <td class="product_remove">
-                                            <a href="#">
-                                                <i class="pe-7s-close" title="Supprimer"></i>
-                                            </a>
-                                        </td>
-                                        <td class="product-thumbnail">
-                                            <a href="#">
-                                                <img src="${favori.idProduit.image }"
-                                                    alt="">                                                    
-                                            </a>
-                                        </td>
-                                        <td class="product-name"><a href="#">${favori.idProduit.titre }</a></td>
-                                        <td class="product-price"><span class="amount">${favori.idProduit.prix }</span></td>
-                                        <td class="product-stock-status"><span class="in-stock">in stock</span></td>
-                                        <td class="cart_btn"><a href="#">Ajouter au panier</a></td>
-                                    </tr>
-                                    </c:forEach>
-                                    
-                                </tbody>
-                            </table>
+                        	<c:choose>
+                        		<c:when test="${empty listeFavoris }">
+                        			<h2>Votre liste de favoris est vide !</h2>
+                        		</c:when>
+                        		<c:otherwise>
+		                            <table class="table">
+		                                <thead>
+		                                    <tr>
+		                                        <th class="product_remove">Supprimer</th>
+		                                        <th class="product-thumbnail">Images</th>
+		                                        <th class="cart-product-name">Produit</th>
+		                                        <th class="product-price">Prix unitaire</th>
+		                                        <th class="product-stock-status">État du Stock</th>
+		                                        <th class="cart_btn">Ajouter au panier</th>
+		                                    </tr>
+		                                </thead>
+		                                <tbody>
+		                                	<c:forEach items="${listeFavoris }" var="favori">
+		                                    <tr>
+		                                        <td class="product_remove">
+		                                            <a href="listeFavoris?idUtilisateur=${favori.idUtilisateur.id }&action=delete&id=${favori.id}">
+		                                                <i class="pe-7s-close" title="Supprimer"></i>
+		                                            </a>
+		                                        </td>
+		                                        <td class="product-thumbnail">
+		                                            <a href="produit?id=${favori.idProduit.id }"><img src="${favori.idProduit.image }" alt="" width="100"></a>
+		                                        </td>
+		                                        <td class="product-name"><a href="produit?id=${favori.idProduit.id }">${favori.idProduit.titre }</a></td>
+		                                        <td class="product-price"><span class="amount">${favori.idProduit.prix }</span></td>
+		                                        <td class="product-stock-status">
+		                                        	<c:choose>
+		                                        		<c:when test="${favori.idProduit.stock > 0 }">
+		                                        			<span class="in-stock">En stock</span>
+		                                        		</c:when>
+		                                        		<c:otherwise>
+		                                        			<span class="in-stock text-danger">en restockage</span>
+		                                        		</c:otherwise>
+		                                        	</c:choose>
+		                                        </td>
+		                                        <td class="cart_btn"><a href="#">Ajouter au panier</a></td>
+		                                    </tr>
+		                                    </c:forEach>
+		                                    
+		                                </tbody>
+		                            </table>
+                            	</c:otherwise>
+                        	</c:choose>
                         </div>
                     </form>
                 </div>

@@ -1,6 +1,7 @@
 package controleur.frontend;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.FavoriD;
-import dao.ProduitD;
-import dao.UtilisateurD;
+import modele.FavoriM;
 
 /**
  * Servlet implementation class FavoriC
@@ -33,16 +33,19 @@ public class ListeFavorisC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		FavoriD favoriD = new FavoriD();
-//		ArrayList<ProduitM> listeFavoris = new ArrayList<>();
-//		listeFavoris = favoriD.read();
-		request.setAttribute("listeFavoris", favoriD.read());
-		ProduitD produitD = new ProduitD();
-		request.setAttribute("listeProduits", produitD.read());
-		UtilisateurD utilisateurD = new UtilisateurD();
-		request.setAttribute("listeUtilisateurs", utilisateurD.read());
-
-		System.out.println(favoriD.read());
-		request.getRequestDispatcher("vue/frontend/listeFavoris.jsp").forward(request, response);
+		ArrayList<FavoriM> listeFavoris = new ArrayList<>();
+		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
+		listeFavoris = favoriD.findByIdUser(idUtilisateur);
+		request.setAttribute("listeFavoris", listeFavoris);
+		
+		if (request.getParameter("id") == null) {
+			request.getRequestDispatcher("vue/frontend/listeFavoris.jsp").forward(request, response);
+		} else if (request.getParameter("action").equalsIgnoreCase("delete")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			favoriD.delete(id);
+			response.sendRedirect(request.getContextPath()+"/listeFavoris?idUtilisateur="+idUtilisateur);
+		}
+		
 		
 	}
 

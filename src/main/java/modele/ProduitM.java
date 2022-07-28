@@ -49,7 +49,14 @@ public class ProduitM {
 		this.prix = prix;
 		this.image = image;
 	}
-	
+	public ProduitM(int id, String titre, float prix, String image, int stock) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.prix = prix;
+		this.image = image;
+		this.stock = stock;
+	}
 	public int getId() {
 		return id;
 	}
