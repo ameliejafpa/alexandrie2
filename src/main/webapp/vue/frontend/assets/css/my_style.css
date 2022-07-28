@@ -1,3 +1,7 @@
+.main_menu nav > ul > li:hover > a {
+  color: #fc7c7c;
+}
+
 .breadcrumbs_text {
   padding: 20px 0;
 }

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="vue/frontend/assets/css/jquery-ui.min.css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="vue/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="vue/frontend/assets/css/my_style.css">
 
     <!--modernizr min js here-->
     <script src="vue/frontend/assets/js/vendor/modernizr-3.11.2.min.js"></script>

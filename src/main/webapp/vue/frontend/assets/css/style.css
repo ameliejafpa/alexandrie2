@@ -1007,7 +1007,7 @@ textarea:-ms-input-placeholder {
   opacity: 1;
   visibility: visible;
 }
-.main_menu nav > ul > li > a::before {
+/* .main_menu nav > ul > li > a::before {
   position: absolute;
   content: "";
   background: url(../img/others/menu_shape.png);
@@ -1022,7 +1022,7 @@ textarea:-ms-input-placeholder {
   visibility: hidden;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-}
+} */
 .main_menu nav > ul > li ul.bucker-dropdown {
   position: absolute;
   min-width: 230px;

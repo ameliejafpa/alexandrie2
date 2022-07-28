@@ -15,11 +15,13 @@ import dao.FavoriD;
 import dao.ImageD;
 import dao.ProduitD;
 import dao.UtilisateurD;
+import dao.VisiteD;
 import modele.CommentaireM;
 import modele.FavoriM;
 import modele.ImageM;
 import modele.ProduitM;
 import modele.UtilisateurM;
+import modele.VisiteM;
 
 /**
  * Servlet implementation class ProduitC
@@ -61,24 +63,26 @@ public class ProduitC extends HttpServlet {
 		listeProduits.removeIf(prod -> prod.getId() == idProduit);
 		request.setAttribute("listeProduits", listeProduits);
 		
+		//insertion visite
+		HttpSession session = request.getSession(true);
+		int userId = (int) session.getAttribute("userId");
+		produit.setId(idProduit);
+		UtilisateurM utilisateur = new UtilisateurM();
+		utilisateur.setId(userId);
+		VisiteM visiteM = new VisiteM();
+		visiteM.setIdProduit(produit);
+		visiteM.setIdUtilisateur(utilisateur);
+		VisiteD visiteD = new VisiteD();
+		visiteD.create(visiteM);
+		
 		//ajout favori
 		if (request.getParameter("btnFavori") != null) {
-			HttpSession session = request.getSession(true);
-			int userId = (int) session.getAttribute("userId");
-			produit.setId(idProduit);
-			UtilisateurM utilisateur = new UtilisateurM();
-			utilisateur.setId(userId);
 			FavoriD favoriD= new FavoriD();
 			favoriD.create(new FavoriM(produit,utilisateur));
 		}
 		
 		//ajout commentaire
 		if (request.getParameter("btnCommentaire") != null) {
-			HttpSession session = request.getSession(true);
-			int userId = (int) session.getAttribute("userId");
-			produit.setId(idProduit);
-			UtilisateurM utilisateur = new UtilisateurM();
-			utilisateur.setId(userId);
 			String commentaire = request.getParameter("commentaire");
 			int note = Integer.valueOf(request.getParameter("note"));
 			request.setAttribute("listeProduits", produitD.read());

@@ -19,7 +19,7 @@ public class VisiteD implements IDao<VisiteM> {
 		// TODO Auto-generated method stub
 try {
 			
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO visite(idProduit, idUtilisateur, dateV) VALUES (?, ?, now()");
+			PreparedStatement sql = connect.prepareStatement("INSERT INTO visite(idProduit, idUtilisateur, dateV) VALUES (?, ?, now())");
 			
 			sql.setObject(1, visite.getIdProduit().getId());
 			sql.setObject(2, visite.getIdUtilisateur().getId());

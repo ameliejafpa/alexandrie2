@@ -62,9 +62,9 @@
                                         </li>
                                    </c:if>
                                    <c:if test="${isConnected }">
-                                        <li class="account_link"> <i class="icofont-user-alt-7"></i><a href="#">${userPrenom} ${userNom}</a>
+                                        <li class="account_link"> <i class="icofont-user-alt-7"></i><a href="monCompte">${userPrenom} ${userNom}</a>
                                         	<ul class="dropdown_account_link">
-                                        		<li><a href="#"><span>Mon compte</span></a></li>
+                                        		<li><a href="monCompte"><span>Mon compte</span></a></li>
                                         		<li><a href="deconnexion"><span>Déconnexion </span></a></li>
                                         	</ul>
                                         </li>
@@ -98,8 +98,10 @@
 	                                			</c:forEach>
 	                                		</ul>
 	                                	<li>
-                                	</c:forEach> 
-                                    <li><a href="${coordonnee }">Nous contacter</a></li>
+                                	</c:forEach>
+                                	<c:if test="${isConnected }">
+                                    	<li><a href="contact">Nous contacter</a></li>
+                                    </c:if>
                                 </ul>
                             </nav>
                         </div>
