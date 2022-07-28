@@ -89,16 +89,14 @@
                                         </td>
                                         <td class="product-thumbnail">
                                             <a href="#">
-                                                <img src="assets/img/product/mini-product/product1.png"
-                                                    alt="Wishlist Thumbnail">
-                                                    ${favori.id }
-                                                    
+                                                <img src="${favori.idProduit.image }"
+                                                    alt="">                                                    
                                             </a>
                                         </td>
-                                        <td class="product-name"><a href="#">${favori.produit.titre }</a></td>
-                                        <td class="product-price"><span class="amount">${favori.idUtilisateur }</span></td>
+                                        <td class="product-name"><a href="#">${favori.idProduit.titre }</a></td>
+                                        <td class="product-price"><span class="amount">${favori.idProduit.prix }</span></td>
                                         <td class="product-stock-status"><span class="in-stock">in stock</span></td>
-                                        <td class="cart_btn"><a href="#">add to cart</a></td>
+                                        <td class="cart_btn"><a href="#">Ajouter au panier</a></td>
                                     </tr>
                                     </c:forEach>
                                     

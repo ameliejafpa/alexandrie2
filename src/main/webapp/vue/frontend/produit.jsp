@@ -152,7 +152,7 @@
 		                                </ul>
 		                            </div>
 		                            <div class="reviews__desc">
-		                                <h3>${commentaire.utilisateur.prenom } ${commentaire.utilisateur.nom }</h3>
+		                                <h3>${commentaire.idUtilisateur.prenom } ${commentaire.idUtilisateur.nom }</h3>
 		                                <p>${commentaire.commentaire }</p>
 		                            </div>
 		                        
