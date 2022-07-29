@@ -33,10 +33,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumbs_text">
-                        <h1>Contact Us</h1>
+                        <h1>Contactez-nous</h1>
                         <ul>
                             <li><a href="index.html">Home </a></li>
-                            <li> // Contact Us</li>
+                            <li> // Contactez-nous</li>
                         </ul>
                     </div>
                 </div>
@@ -53,15 +53,14 @@
                     <div class="col-lg-7 col-md-6">
                         <div class="contact_info_content">
                             <h2>Nous sommes ici pour vous aider !</h2>
-                            
-                            <div class="contact_info_details mb-45">
-                                <h3>Notre magasin à Paris</h3>
-                                <p>Your address goes here.</p>
-                                <p><a href="tel:0123456789">0123456789</a></p>
-                                <p><a href="#">demo@example.com</a></p>
-                                <p><a href="#">www.example.com</a></p>
-                                <span>See On The Map</span>
-                            </div>
+                            <c:forEach items="${listeCoordonnees }" var="coordonnee">
+                            	<div class="contact_info_details mb-45">
+	                                <h3>Notre magasin à Paris</h3>
+	                                <p>${coordonnee.adresse }</p>
+	                                <p><a href="tel:${coordonnee.telephone }">${coordonnee.telephone }</a></p>
+	                                <p><a href="mailto:${coordonnee.email }">${coordonnee.email }</a></p>
+                            	</div>
+                            </c:forEach>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-6">
@@ -87,15 +86,6 @@
     </div>
     <!-- contact section end -->
 
-    <!--contact map start-->
-    <div class="contact_map mt-70">
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2625.8276019638856!2d2.3886535158562716!3d48.842427009784245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1659046637143!5m2!1sfr!2sfr"
-            style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            
-            
-    </div>
-    <!--contact map end-->
  
  
 <c:import url="footer.jsp"></c:import>

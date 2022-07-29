@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CategorieD;
+import dao.CoordonneeD;
 import dao.SousCategorieD;
 import modele.CategorieM;
+import modele.CoordonneeM;
 import modele.PanierM;
 import modele.SousCategorieM;
 
@@ -60,6 +62,11 @@ public class HeaderC extends HttpServlet {
 		ArrayList<SousCategorieM> listeSousCategories = new ArrayList<>();
 		listeSousCategories = sousCategorieD.read();
 		request.setAttribute("listeSousCategories", listeSousCategories);
+		
+		ArrayList<CoordonneeM> listeCoordonnees = new ArrayList<>();
+		CoordonneeD coordonneeD = new CoordonneeD();
+		listeCoordonnees = coordonneeD.read();
+		request.setAttribute("listeCoordonnees", listeCoordonnees);	
 		
 		request.getRequestDispatcher("vue/frontend/header.jsp").include(request, response);
 	}

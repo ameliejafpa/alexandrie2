@@ -13,7 +13,9 @@
                             <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                         </div>
                         <div class="welcome_text text-center">
-                            <p>Bienvenue chez Alexandrie</p>
+	                        <c:forEach items="${listeCoordonnees }" var="coordonnee">
+	                            <p>Bienvenue chez ${coordonnee.nom }</p>
+	                        </c:forEach>
                         </div>
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
@@ -28,8 +30,10 @@
 	                                			</c:forEach>
 	                                		</ul>
 	                                	<li>
-                                	</c:forEach> 
-                                <li class="menu-item-has-children"><a href="${coordonnee }">Nous contacter</a></li>
+                                	</c:forEach>
+                                	<c:if test="${isConnected }">
+                                	<li class="menu-item-has-children"><a href="contact">Nous contacter</a></li>
+                                	</c:if>
                             </ul>
                         </div>
                     </div>
@@ -48,14 +52,18 @@
                     <div class="col-12">
                         <div class="header_top_inner d-flex justify-content-between">
                             <div class="welcome_text">
-                                <p>Les instruments de musique</p>
+                            	<c:forEach items="${listeCoordonnees }" var="coordonnee">
+                                	<p>${coordonnee.nom }</p>
+                                </c:forEach>
                             </div>
                             <div class="header_top_sidebar d-flex align-items-center">
                                 <ul class="d-flex">
-                                    <li><i class="icofont-phone"></i> <a href="tel:0123456789">01 23 45 67 89</a>
-                                    </li>
-                                    <li><i class="icofont-envelope"></i> <a
-                                            href="mailto:demo@example.com">contact@alexandrie.com</a></li>
+                                	<c:forEach items="${listeCoordonnees }" var="coordonnee">
+	                                    <li><i class="icofont-phone"></i> <a href="tel:${coordonnee.telephone }">${coordonnee.telephone }</a>
+	                                    </li>
+	                                    <li><i class="icofont-envelope"></i> <a href="mailto:${coordonnee.email }">${coordonnee.email }</a>
+	                                    </li>
+	                                </c:forEach>
                                    <c:if test="${!isConnected }">
                                         <li class="account_link">
                                                 <a href="login"><span>Inscription / Connexion</span></a> 
