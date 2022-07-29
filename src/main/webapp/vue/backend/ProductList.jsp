@@ -70,20 +70,54 @@
               <div class="card">
                 <div class="card-header py-3">
                   <div class="row align-items-center m-0">
+                  <!-- filtre categories -->
                     <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                        <select class="form-select">
-                            <option selected value=0>Toutes les catégories</option>
-                            <c:forEach var="i" begin="0" end="${listeCategorie.size() }">
-								<c:if test=" ${listeCategorie[i].id==Null }">
-								</c:if>
-								<c:if test="${listeCategorie[i].id!=Null }">
-									<option 
-									value="${listeCategorie[i].id }">
-									${listeCategorie[i].titre }</option>
-								</c:if>
-							</c:forEach>
-                        </select>
-                    </div>>
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                           			filtrer par categorie
+                          			</button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <ul>
+                                            <c:forEach items="${listeCategorie }" var ="categorie">
+												<li> <a href="productlistadmin?sortCategorie=${categorie.id }" name="sortCategorie">${categorie.titre }</a>
+					              				</li>
+											</c:forEach>
+											<li> <a href="productlistadmin" >Tous</a>
+					              			</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                     </div>
+                  <!-- filtre sous-categories -->
+                    <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                           filtrer par sous categorie
+                          </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <ul>
+                                            <c:forEach items="${listeSousCategorie }" var ="sousCategorie">
+													<li> <a href="productlistadmin?sortSousCategorie=${sousCategorie.id }" name="sortSousCategorie">${sousCategorie.titre }</a>
+					              					</li>
+											</c:forEach>
+												<li> <a href="productlistadmin" >Tous</a>
+					              				</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
                  </div>
                 </div>
                 <div class="card-body">
@@ -102,31 +136,28 @@
                         </tr>
                       </thead>                    
                       <tbody>
-                       <c:forEach var="i" begin="0" end="${listeProduits.size() }">
-									<c:if test=" ${listeProduits[i].id==Null }">
-									</c:if>
-									<c:if test="${listeProduits[i].id!=Null }">	
+                       <c:forEach items="${listeProduits }" var ="produit">
 				                        <tr>
 				                          <td>
 				                            <div class="form-check">
 				                              <input class="form-check-input" type="checkbox">
 				                            </div>
 				                          </td>
-				                          <td><span>${listeProduits[i].id }</span></td>
+				                          <td><span>${produit.id }</span></td>
 				                          <td class="productlist">
 				                            <a class="d-flex align-items-center gap-2" href="#">
 				                              <div class="product-box">
-				                                  <img src="${listeProduits[i].image }" alt=""  width="40" height="50">
+				                                  <img src="${produit.image }" alt=""  width="40" height="50">
 				                              </div>
 				                              <div>
-				                                  <h6 class="mb-0 product-title">${listeProduits[i].titre }</h6>
+				                                  <h6 class="mb-0 product-title">${produit.titre }</h6>
 				                              </div>
 				                             </a>
 				                          </td>
-				                          <td><span>${listeProduits[i].prix } EUR</span></td>
-				                          <td><span>${listeProduits[i].stock }</span></td>
-				                          <td><span>${listeProduits[i].idSousCategorie.titre }</span></td>
-				                          <td><span>${listeProduits[i].idSousCategorie.idCategorie.titre }</span></td>
+				                          <td><span>${produit.prix } EUR</span></td>
+				                          <td><span>${produit.stock }</span></td>
+				                          <td><span>${produit.idSousCategorie.titre }</span></td>
+				                          <td><span>${produit.idSousCategorie.idCategorie.titre }</span></td>
 				                          <td>
 				                            <div class="d-flex align-items-center gap-3 fs-6">
 				                              <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
@@ -135,7 +166,6 @@
 				                            </div>
 				                          </td>
 				                        </tr>								
-									</c:if>
 								</c:forEach>
                         </tbody>
                     </table>

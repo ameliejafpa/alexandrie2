@@ -73,6 +73,10 @@
                                <input type="text" class="form-control" placeholder="Category name" name="inputName">
                              </div>
                              <div class="col-12">
+                               <label class="form-label">fichier</label>
+                               <input type="file" class="form-control" placeholder="Category name" name="inputFile">
+                             </div>
+                             <div class="col-12">
                                 <label class="form-label">Type</label>
                                 <select class="form-select" name="inputType">
                                   <option value="1">categorie</option>

@@ -71,16 +71,14 @@ public class ListeCategories extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//update et create
-		System.out.println("post get param update"+request.getParameter("updateCategorie"));
+		System.out.println("input file: vue/img/produit/"+request.getParameter("inputFile"));
 		if (request.getParameter("inputIdCat")!=null) {
-			System.out.println("update cat");
 			categorieD.update(new CategorieM(request.getParameter("inputName")), Integer.valueOf(request.getParameter("inputIdCat")));	
 		} //fin update cat
 		else if (request.getParameter("inputIdSousCat")!=null) {
 			sousCategorieD.update(new SousCategorieM(request.getParameter("inputName"), categorieD.findById(Integer.parseInt(request.getParameter("inputCatParent")))), Integer.valueOf(request.getParameter("inputIdSousCat")));	
 		} // fin update sous cat
 		else if (Integer.parseInt(request.getParameter("inputType"))==1) {
-			System.out.println("nouvelle cat");
 			categorieD.create(new CategorieM(request.getParameter("inputName")));			
 		} // fin create cat
 		else if (Integer.parseInt(request.getParameter("inputType"))==2) {

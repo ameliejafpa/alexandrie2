@@ -43,7 +43,8 @@ public class ProductList extends HttpServlet {
 		if(request.getParameter("delete")!=null ) {
 			sousCategorieD.delete(Integer.valueOf(request.getParameter("delete")));
 		}
-		 */
+		 */		
+		
 		ArrayList<CategorieM> categorieM = new ArrayList<CategorieM>();
 		categorieM=categorieD.read();
 		request.setAttribute("listeCategorie", categorieM);
@@ -53,8 +54,23 @@ public class ProductList extends HttpServlet {
 		request.setAttribute("listeSousCategorie", sousCategorieM);
 		
 		ArrayList<ProduitM> produitM = new ArrayList<ProduitM>();
-		produitM=produitD.read();
-		request.setAttribute("listeProduits", produitM);
+		
+		//affichages produits d'une sous categorie
+		if (request.getParameter("sortSousCategorie")!=null ) {			
+			produitM=produitD.readBySubCategory(Integer.valueOf(request.getParameter("sortSousCategorie")));
+			request.setAttribute("listeProduits", produitM);
+		}
+		//affichage produits catégorie
+		else if (request.getParameter("sortCategorie")!=null) {
+			produitM=produitD.readByCategory(Integer.valueOf(request.getParameter("sortCategorie")));
+			request.setAttribute("listeProduits", produitM);
+		} 
+		//affichage tous les produits	
+		else {
+			produitM=produitD.read();
+			request.setAttribute("listeProduits", produitM);
+		}
+		
 				
 		request.getRequestDispatcher("/vue/backend/ProductList.jsp").forward(request, response);
 	}
