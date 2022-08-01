@@ -30,6 +30,7 @@
   <link href="vue/backend/assets/css/header-colors.css" rel="stylesheet" />
 
   <title>Liste des produits</title>
+    <style>.page-content {padding: 1.5rem 3rem} </style>
 </head>
 
 <body>
@@ -67,109 +68,196 @@
             </div>
             <!--end breadcrumb-->
 
-              <div class="card">
-                <div class="card-header py-3">
-                  <div class="row align-items-center m-0">
-                  <!-- filtre categories -->
-                    <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                           			filtrer par categorie
-                          			</button>
-                                    </h2>
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <ul>
-                                            <c:forEach items="${listeCategorie }" var ="categorie">
-												<li> <a href="productlistadmin?sortCategorie=${categorie.id }" name="sortCategorie">${categorie.titre }</a>
-					              				</li>
-											</c:forEach>
-											<li> <a href="productlistadmin" >Tous</a>
-					              			</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+    <div class="card">
+        <div class="card-header py-3">
+            <div class="row align-items-center m-0">
+	            <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+	            	<h6 class="mb-0">Ajouter ou modifier un produit</h6>
+	            </div>
+                <!-- filtre categories -->
+                <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    filtrer par categorie
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <c:forEach items="${listeCategorie }" var="categorie">
+                                            <li> <a href="productlistadmin?sortCategorie=${categorie.id }"
+                                                    name="sortCategorie">${categorie.titre }</a>
+                                            </li>
+                                        </c:forEach>
+                                        <li> <a href="productlistadmin">Tous</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                     </div>
-                  <!-- filtre sous-categories -->
-                    <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                           filtrer par sous categorie
-                          </button>
-                                    </h2>
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <ul>
-                                            <c:forEach items="${listeSousCategorie }" var ="sousCategorie">
-													<li> <a href="productlistadmin?sortSousCategorie=${sousCategorie.id }" name="sortSousCategorie">${sousCategorie.titre }</a>
-					              					</li>
-											</c:forEach>
-												<li> <a href="productlistadmin" >Tous</a>
-					              				</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
                     </div>
-                 </div>
                 </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table class="table align-middle table-striped">
-                      <thead class="table-light">
-                        <tr>			
-                          <th></th>
-                          <th>Id</th>
-                          <th>Produit</th>
-                          <th>Prix</th>
-                          <th>Stock</th>
-                          <th>Sous-categorie</th>
-                          <th>Categorie</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>                    
-                      <tbody>
-                       <c:forEach items="${listeProduits }" var ="produit">
-				                        <tr>
-				                          <td>
-				                            <div class="form-check">
-				                              <input class="form-check-input" type="checkbox">
-				                            </div>
-				                          </td>
-				                          <td><span>${produit.id }</span></td>
-				                          <td class="productlist">
-				                            <a class="d-flex align-items-center gap-2" href="#">
-				                              <div class="product-box">
-				                                  <img src="${produit.image }" alt=""  width="40" height="50">
-				                              </div>
-				                              <div>
-				                                  <h6 class="mb-0 product-title">${produit.titre }</h6>
-				                              </div>
-				                             </a>
-				                          </td>
-				                          <td><span>${produit.prix } EUR</span></td>
-				                          <td><span>${produit.stock }</span></td>
-				                          <td><span>${produit.idSousCategorie.titre }</span></td>
-				                          <td><span>${produit.idSousCategorie.idCategorie.titre }</span></td>
-				                          <td>
-				                            <div class="d-flex align-items-center gap-3 fs-6">
-				                              <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="View detail" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-				                              <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit info" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-				                              <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-				                            </div>
-				                          </td>
-				                        </tr>								
-								</c:forEach>
-                        </tbody>
-                    </table>
-                  </div>
+                <!-- filtre sous-categories -->
+                <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                    aria-controls="flush-collapseOne">
+                                    filtrer par sous categorie
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <c:forEach items="${listeSousCategorie }" var="sousCategorie">
+                                            <li> <a href="productlistadmin?sortSousCategorie=${sousCategorie.id }"
+                                                    name="sortSousCategorie">${sousCategorie.titre }</a>
+                                            </li>
+                                        </c:forEach>
+                                        <li> <a href="productlistadmin">Tous</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- fin header contenu -->
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-lg-2 d-flex">
+                    <div class="card border shadow-none w-100">
+                        <div class="card-body">
+
+                            <!-- formulaire ajout -->
+                            <form class="row g-3" method="post" action="productlistadmin">
+                                <div class="col-12">
+                                    <label class="form-label">Titre</label>
+                                    <input type="text" class="form-control" placeholder="nom" name="intputTitre">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Description</label>
+                                    <input type="text" class="form-control" placeholder="description" name="inputDescr">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Prix</label>
+                                    <input type="number" step="0.01" class="form-control" placeholder="prix"
+                                        name="inputPrix">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Image</label>
+                                    <input type="file" class="form-control" placeholder="chemin de l'image"
+                                        name="inputImage">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Sous-catégorie</label>
+                                    <select class="form-select" name="inputSousCat">
+                                        <c:forEach items="${listeSousCategorie}" var="sousCategorie">
+                                            <option value="${sousCategorie.id }">
+                                                ${sousCategorie.titre }</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Stock</label>
+                                    <input type="number" step="1" class="form-control" placeholder="stock"
+                                        name="inputStock">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Stock minimum</label>
+                                    <input type="number" step="1" class="form-control" placeholder="stock min"
+                                        name="inputStockMin">
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary">Valider</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- table produits-->
+                <div class="col-12 col-lg-10 d-flex">
+                    <div class="card border shadow-none w-100">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table align-middle table-striped">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Id</th>
+                                            <th></th>
+                                            <th>Produit</th>
+                                            <th>Prix</th>
+                                            <th>Stock</th>
+                                            <th>Cat</th>
+                                            <th>Sous-cat</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${listeProduits }" var="produit">
+                                            <tr>
+                                                <td><span>${produit.id }</span></td>
+                                                <td><img src="${produit.image }" alt="" width="40" height="50"></td>
+                                                <td><span>${produit.titre }</span></td>
+                                                <td><span>${produit.prix } EUR</span></td>
+                                                <td><span>${produit.stock }</span></td>
+                                                <td><span>${produit.idSousCategorie.idCategorie.titre }</span></td>
+                                                <td><span>${produit.idSousCategorie.titre }</span></td>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-3 fs-6">
+                                                        <a href="javascript:;" class="text-primary"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                                            data-bs-original-title="View detail" aria-label="Views"><i
+                                                                class="bi bi-eye-fill"></i></a>
+                                                        <a href="javascript:;" class="text-warning"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                                            data-bs-original-title="Edit info" aria-label="Edit"><i
+                                                                class="bi bi-pencil-fill"></i></a>
+                                                        <a class="text-danger" data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproduitModal${produit.id }"
+                                                            data-bs-placement="bottom" title=""
+                                                            data-bs-original-title="Delete" aria-label="Delete"><i
+                                                                class="bi bi-trash-fill"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- modal suppression catégorie-->
+                                            <div class="modal fade" id="deletePrdtModal${produit.id }" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">Voulez-vous confirmer la suppression de
+                                                            ${produit.titre } ?</div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Annuler</button>
+                                                            <a href="listecatadmin?deleteProduit=${produit.id }"><button
+                                                                    type="button" class="btn btn-primary"
+                                                                    name="deleteProduit">Confirmer</button></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
 
             <nav class="float-end mt-4" aria-label="Page navigation">
               <ul class="pagination">
@@ -181,6 +269,7 @@
               </ul>
             </nav>
 
+ 	 </div>
   </div>
 </div>
 
