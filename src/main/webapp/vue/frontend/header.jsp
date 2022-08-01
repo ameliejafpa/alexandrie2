@@ -89,7 +89,9 @@
                 <div class="col-12">
                     <div class="main_header d-flex justify-content-between align-items-center">
                        <div class="header_logo">
-                            <a class="sticky_none" href="index.html"><img src="vue/frontend/assets/img/logo/logo_music_shop.png" alt=""></a>
+                       		<c:forEach items="${listeCoordonnees }" var="coordonnee">
+                            <a class="sticky_none" href="accueil"><img src="${coordonnee.logo }" alt=""></a>
+                            </c:forEach>
                         </div>
                         <!--main menu start-->
                         <div class="main_menu d-none d-lg-block">
