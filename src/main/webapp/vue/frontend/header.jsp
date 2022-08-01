@@ -31,9 +31,9 @@
 	                                		</ul>
 	                                	<li>
                                 	</c:forEach>
-                                	<c:if test="${isConnected }">
+                                	
                                 	<li class="menu-item-has-children"><a href="contact">Nous contacter</a></li>
-                                	</c:if>
+                                	
                             </ul>
                         </div>
                     </div>
