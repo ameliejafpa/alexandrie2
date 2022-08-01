@@ -33,9 +33,12 @@ public class ResultatsRechercheC extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String requete = request.getParameter("requete");
+		//String[] mots = requete.split(" ");
 		ProduitD produitD = new ProduitD();
 		ArrayList<ProduitM> listeProduits = new ArrayList<>();
-		listeProduits = produitD.search(requete);
+		//for (String mot : mots) {
+			listeProduits = produitD.search(requete);
+		//}
 		request.setAttribute("listeProduits", listeProduits);
 
 		request.getRequestDispatcher("vue/frontend/resultatsRecherche.jsp").forward(request, response);	}

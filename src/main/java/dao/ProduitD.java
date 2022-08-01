@@ -183,8 +183,9 @@ public class ProduitD implements IDao<ProduitM> {
 	public ArrayList<ProduitM> search(String mot) {
 		ArrayList<ProduitM> listeProduits = new ArrayList<>();
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit WHERE titre LIKE ?");
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id WHERE produit.titre LIKE ? OR produit.description LIKE ?");
 			sql.setString(1, "%"+mot+"%");
+			sql.setString(2, "%"+mot+"%");
 			ResultSet res = sql.executeQuery();
 			while (res.next()) {
 				ProduitM produit = new ProduitM(res.getInt("produit.id"), res.getString("produit.titre"), 

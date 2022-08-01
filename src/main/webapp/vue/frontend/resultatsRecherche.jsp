@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumbs_text">
-                        <h1>Recherche : ${requete }</h1>
+                        <h1>Recherche : "${param.requete }"</h1>
                         <ul>
                             <li><a href="accueil">Accueil </a></li>
                             <li> // Recherche</li>
@@ -132,8 +132,8 @@
 	                                        <article class="product_list_items border-bottom">
 	                                            <figure class="product_list_flex d-flex align-items-center">
 	                                                <div class="product_thumb">
-	                                                    <a href="single-product.html"><img
-	                                                            src="assets/img/product/product12.png" alt=""></a>
+	                                                    <a href="produit?id=${produit.id }"><img
+	                                                            src="${produit.image }" alt=""></a>
 	                                                    <!-- <div class="action_links">
 	                                                        <ul class="d-flex justify-content-center">
 	                                                            <li class="add_to_cart"><a href="cart.html"
