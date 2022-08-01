@@ -39,7 +39,8 @@ public class ProduitD implements IDao<ProduitM> {
 		ArrayList<ProduitM> listeProduit = new ArrayList<>();
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON "
-					+ "produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id");
+					+ "produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id "
+					+ "ORDER BY categorie.titre, souscategorie.titre, produit.titre");
 			ResultSet res = sql.executeQuery(); 			
 			while (res.next()) {
 				ProduitM produit = new ProduitM(res.getInt("produit.id"), res.getString("produit.titre"), 
@@ -59,7 +60,9 @@ public class ProduitD implements IDao<ProduitM> {
 	public ArrayList<ProduitM> readByCategory(int idCategorie) {
 		ArrayList<ProduitM> listeProduit = new ArrayList<>();
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id WHERE categorie.id = ?");
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id "
+					+ "INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id WHERE categorie.id = ? "
+					+ "ORDER BY souscategorie.titre, produit.titre");
 			sql.setInt(1,idCategorie);	
 			ResultSet res = sql.executeQuery(); 
 			
@@ -81,7 +84,9 @@ public class ProduitD implements IDao<ProduitM> {
 	public ArrayList<ProduitM> readBySubCategory(int idSousCategorie) {
 		ArrayList<ProduitM> listeProduit = new ArrayList<>();
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id WHERE sousCategorie.id = ?");
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id "
+					+ "INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id WHERE sousCategorie.id = ? "
+					+ "ORDER BY produit.titre");
 			sql.setInt(1,idSousCategorie);	
 			ResultSet res = sql.executeQuery(); 
 			
@@ -157,6 +162,7 @@ public class ProduitD implements IDao<ProduitM> {
 		}
 		return produit;
 	}
+
 	
 	public int totalParCategorie() {
 		int total = 0;

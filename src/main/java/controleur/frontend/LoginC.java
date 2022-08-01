@@ -42,7 +42,6 @@ public class LoginC extends HttpServlet {
 			
 			UtilisateurM utilisateur = new UtilisateurM(nom,prenom,email,password);
 			utilisateurD.create(utilisateur);
-			System.out.println("inscription OK !");
 			messageInscriptionOk = true;			
 		}
 		

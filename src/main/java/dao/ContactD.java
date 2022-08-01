@@ -18,7 +18,7 @@ public class ContactD implements IDao<ContactM>{
 		// TODO Auto-generated method stub
 		try {
 			
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO contact(idUtilisateur, sujet, message, etat) VALUES (?, ?, ?, ?");
+			PreparedStatement sql = connect.prepareStatement("INSERT INTO contact(idUtilisateur, sujet, message, etat) VALUES (?, ?, ?, ?)");
 			
 			sql.setObject(1, contact.getIdUtilisateur().getId());
 			sql.setString(2, contact.getSujet());

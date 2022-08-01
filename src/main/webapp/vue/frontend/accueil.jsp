@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="vue/frontend/assets/css/magnific-popup.css">
     <link rel="stylesheet" href="vue/frontend/assets/css/jquery-ui.min.css">
     <!-- Main Style CSS -->
-    <link rel="stylesheet" href="vue/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="vue/frontend/assets/css/style.css">    
+    <link rel="stylesheet" href="vue/frontend/assets/css/my_style.css">
 
     <!--modernizr min js here-->
     <script src="vue/frontend/assets/js/vendor/modernizr-3.11.2.min.js"></script>
@@ -300,9 +301,7 @@
 			                                                    <li class="wishlist"><a href="wishlist.html"
 			                                                            title="Add to Wishlist"><span class="pe-7s-like"></span></a>
 			                                                    </li>
-			                                                    <li class="quick_button"><a href="#" title="Quick View"
-			                                                            data-bs-toggle="modal" data-bs-target="#modal_box">
-			                                                            <span class="pe-7s-look"></span></a></li>
+			                                                    
 			                                                </ul>
 			                                            </div>
 			                                        </div>
@@ -337,14 +336,12 @@
 			                                                    <li class="wishlist"><a href="wishlist.html"
 			                                                            title="Add to Wishlist"><span class="pe-7s-like"></span></a>
 			                                                    </li>
-			                                                    <li class="quick_button"><a href="#" title="Quick View"
-			                                                            data-bs-toggle="modal" data-bs-target="#modal_box">
-			                                                            <span class="pe-7s-look"></span></a></li>
+			                                                    
 			                                                </ul>
 			                                            </div>
 			                                        </div>
 			                                        <figcaption class="product_content text-center">
-			                                            <h4><a href="single-product.html">${produit.titre }</a></h4>
+			                                            <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
 			                                            <div class="price_box">
 			                                                <span class="current_price">${produit.prix } €</span>
 			                                            </div>

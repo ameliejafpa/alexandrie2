@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import modele.CommentaireM;
 import modele.FavoriM;
 import modele.ProduitM;
 import modele.UtilisateurM;
@@ -32,11 +34,10 @@ public class FavoriD implements IDao<FavoriM>{
 		ArrayList<FavoriM> listeFavori = new ArrayList<>();
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM favori INNER JOIN produit ON "
-					+ "favori.idProduit=produit.id INNER JOIN favori.idUtilisateur=utilisateur.id ");
+					+ "favori.idProduit=produit.id INNER JOIN utilisateur ON favori.idUtilisateur=utilisateur.id ");
 			ResultSet res = sql.executeQuery(); 			
 			while (res.next()) {
-				FavoriM favori = new FavoriM(res.getInt("favori.id"), new ProduitM(res.getInt("produit.id"), 
-					res.getString("produit.titre")), new UtilisateurM(res.getInt("id"),res.getString("nom"), res.getString("prenom"),
+				FavoriM favori = new FavoriM(res.getInt("favori.id"), new ProduitM(res.getInt("produit.id"),res.getString("produit.titre"),res.getFloat("produit.prix"), res.getString("produit.image")), new UtilisateurM(res.getInt("id"),res.getString("nom"), res.getString("prenom"),
 					res.getString("dateInscription"), res.getString("email"), res.getString("motDePasse")));
 				listeFavori.add(favori);
 			}			
@@ -82,7 +83,7 @@ public class FavoriD implements IDao<FavoriM>{
 		FavoriM favori = null;		
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM favori INNER JOIN produit ON "
-					+ "favori.idProduit=produit.id INNER JOIN favori.idUtilisateur=utilisateur.id "
+					+ "favori.idProduit=produit.id INNER JOIN utilisateur ON favori.idUtilisateur=utilisateur.id "
 					+ "WHERE favori.id= "+id+"");			
 			ResultSet res = sql.executeQuery();			
 			if(res.next()) {
@@ -94,6 +95,23 @@ public class FavoriD implements IDao<FavoriM>{
 			e.printStackTrace();
 		}
 		return favori;
+	}
+	
+	public ArrayList<FavoriM> findByIdUser(int id) {
+		ArrayList<FavoriM> listeFavoris = new ArrayList<>();		
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM favori INNER JOIN produit ON favori.idProduit=produit.id INNER JOIN utilisateur ON favori.idUtilisateur=utilisateur.id WHERE utilisateur.id= ?");	
+			sql.setInt(1,id);	
+			ResultSet res = sql.executeQuery();			
+			while(res.next()) {
+				FavoriM favori =  new FavoriM(res.getInt("favori.id"), new ProduitM(res.getInt("produit.id"), 
+						res.getString("produit.titre"),res.getFloat("produit.prix"), res.getString("produit.image"),res.getInt("produit.stock")), new UtilisateurM(res.getInt("utilisateur.id"),res.getString("nom"),res.getString("prenom"),res.getString("dateInscription"), res.getString("email"),res.getString("motDePasse")));
+				listeFavoris.add(favori);		
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return listeFavoris;
 	}
 
 } // fin FavoriD

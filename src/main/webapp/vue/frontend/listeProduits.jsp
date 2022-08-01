@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="vue/frontend/assets/css/jquery-ui.min.css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="vue/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="vue/frontend/assets/css/my_style.css">
 
     <!--modernizr min js here-->
     <script src="vue/frontend/assets/js/vendor/modernizr-3.11.2.min.js"></script>
@@ -50,7 +51,15 @@
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumbs_text">
-                        <h1>Produits</h1>
+                    <c:if test="${idCategorie != null}">
+                    	<h1>${categorie.titre }</h1>
+                    </c:if>
+                    <c:if test="${idSousCategorie != null}">
+                    	<h1>${sousCategorie.titre }</h1>
+                    </c:if>
+                    <c:if test="${idCategorie == null && idSousCategorie == null}">
+                    	<h1>Tous les instruments</h1>
+                    </c:if>
                         <ul>
                             <li><a href="/accueil">Accueil </a></li>
                             <li> // Liste des instruments</li>
@@ -68,7 +77,7 @@
             <div class="row">
                 <div class="col-lg-3 order-2 order-lg-1">
                     <div class="product_sidebar product_widget">
-                        <div class="widget__list widget_filter wow fadeInUp" data-wow-delay="0.1s"
+                        <!-- <div class="widget__list widget_filter wow fadeInUp" data-wow-delay="0.1s"
                             data-wow-duration="1.1s">
                             <h3>Filtres</h3>
                             
@@ -82,7 +91,7 @@
                                 </div>
 
                             </div>
-                        </div>
+                        </div> -->
                         <div class="widget__list category wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="1.2s">
                             <h3>Catégories</h3>
                             <div class="widget_category">
@@ -113,9 +122,9 @@
                         <div class="product_sidebar_header mb-60 d-flex justify-content-between align-items-center">
                             
                             <div class="product_header_right d-flex align-items-center">
-                                <div class="sorting__by d-flex align-items-center">
+                                <!-- <div class="sorting__by d-flex align-items-center">
                                     <span>Trier par : </span>
-                                    <form class="select_option" action="#">
+                                    <form class="select_option" method="post">
                                         <select name="orderby" id="short">
                                             <option selected value="1">Par défault</option>
                                             <option value="2">Tri par popularité</option>
@@ -124,7 +133,7 @@
                                             <option value="5">Du plus cher au moins cher</option>
                                         </select>
                                     </form>
-                                </div>
+                                </div> -->
                                 <div class="product__toolbar__btn">
                                     <ul class="nav" role="tablist">
                                         <li class="nav-item">
@@ -155,7 +164,7 @@
 	                                                    <div class="product_thumb">
 	                                                        <a href="produit?id=${produit.id }"><img
 	                                                                src="${produit.image }" alt=""></a>
-	                                                        <div class="action_links">
+	                                                        <%-- <div class="action_links">
 	                                                            <ul class="d-flex justify-content-center">
 	                                                                <li class="add_to_cart"><a href="cart.html"
 	                                                                        title="Add to cart">
@@ -163,12 +172,10 @@
 	                                                                <li class="wishlist"><a href="#"
 	                                                                        title="Add to Wishlist"><span
 	                                                                            class="pe-7s-like"></span></a></li>
-	                                                                <li class="quick_button"><a href="#" title="Quick View"
-	                                                                        data-bs-toggle="modal"
-	                                                                        data-bs-target="#modal_box"> <span
+	                                                                <li class="quick_button"><a href="produit?id=${produit.id }" title="Quick View"> <span
 	                                                                            class="pe-7s-look"></span></a></li>
 	                                                            </ul>
-	                                                        </div>
+	                                                        </div> --%>
 	                                                    </div>
 	                                                    <figcaption class="product_content text-center">
 	                                                        <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
@@ -190,19 +197,6 @@
 	                                                <div class="product_thumb">
 	                                                    <a href="produit?id=${produit.id }"><img
 	                                                            src="${produit.image }" alt=""></a>
-	                                                    <div class="action_links">
-	                                                        <ul class="d-flex justify-content-center">
-	                                                            <li class="add_to_cart"><a href="cart.html"
-	                                                                    title="Add to cart">
-	                                                                    <span class="pe-7s-shopbag"></span></a></li>
-	                                                            <li class="wishlist"><a href="#"
-	                                                                    title="Add to Wishlist"><span
-	                                                                        class="pe-7s-like"></span></a></li>
-	                                                            <li class="quick_button"><a href="#" title="Quick View"
-	                                                                    data-bs-toggle="modal" data-bs-target="#modal_box">
-	                                                                    <span class="pe-7s-look"></span></a></li>
-	                                                        </ul>
-	                                                    </div>
 	                                                </div>
 	                                                <figcaption class="product_list_content">
 	                                                    <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
@@ -222,7 +216,7 @@
 	                                                    <div class="product__desc">
 	                                                        <p>${produit.description }</p>
 	                                                    </div>
-	                                                    <div class="action_links product_list_action">
+	                                                    <%-- <div class="action_links product_list_action">
 	                                                        <ul class="d-flex">
 	                                                            <li class="add_to_cart"><a href="cart.html"
 	                                                                    title="Add to cart">
@@ -230,11 +224,10 @@
 	                                                            <li class="wishlist"><a href="#"
 	                                                                    title="Add to Wishlist"><span
 	                                                                        class="pe-7s-like"></span></a></li>
-	                                                            <li class="quick_button"><a href="#" title="Quick View"
-	                                                                    data-bs-toggle="modal" data-bs-target="#modal_box">
+	                                                            <li class="quick_button"><a href="produit?id=${produit.id }" title="Quick View">
 	                                                                    <span class="pe-7s-look"></span></a></li>
 	                                                        </ul>
-	                                                    </div>
+	                                                    </div> --%>
 	                                                </figcaption>
 	                                            </figure>
 	                                        </article>

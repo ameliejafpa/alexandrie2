@@ -62,6 +62,11 @@ public class CoordonneeM {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
+	@Override
+	public String toString() {
+		return "CoordonneeM [id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", telephone=" + telephone
+				+ ", email=" + email + ", logo=" + logo + "]";
+	}
 
-
+	
 }

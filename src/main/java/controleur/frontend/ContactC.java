@@ -10,25 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CategorieD;
+import dao.ContactD;
 import dao.CoordonneeD;
-import dao.SousCategorieD;
-import modele.CategorieM;
+import modele.ContactM;
 import modele.CoordonneeM;
-import modele.PanierM;
-import modele.SousCategorieM;
+import modele.UtilisateurM;
 
 /**
- * Servlet implementation class HeaderC
+ * Servlet implementation class ContactC
  */
-@WebServlet("/headerC")
-public class HeaderC extends HttpServlet {
+@WebServlet("/contact")
+public class ContactC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HeaderC() {
+    public ContactC() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,37 +36,23 @@ public class HeaderC extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// récupération du message
 		HttpSession session = request.getSession(true);
-		if (session.getAttribute("isConnected") == null) {
-			session.setAttribute("userId", 1);
-			session.setAttribute("userPrenom", "invité");
-			session.setAttribute("userNom", "invité");
-			session.setAttribute("isConnected", false);
+		int userId = (int) session.getAttribute("userId");
+		ContactD contactD = new ContactD();
+		if (request.getParameter("btnMessage") != null) {
+			String sujet = request.getParameter("conSujet");
+			String message = request.getParameter("conMessage");
+			contactD.create(new ContactM(new UtilisateurM(userId), sujet, message, 0));
 		}
 		
-		if ((PanierM)session.getAttribute("panier") == null) {
-			PanierM panierTemporaire = new PanierM();
-			session.setAttribute("panier", panierTemporaire);
-		}
-		
-		
-		CategorieD categorieD = new CategorieD();
-		ArrayList<CategorieM> listeCategories = new ArrayList<>();
-		listeCategories = categorieD.read();
-		request.setAttribute("listeCategories", listeCategories);
-		
-		
-		SousCategorieD sousCategorieD = new SousCategorieD();
-		ArrayList<SousCategorieM> listeSousCategories = new ArrayList<>();
-		listeSousCategories = sousCategorieD.read();
-		request.setAttribute("listeSousCategories", listeSousCategories);
-		
+		//Affichage des coordonnées
 		ArrayList<CoordonneeM> listeCoordonnees = new ArrayList<>();
 		CoordonneeD coordonneeD = new CoordonneeD();
 		listeCoordonnees = coordonneeD.read();
-		request.setAttribute("listeCoordonnees", listeCoordonnees);	
+		request.setAttribute("listeCoordonnees", listeCoordonnees);		
 		
-		request.getRequestDispatcher("vue/frontend/header.jsp").include(request, response);
+		request.getRequestDispatcher("vue/frontend/contact.jsp").forward(request, response);
 	}
 
 	/**

@@ -43,7 +43,20 @@ public class ProduitM {
 		this.id = id;
 		this.titre = titre;
 	}
-	
+	public ProduitM(int id, String titre, float prix, String image) {
+		this.id = id;
+		this.titre = titre;
+		this.prix = prix;
+		this.image = image;
+	}
+	public ProduitM(int id, String titre, float prix, String image, int stock) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.prix = prix;
+		this.image = image;
+		this.stock = stock;
+	}
 	public int getId() {
 		return id;
 	}
@@ -91,6 +104,12 @@ public class ProduitM {
 	}
 	public void setStockMinimum(int stockMinimum) {
 		this.stockMinimum = stockMinimum;
+	}
+	@Override
+	public String toString() {
+		return "ProduitM [id=" + id + ", titre=" + titre + ", description=" + description + ", prix=" + prix
+				+ ", image=" + image + ", idSousCategorie=" + idSousCategorie + ", stock=" + stock + ", stockMinimum="
+				+ stockMinimum + "]";
 	}
 	
 

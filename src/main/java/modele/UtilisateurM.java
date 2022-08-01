@@ -16,7 +16,7 @@ public class UtilisateurM {
 		this.dateInscription = dateInscription;
 		this.email = email;
 		this.motDePasse = motDePasse;
-	}	
+	}		
 	public UtilisateurM(int id, String nom, String prenom, String dateInscription, String email, String motDePasse) {
 		this.id = id;
 		this.nom = nom;
@@ -25,8 +25,7 @@ public class UtilisateurM {
 		this.email = email;
 		this.motDePasse = motDePasse;
 	}
-	
-	
+
 	public UtilisateurM(String nom, String prenom, String email, String motDePasse) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -34,11 +33,18 @@ public class UtilisateurM {
 		this.motDePasse = motDePasse;
 	}
 	
-	
+	public UtilisateurM(String nom, String prenom, String email) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+	}
 	public UtilisateurM(String email, String motDePasse) {
-		super();
 		this.email = email;
 		this.motDePasse = motDePasse;
+	}
+	
+	public UtilisateurM(int id) {
+		this.id = id;
 	}
 	public int getId() {
 		return id;
@@ -75,6 +81,11 @@ public class UtilisateurM {
 	}
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+	@Override
+	public String toString() {
+		return "UtilisateurM [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateInscription=" + dateInscription
+				+ ", email=" + email + ", motDePasse=" + motDePasse + "]";
 	}
 	
 

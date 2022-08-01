@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.CategorieD;
 import dao.ProduitD;
+import dao.SousCategorieD;
 import modele.CategorieM;
 import modele.ProduitM;
+import modele.SousCategorieM;
 
 /**
  * Servlet implementation class ListeProduitsC
@@ -42,9 +44,20 @@ public class ListeProduitsC extends HttpServlet {
 		if (request.getParameter("idCategorie") != null) {
 			int idCategorie = Integer.parseInt(request.getParameter("idCategorie"));
 			listeProduits = produitD.readByCategory(idCategorie);
+			
+			//affichage titre catégorie
+			CategorieD categorieD = new CategorieD();
+			CategorieM categorie = categorieD.findById(idCategorie);
+			request.setAttribute("categorie", categorie);
+
 		} else if (request.getParameter("idSousCategorie") != null) {
 			int idSousCategorie = Integer.parseInt(request.getParameter("idSousCategorie"));
 			listeProduits = produitD.readBySubCategory(idSousCategorie);
+			
+			//affichage titre sous catégorie
+			SousCategorieD sousCategorieD = new SousCategorieD();
+			SousCategorieM sousCategorie = sousCategorieD.findById(idSousCategorie);
+			request.setAttribute("sousCategorie", sousCategorie);
 		} else {
 			listeProduits = produitD.read();
 		}

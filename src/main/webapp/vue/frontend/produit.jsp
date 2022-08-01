@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="vue/frontend/assets/css/jquery-ui.min.css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="vue/frontend/assets/css/style.css">
+    <link rel="stylesheet" href="vue/frontend/assets/css/my_style.css">
+    
 
     <!--modernizr min js here-->
     <script src="vue/frontend/assets/js/vendor/modernizr-3.11.2.min.js"></script>
@@ -45,12 +47,11 @@
  <jsp:include page="/headerC" />
  
     <!-- breadcrumbs area start -->
-    <div class="breadcrumbs_aree breadcrumbs_bg mb-100" data-bgimg="vue/frontend/assets/img/others/breadcrumbs-bg.png">
+    <div class="breadcrumbs_aree breadcrumbs_bg mb-50">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumbs_text">
-                        <h1>Single Product</h1>
                         <ul>
                             <li><a href="accueil">Accueil </a></li>
                             <li> // Produit</li>
@@ -97,7 +98,7 @@
                         <div class="price_box">
                             <span class="current_price">${produit.prix } €</span>
                         </div>
-                        <div class="quickview__info mb-0">
+                        <!-- <div class="quickview__info mb-0">
                             <p class="product_review d-flex align-items-center">
                                 <span class="review_icon d-flex">
                                     <i class="ion-ios-star"></i>
@@ -108,22 +109,22 @@
                                 </span>
                                 <span class="review__text"> (5 reviews)</span>
                             </p>
-                        </div>
+                        </div> -->
                         <p class="product_details_desc">${produit.description }</p>
                         <form method="post" class="product_pro_button quantity d-flex align-items-center">
                         	
 	                            <div class="pro-qty border">
 	                                <input type="text" value="1">
 	                            </div>
-	                            <button class="add_to_cart " type="submit" name="padd" >Ajouter au panier</button>
-	                            <a class="add_to_cart " href="#">add to cart</a>
-	                            <a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
+	                            <button class="add_to_cart" type="submit" name="padd" >Ajouter au panier</button>
+<!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->
+								<c:if test="${isConnected }">
+									<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>
+								</c:if>
+<!-- 							<a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
 	                            <a class="serch_btn" href="#"><i class="pe-7s-search"></i></a>
-                            
+ -->                            
                         </form>
-                        <div class="product_paypal">
-                            <img src="vue/frontend/assets/img/others/paypal.png" alt="payments">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -137,70 +138,53 @@
             <div class="row">
                 <div class="col-12">
                     <div class="reviews__wrapper">
-	                    <h2>Write Your Own Review</h2>
-	                    <div class="customer__reviews d-flex justify-content-between mb-20">
-	                        <div class="customer_reviews_left">
-	                            <div class="comment__title">
-	                                <h2>Add a review </h2>
-	                                <p>Your email address will not be published. Required fields are marked
-	                                </p>
-	                            </div>
-	                            <div class="reviews__ratting">
-	                                <h3>Your rating</h3>
-	                                <ul class="d-flex">
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                        <div class="customer_reviews_right">
-	                            <h2 class="reviews__title">Customer Reviews</h2>
-	                            <div class="reviews__ratting">
-	                                <ul class="d-flex">
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-	                                </ul>
-	                            </div>
-	                            <div class="reviews__desc">
-	                                <h3>Lorem ipsum dolor sit amet</h3>
-	                                <span>Deate on July 22, 2020</span>
-	                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-	                                    eiusmod
-	                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-	                                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-	                                    ea
-	                                    commodo consequat.</p>
-	                            </div>
-	                        </div>
-	                    </div>
-	
-	                    <div class="product_review_form">
-	                        <form action="#">
-	                            <div class="row">
-	                                <div class="col-12">
-	                                    <label for="review_comment">Your review </label>
-	                                    <textarea class="border" name="comment" id="review_comment"></textarea>
-	                                </div>
-	                                <div class="col-lg-6 col-md-6">
-	                                    <label for="author">Name</label>
-	                                    <input class="border" id="author" type="text">
-	
-	                                </div>
-	                                <div class="col-lg-6 col-md-6">
-	                                    <label for="email">Email </label>
-	                                    <input class="border" id="email" type="text">
-	                                </div>
-	                            </div>
-	                            <button class="btn custom-btn text-white" data-hover="Submit"
-	                                type="submit">Submit</button>
-	                        </form>
-	                    </div>
+	                    <h2>Commentaires</h2>
+	                    <c:forEach items="${listeCommentaires }" var="commentaire">
+		                    <div class="customer__reviews d-flex justify-content-between mb-20">
+		                            <div class="reviews__ratting">
+		                            	<p>${commentaire.note }/5 <i class="ion-ios-star"></li></i></p>
+		                                <ul class="d-flex">
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
+		                                </ul>
+		                            </div>
+		                            <div class="reviews__desc">
+		                                <h3>${commentaire.idUtilisateur.prenom } ${commentaire.idUtilisateur.nom }</h3>
+		                                <p>${commentaire.commentaire }</p>
+		                            </div>
+		                        
+		                    </div>
+	                    </c:forEach>
+	                    <c:if test="${!isConnected }">
+							<div class="comment__title">
+                                <h2>Connexion/inscription</h2>
+                                <p>Vous devez vous connecter ou vous inscrire pour laisse un commentaire
+                                </p>
+                                <a class="login" href="login">Connexion/Inscription</a>
+                            </div>
+								</c:if>
+						<c:if test="${isConnected }">
+							<div class="comment__title">
+                                <h2>Ajouter un commentaire </h2>
+                            </div>
+		                    <div class="product_review_form">
+		                        <form method="post">
+		                            <div class="row">
+		                                <div class="col-12">
+		                                    <label for="review_comment">Votre commentaire</label>
+		                                    <textarea class="border" name="commentaire" id="review_comment"></textarea>
+		                                    <label for="reviews__ratting">Votre notation</label>
+		                                	<input type="number" id=reviews__ratting" name="note" min="1" max="5"/>
+		                                </div>
+		                            </div>
+		                            <button class="btn custom-btn text-white" data-hover="Submit"
+		                                type="submit" name="btnCommentaire">Envoyer</button>
+		                        </form>
+		                    </div>
+	                    </c:if>
 	                </div>
 	             </div>
             </div>
@@ -212,10 +196,7 @@
     <div class="product_section mb-80">
         <div class="container">
             <div class="section_title text-center mb-55">
-                <h2>Related Products</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <br> tempor
-                    incididunt ut
-                    labore et dolore magna</p>
+                <h2>Produits qui pourraient vous intéresser</h2>
             </div>
             <div class="row product_slick slick_navigation slick__activation" data-slick='{
                 "slidesToShow": 4,
@@ -231,206 +212,31 @@
                   {"breakpoint":500, "settings": { "slidesToShow": 1 } }  
                  ]                                                     
             }'>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product1.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Products Name Here</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$22.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product2.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Lorem, ipsum dolor.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$24.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product3.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Praesentium vero nesciu.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$28.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product4.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Sit amet consectetur elit.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$32.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product5.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Atque earum ullam non.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$35.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product6.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Modi excepturi ut ipsam.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$38.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product7.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Provident odio, are Unde.</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$28.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
-                <div class="col-lg-3">
-                    <article class="single_product">
-                        <figure>
-                            <div class="product_thumb">
-                                <a href="single-product.html"><img src="vue/frontend/assets/img/product/product1.png" alt=""></a>
-                                <div class="action_links">
-                                    <ul class="d-flex justify-content-center">
-                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span
-                                                    class="pe-7s-shopbag"></span></a></li>
-                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span
-                                                    class="pe-7s-like"></span></a></li>
-                                        <li class="quick_button"><a href="#" title="Quick View" data-bs-toggle="modal"
-                                                data-bs-target="#modal_box"> <span class="pe-7s-look"></span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="single-product.html">Products Name Here</a></h4>
-                                <div class="price_box">
-                                    <span class="current_price">$22.00</span>
-                                </div>
-                            </figcaption>
-                        </figure>
-                    </article>
-                </div>
+                <c:forEach items="${listeProduits }" var="produit">
+	                <div class="col-lg-3">
+	                    <article class="single_product">
+	                        <figure>
+	                            <div class="product_thumb">
+	                                <a href="produit?id=${produit.id }"><img src="${produit.image }" alt=""></a>
+	                                <!-- <div class="action_links">
+	                                    <ul class="d-flex justify-content-center">
+	                                    	<li><button class="add_to_cart" type="submit" name="padd" ><span class="pe-7s-shopbag"></span></button></li>
+	                                        <li class="add_to_cart"><a href="cart.html" title="Add to cart"> <span class="pe-7s-shopbag"></span></a></li>
+	                                        <li><button class="wishlist__btn" type="submit" name="pwhish" ><span class="pe-7s-like"></span></button></li>
+	                                        <li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="pe-7s-like"></span></a></li>
+	                                    </ul>
+	                                </div> -->
+	                            </div>
+	                            <figcaption class="product_content text-center">
+	                                <h4><a href="sproduit?id=${produit.id }">${produit.titre }</a></h4>
+	                                <div class="price_box">
+	                                    <span class="current_price">${produit.prix } €</span>
+	                                </div>
+	                            </figcaption>
+	                        </figure>
+	                    </article>
+	                </div>
+                </c:forEach> 
             </div>
         </div>
     </div>

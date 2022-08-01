@@ -81,6 +81,27 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 		}
 		return false;
 	}
+	
+	public boolean updateWithoutPassword(UtilisateurM utilisateur, int id) {
+		// TODO Auto-generated method stub
+		try {
+			
+			PreparedStatement sql = connect.prepareStatement("UPDATE utilisateur SET nom = ?, prenom = ?, email = ? WHERE id = ?");
+			
+			sql.setString(1, utilisateur.getNom());
+			sql.setString(2, utilisateur.getPrenom());
+			sql.setString(3, utilisateur.getEmail());
+			sql.setInt(4, id);
+			
+			sql.executeUpdate();
+			return true;
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	@Override
 	public boolean delete(int id) {
