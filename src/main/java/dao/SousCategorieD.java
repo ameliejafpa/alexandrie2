@@ -31,7 +31,7 @@ public class SousCategorieD implements IDao<SousCategorieM> {
 	public ArrayList<SousCategorieM> read() {
 		ArrayList<SousCategorieM> listeSousCategorie = new ArrayList<>();
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT * FROM sousCategorie INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id");
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM sousCategorie INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id ORDER BY sousCategorie.titre");
 			ResultSet res = sql.executeQuery(); 			
 			while (res.next()) {
 				SousCategorieM sousCategorie = new SousCategorieM(res.getInt("sousCategorie.id"),res.getString("sousCategorie.titre"), 
