@@ -39,8 +39,7 @@ public class ProduitD implements IDao<ProduitM> {
 		ArrayList<ProduitM> listeProduit = new ArrayList<>();
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON "
-					+ "produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id "
-					+ "ORDER BY categorie.titre, souscategorie.titre, produit.titre");
+					+ "produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id ");
 			ResultSet res = sql.executeQuery(); 			
 			while (res.next()) {
 				ProduitM produit = new ProduitM(res.getInt("produit.id"), res.getString("produit.titre"), 
@@ -179,6 +178,28 @@ public class ProduitD implements IDao<ProduitM> {
 		
 		return total;
 		
+	}
+	
+	public ArrayList<ProduitM> search(String mot) {
+		ArrayList<ProduitM> listeProduits = new ArrayList<>();
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit WHERE titre LIKE ?");
+			sql.setString(1, "%"+mot+"%");
+			ResultSet res = sql.executeQuery();
+			while (res.next()) {
+				ProduitM produit = new ProduitM(res.getInt("produit.id"), res.getString("produit.titre"), 
+						res.getString("produit.description"), res.getFloat("produit.prix"), res.getString("produit.image"), 
+						new SousCategorieM(res.getInt("sousCategorie.id"),res.getString("sousCategorie.titre"), 
+								new CategorieM(res.getInt("categorie.id"), res.getString("categorie.titre"))
+						),res.getInt("produit.stock"), res.getInt("produit.stockMinimum"));
+				listeProduits.add(produit);
+			}
+			
+			return listeProduits;
+		} catch (Exception e) {
+			e.printStackTrace();
+	    	return null;
+		}
 	}
 
 } // fin ProduitD

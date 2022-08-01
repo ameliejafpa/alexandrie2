@@ -189,8 +189,8 @@
         <div class="search_close">
             <i class="ion-close-round"></i>
         </div>
-        <form class="border-bottom" action="#">
-            <input class="border-0" placeholder="Chercher..." type="text">
-            <button type="submit"><span class="pe-7s-search"></span></button>
+        <form class="border-bottom" action="resultatsRecherche" method="GET">
+            <input class="border-0" placeholder="Chercher..." type="text" name="requete">
+            <button type="submit" name="btnRecherche"><span class="pe-7s-search"></span></button>
         </form>
     </div>

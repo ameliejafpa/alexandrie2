@@ -48,7 +48,7 @@ public class CommandeD implements IDao<CommandeM>{
 			while (rs.next()) {
 				CommandeM commande = new CommandeM();
 				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),rs.getString("utilisateur.nom"),rs.getString("utilisateur.prenom"),rs.getString("utilisateur.dateInscription"),rs.getString("utilisateur.email"),rs.getString("utilisateur.motDePasse"));
-				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),utilisateur,rs.getString("adresseLivraison.adresse"),rs.getInt("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),rs.getString("adresseLivraison.pays"));
+				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),utilisateur,rs.getString("adresseLivraison.adresse"),rs.getString("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),rs.getString("adresseLivraison.pays"));
 				
 				commande.setId(rs.getInt("commande.id"));
 				commande.setIdUtilisateur(utilisateur);
@@ -117,7 +117,7 @@ public class CommandeD implements IDao<CommandeM>{
 			if (rs.next()) {
 				
 				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),rs.getString("utilisateur.nom"),rs.getString("utilisateur.prenom"),rs.getString("utilisateur.dateInscription"),rs.getString("utilisateur.email"),rs.getString("utilisateur.motDePasse"));
-				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),utilisateur,rs.getString("adresseLivraison.adresse"),rs.getInt("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),rs.getString("adresseLivraison.pays"));
+				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),utilisateur,rs.getString("adresseLivraison.adresse"),rs.getString("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),rs.getString("adresseLivraison.pays"));
 				
 				commande.setId(rs.getInt("commande.id"));
 				commande.setIdUtilisateur(utilisateur);

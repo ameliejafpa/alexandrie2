@@ -18,7 +18,7 @@ public class RechercheD implements IDao<RechercheM>{
 		// TODO Auto-generated method stub
 		try {
 			
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO recherche(idUtilisateur, motCle, dateR) VALUES (? , ?, now()");
+			PreparedStatement sql = connect.prepareStatement("INSERT INTO recherche(idUtilisateur, motCle, dateR) VALUES (? , ?, now())");
 			
 			sql.setObject(1, recherche.getIdUtilisateur().getId());
 			sql.setString(2, recherche.getMotCle());
