@@ -61,7 +61,7 @@ public class ProduitD implements IDao<ProduitM> {
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id "
 					+ "INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id WHERE categorie.id = ? "
-					+ "ORDER BY souscategorie.titre, produit.titre");
+					+ "ORDER BY sousCategorie.titre, produit.titre");
 			sql.setInt(1,idCategorie);	
 			ResultSet res = sql.executeQuery(); 
 			
