@@ -114,9 +114,9 @@
                         <form method="post" class="product_pro_button quantity d-flex align-items-center">
                         	
 	                            <div class="pro-qty border">
-	                                <input type="text" value="1">
+	                                <input type="text" value="1" name="panierQuantite">
 	                            </div>
-	                            <button class="add_to_cart" type="submit" name="padd" >Ajouter au panier</button>
+	                            <button class="add_to_cart" type="submit" name="btnPanierAdd" >Ajouter au panier</button>
 <!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->
 								<c:if test="${isConnected }">
 									<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>

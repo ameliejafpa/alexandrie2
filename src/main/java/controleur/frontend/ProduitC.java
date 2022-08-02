@@ -19,6 +19,8 @@ import dao.VisiteD;
 import modele.CommentaireM;
 import modele.FavoriM;
 import modele.ImageM;
+import modele.PanierDetailsM;
+import modele.PanierM;
 import modele.ProduitM;
 import modele.UtilisateurM;
 import modele.VisiteM;
@@ -97,6 +99,15 @@ public class ProduitC extends HttpServlet {
 		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();
 		listeCommentaires = commentaireD.findByIdProduct(idProduit);
 		request.setAttribute("listeCommentaires", listeCommentaires);
+		
+		//ajout panier
+		if (request.getParameter("btnPanierAdd") != null) {
+			int quantite = Integer.valueOf(request.getParameter("panierQuantite"));
+			PanierDetailsM panierAdd = new PanierDetailsM(produit, quantite);
+			PanierM panier = (PanierM) session.getAttribute("panier");
+			panier.add(panierAdd);
+			session.setAttribute("panier", panier);
+		}
 		
 		
 		request.getRequestDispatcher("vue/frontend/produit.jsp").forward(request, response);

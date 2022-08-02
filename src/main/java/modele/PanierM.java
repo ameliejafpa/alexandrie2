@@ -1,7 +1,7 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 public class PanierM {
 	public ArrayList<PanierDetailsM> articles = new ArrayList<>();
@@ -25,22 +25,22 @@ public class PanierM {
 	}
 	
 	public void add(PanierDetailsM p) {
-		boolean exist = false;
-		for (PanierDetailsM panierDetailsM : articles) {
-			if (panierDetailsM.getProduit().getId() == p.getProduit().getId()) {
-				exist = true;
-				panierDetailsM.setQuantite(panierDetailsM.getQuantite()+p.getQuantite());
+		boolean exist=false;
+		for(PanierDetailsM panierDetails:articles) {
+			if(panierDetails.getProduit().getId()==p.getProduit().getId()) {
+				exist=true;
+				panierDetails.setQuantite(panierDetails.getQuantite()+p.getQuantite());
 			}
-			if (exist = false) {
-				articles.add(p);
-			}
+		}
+		if(exist==false) {
+			articles.add(p);
 		}
 	}
 	
 	public double prixTotal() {
 		double prixTotal = 0;
-		for (PanierDetailsM panierDetailsM : articles) {
-			prixTotal += panierDetailsM.getProduit().getPrix() * panierDetailsM.getQuantite();
+		for (PanierDetailsM panierDetails : articles) {
+			prixTotal += panierDetails.getProduit().getPrix() * panierDetails.getQuantite();
 		}
 		
 		return prixTotal;
@@ -48,9 +48,9 @@ public class PanierM {
 	
 	public void delete(int idProduit) {
 		PanierDetailsM detail = new PanierDetailsM();
-		for (PanierDetailsM panierDetailsM : articles) {
-			if (panierDetailsM.getProduit().getId() == idProduit) {
-				detail = panierDetailsM;
+		for (PanierDetailsM panierDetails : articles) {
+			if (panierDetails.getProduit().getId() == idProduit) {
+				detail = panierDetails;
 			}
 		}
 		articles.remove(detail);

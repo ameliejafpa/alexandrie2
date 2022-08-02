@@ -359,59 +359,6 @@
         </div>
     </div>
     <!-- product section end -->
-    
-    <!-- service section start-->
-    <div class="service_section services_style2 service_container mb-86">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="services_section_inner d-flex justify-content-between">
-                        <div class="single_services one text-center wow fadeInUp" data-wow-delay="0.1s"
-                            data-wow-duration="1.1s">
-                            <div class="services_thumb">
-                                <img src="assets/img/others/services5.png" alt="">
-                            </div>
-                            <div class="services_content">
-                                <h3><a href="shop-left-sidebar.html">Pastry</a></h3>
-                                <p>Lorem ipsum dolor sit ametgtol consecr adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <div class="single_services two text-center wow fadeInUp" data-wow-delay="0.2s"
-                            data-wow-duration="1.2s">
-                            <div class="services_thumb">
-                                <img src="assets/img/others/services6.png" alt="">
-                            </div>
-                            <div class="services_content">
-                                <h3><a href="shop-left-sidebar.html">Breakfast</a></h3>
-                                <p>Lorem ipsum dolor sit ametgtol consecr adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <div class="single_services three text-center wow fadeInUp" data-wow-delay="0.3s"
-                            data-wow-duration="1.3s">
-                            <div class="services_thumb">
-                                <img src="assets/img/others/services7.png" alt="">
-                            </div>
-                            <div class="services_content">
-                                <h3><a href="shop-left-sidebar.html">Cofee Cake</a></h3>
-                                <p>Lorem ipsum dolor sit ametgtol consecr adipiscing elit.</p>
-                            </div>
-                        </div>
-                        <div class="single_services four text-center wow fadeInUp" data-wow-delay="0.4s"
-                            data-wow-duration="1.4s">
-                            <div class="services_thumb">
-                                <img src="assets/img/others/services8.png" alt="">
-                            </div>
-                            <div class="services_content">
-                                <h3><a href="shop-left-sidebar.html">Bake Tost</a></h3>
-                                <p>Lorem ipsum dolor sit ametgtol consecr adipiscing elit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- service section end-->
 
 <c:import url="footer.jsp"></c:import>
 

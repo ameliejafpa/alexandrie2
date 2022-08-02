@@ -2,6 +2,7 @@ package controleur.frontend;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +17,7 @@ import dao.RechercheD;
 import dao.SousCategorieD;
 import modele.CategorieM;
 import modele.CoordonneeM;
+import modele.PanierDetailsM;
 import modele.PanierM;
 import modele.RechercheM;
 import modele.SousCategorieM;
@@ -82,9 +84,12 @@ public class HeaderC extends HttpServlet {
 			//request.setAttribute("requete", rechercheD.create(rechercheM));
 			rechercheD.create(rechercheM);
 			response.sendRedirect(request.getContextPath() + "/resultatsRecherche");
-			
-			
 		}
+		
+		//affichage mini panier
+		PanierM panier = (PanierM) session.getAttribute("panier");
+		ArrayList<PanierDetailsM> panierDetails = panier.articles;
+		request.setAttribute("panierDetails", panierDetails);
 		
 		request.getRequestDispatcher("vue/frontend/header.jsp").include(request, response);
 	}

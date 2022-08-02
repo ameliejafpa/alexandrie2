@@ -146,13 +146,13 @@
                 </div>
             </div>
             <c:forEach items="${panierDetails }" var="article">
-	            <div class="cart_item">
+           		<div class="cart_item">
 	                <div class="cart_img">
-	                    <a href="produit?id=${article.idProduit.id }"><img src="vue/frontend/assets/img/product/product1.png" alt=""></a>
+	                    <a href="produit?id=${article.produit.id }"><img src="${article.produit.image }" alt=""></a>
 	                </div>
 	                <div class="cart_info">
-	                    <a href="single-product.html">Primis In Faucibus</a>
-	                    <p>1 x <span> $65.00 </span></p>
+	                    <a href="produit?id=${article.produit.id }">${article.produit.titre }</a>
+	                    <p>${article.quantite } x <span>${article.produit.prix } &euro;</span></p>
 	                </div>
 	                <div class="cart_remove">
 	                    <a href="#"><i class="ion-android-close"></i></a>
@@ -163,19 +163,16 @@
         </div>
         <div class="mini_cart_table">
             <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
+                
                 <div class="cart_total mt-10">
                     <span>total:</span>
-                    <span class="price">$125.00</span>
+                    <span class="price">${panier.prixTotal() } &euro;</span>
                 </div>
             </div>
         </div>
         <div class="mini_cart_footer">
             <div class="cart_button">
-                <a href="${login }">Voir le panier</a>
+                <a href="monPanier">Voir le panier</a>
             </div>
             <div class="cart_button">
                 <a href="checkout.html"><i class="fa fa-sign-in"></i> Payer</a>
