@@ -109,9 +109,7 @@
 	                                		</ul>
 	                                	<li>
                                 	</c:forEach>
-                                	<c:if test="${isConnected }">
-                                    	<li><a href="contact">Nous contacter</a></li>
-                                    </c:if>
+                                    <li><a href="contact">Nous contacter</a></li>
                                 </ul>
                             </nav>
                         </div>
