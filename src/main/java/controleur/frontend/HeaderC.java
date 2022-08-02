@@ -91,6 +91,13 @@ public class HeaderC extends HttpServlet {
 		ArrayList<PanierDetailsM> panierDetails = panier.articles;
 		request.setAttribute("panierDetails", panierDetails);
 		
+		//suppression d'un produit du panier
+		if (request.getParameter("action") != null && request.getParameter("action").equalsIgnoreCase("delete")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			panier.delete(id);
+			session.setAttribute("panier", panier);
+		}
+		
 		request.getRequestDispatcher("vue/frontend/header.jsp").include(request, response);
 	}
 

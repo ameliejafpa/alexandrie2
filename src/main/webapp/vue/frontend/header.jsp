@@ -155,7 +155,7 @@
 	                    <p>${article.quantite } x <span>${article.produit.prix } &euro;</span></p>
 	                </div>
 	                <div class="cart_remove">
-	                    <a href="#"><i class="ion-android-close"></i></a>
+	                    <a href="monPanier?action=delete&id=${article.produit.id }"><i class="ion-android-close"></i></a>
 	                </div>
 	            </div>
             </c:forEach>
