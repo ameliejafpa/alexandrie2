@@ -69,6 +69,10 @@
                                         </select>
                                     </form>
                                 </div> -->
+                                <c:if test="${empty listeProduits }">
+                                  	<h4>Désolé, aucun résultat pour votre recherche "${param.requete }"</h4>
+                                 </c:if>
+                                 <c:if test="${!empty listeProduits }">
                                 <div class="product__toolbar__btn">
                                     <ul class="nav" role="tablist">
                                         <li class="nav-item">
@@ -81,6 +85,7 @@
                                         </li>
                                     </ul>
                                 </div>
+                                </c:if>
                             </div>
                         </div>
                         <!--shop toolbar area end-->
