@@ -19,13 +19,13 @@ import modele.ProduitM;
  * Servlet implementation class MonPanier
  */
 @WebServlet("/monPanier")
-public class MonPanier extends HttpServlet {
+public class MonPanierC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MonPanier() {
+    public MonPanierC() {
         super();
         // TODO Auto-generated constructor stub
     }

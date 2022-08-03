@@ -175,7 +175,7 @@
                 <a href="monPanier">Voir le panier</a>
             </div>
             <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Payer</a>
+                <a href="paiement"><i class="fa fa-sign-in"></i> Payer</a>
             </div>
         </div>
     </div>
