@@ -37,6 +37,15 @@ public class PanierM {
 		}
 	}
 	
+	public void update(PanierDetailsM p) {
+		for(PanierDetailsM panierDetails:articles) {
+			if(panierDetails.getProduit().getId()==p.getProduit().getId()) {
+				
+				panierDetails.setQuantite(p.getQuantite());
+			}
+		}
+	}
+	
 	public double prixTotal() {
 		double prixTotal = 0;
 		for (PanierDetailsM panierDetails : articles) {
