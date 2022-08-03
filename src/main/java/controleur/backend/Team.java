@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.AdministrateurD;
 import modele.AdministrateurM;
-import modele.CategorieM;
 
 /**
  * Servlet implementation class Team
@@ -61,15 +60,18 @@ public class Team extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// update
-		if (request.getParameter("inputIdCat") != null) {
-			administrateurD.update(new CategorieM(request.getParameter("inputName")),
-					Integer.valueOf(request.getParameter("inputIdCat")));
+		if (request.getParameter("inputId") != null) {
+			administrateurD.update(new AdministrateurM(request.getParameter("inputName"),
+					request.getParameter("inputName"), null, request.getParameter("inputPrivilege")),
+					Integer.valueOf(request.getParameter("inputId")));
 		}
 
 		// create
 		else {
-			administrateurD.create(new CategorieM(request.getParameter("inputName")));
-		} // fin create cat
+			administrateurD
+					.create(new AdministrateurM(request.getParameter("inputName"), request.getParameter("inputEmail"),
+							request.getParameter("inputName"), request.getParameter("inputPrivilege")));
+		}
 
 		doGet(request, response);
 	}

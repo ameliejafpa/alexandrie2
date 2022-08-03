@@ -52,22 +52,22 @@
 <div class="col-12 col-lg-4 d-flex">
 <div class="card border shadow-none w-100">
     <div class="card-body">
-      <form class="row g-3" method="post" action="listecatadmin">
+      <form class="row g-3" method="post" action="teamadmin">
         <div class="col-12">
           <label class="form-label">Nom</label>
-          <input type="text" class="form-control" placeholder="nom" name="inputName">
+          <input type="text" class="form-control" placeholder="nom" name="inputName" value="${showAdmin.nom }">
         </div>
         <div class="col-12">
           <label class="form-label">Email</label>
-          <input type="text" class="form-control" placeholder="email" name="inputName">
+          <input type="text" class="form-control" placeholder="email" name="inputEmail" value="${showAdmin.email }" >
         </div>
         <div class="col-12">
           <label class="form-label">Privilege</label>
-          <input type="text" class="form-control" placeholder="privilege" name="inputName">
+          <input type="text" class="form-control" placeholder="privilege" name="inputPrivilege" value="${showAdmin.privilege }">
         </div>
        <div class="col-12">
          <div class="d-grid">
-           <button class="btn btn-primary">Ajouter / editer le membre</button>
+           <button class="btn btn-primary" name="inputId" value="${showAdmin.id }">Ajouter / editer le membre</button>
          </div>
        </div>
       </form>                        
@@ -83,6 +83,7 @@
            <table class="table align-middle">
              <thead class="table-light">
                <tr>
+                 <th>id</th>
                  <th>nom</th>
                  <th>email</th>
                  <th>privilege</th>
@@ -93,25 +94,26 @@
              
 <c:forEach items="${listeAdmin}" var ="admin">
   <tr>
-      <td><input class="form-check-input" type="checkbox"></td>
-      <td>${admin.titre }</td>
-      <td></td>
+      <td>${admin.id }</td>
+      <td>${admin.nom }</td>
+      <td>${admin.email }</td>
+      <td>${admin.privilege }</td>
       <td>
           <div class="d-flex align-items-center gap-3 fs-6">
-              <a href="listecatadmin?updateCategorie=${categorie.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateCategorie"><i class="bi bi-pencil-fill"></i></a>
+              <a href="teamadmin?updateAdmin=${admin.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateAdmin"><i class="bi bi-pencil-fill"></i></a>
               <!-- declencheur modal suppression -->
-              <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteCatModal${categorie.id }"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
+              <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteAdminModal${admin.id }"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
           </div>
       </td>
   </tr>	
   <!-- modal suppression catégorie-->
-  <div class="modal fade" id="deleteCatModal${categorie.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteAdminModal${admin.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
-              <div class="modal-body">Voulez-vous confirmer la suppression de ${categorie.titre } ?</div>
+              <div class="modal-body">Voulez-vous confirmer la suppression de ${admin.nom } ?</div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                  <a href="listecatadmin?deleteCategorie=${categorie.id }"><button type="button" class="btn btn-primary" name="deleteCategorie">Confirmer</button></a>
+                  <a href="teamadmin?deleteAdmin=${admin.id }"><button type="button" class="btn btn-primary" name="deleteAdmin">Confirmer</button></a>
               </div>
           </div>
       </div>
