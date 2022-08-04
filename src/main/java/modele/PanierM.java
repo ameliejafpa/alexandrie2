@@ -46,8 +46,8 @@ public class PanierM {
 		}
 	}
 	
-	public double prixTotal() {
-		double prixTotal = 0;
+	public float prixTotal() {
+		float prixTotal = 0;
 		for (PanierDetailsM panierDetails : articles) {
 			prixTotal += panierDetails.getProduit().getPrix() * panierDetails.getQuantite();
 		}

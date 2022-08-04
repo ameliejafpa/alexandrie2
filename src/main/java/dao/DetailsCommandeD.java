@@ -22,7 +22,7 @@ public class DetailsCommandeD implements IDao<DetailsCommandeM>{
 		// TODO Auto-generated method stub
 		try {
 			
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO detailsCommande(idCommande, idProduit, quantite, prix) VALUES (?, ?, ?, ?");
+			PreparedStatement sql = connect.prepareStatement("INSERT INTO detailsCommande(idCommande, idProduit, quantite, prix) VALUES (?, ?, ?, ?)");
 			
 			sql.setObject(1, detailsCommande.getIdCommande().getId());
 			sql.setObject(2, detailsCommande.getIdProduit().getId());

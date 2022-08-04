@@ -82,3 +82,8 @@ button.add_to_cart:hover, button.wishlist__btn:hover, .customer__reviews .login:
 	width: 100px;
 }
 
+.order-button-payment input:disabled {
+	background: #666;
+	cursor: default;
+}
+

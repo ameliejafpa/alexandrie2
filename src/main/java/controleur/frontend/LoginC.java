@@ -57,7 +57,7 @@ public class LoginC extends HttpServlet {
 			UtilisateurM utilisateur = utilisateurD.connexion(email,password);
 			if (utilisateur == null) {
 				System.out.println("pas de connexion");
-				messageConnexionNo = false;
+				messageConnexionNo = true;
 			} else {
 				System.out.println("connexion Ok");
 				HttpSession session = request.getSession(true);

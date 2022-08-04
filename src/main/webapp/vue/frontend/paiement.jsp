@@ -74,6 +74,11 @@
                                         <label>Mot de passe <span class="required">*</span></label>
                                         <input type="password" name="connexPassword">
                                     </p>
+                                    <c:if test="${messageConnexionNo }">
+	                                    <p class="form-row-first">
+	                                    	<div class="col-lg-12 alert alert-danger" role="alert">Adresse e-mail ou mot de passe invalide</div>
+	                                    </p>
+			                		</c:if>
                                     <p>
                                     	<button class="btn custom-btn md-size" type="submit" name="btnConnexion">Connexion</button>
                                     </p>
@@ -137,12 +142,16 @@
                             </div>
                         </div>
 		            </div>
-		            <c:if test="${messageInscriptionOk }">
+		            <c:if test="${!messageInscriptionOk }">
                          	<div class="alert alert-success" role="alert">Votre inscription a bien été prise en compte, veuillez-vous connecter</div>
                     </c:if>
 		           </c:if>
                 </div>
                 <div class="col-lg-6 col-12">
+                	<c:if test="${commandeOk }">
+		           	 	<div class="alert alert-success" role="alert">Votre commande est validée.</div>
+		            </c:if>
+                	<c:if test="${!commandeOk }">
                     <div class="your-order">
                         <h3>Votre commande</h3>
                         <div class="your-order-table table-responsive">
@@ -173,36 +182,13 @@
                         </div>
                         <div class="payment-method">
                             <div class="payment-accordion">
-                                <div class="order-button-payment">
-                                    <input value="Passer la commande" type="submit" <c:if test="${!isConnected }">disabled</c:if>>
-                                </div>
-                                <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order" <c:if test="${!isConnected }">disabled</c:if>>
-  Passer la commande
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="order" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-                                
+                            	<div class="order-button-payment">
+                            		<a href="paiement?valider=ok" class="btn custom-btn" <c:if test="${!isConnected }">disabled title="Connectez-vous pour payer"</c:if>>Payer la commande</a>
+                                </div>   
                             </div>
                         </div>
                     </div>
+                    </c:if>
                 </div>
             </div>
         </div>

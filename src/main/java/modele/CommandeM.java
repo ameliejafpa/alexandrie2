@@ -10,18 +10,15 @@ public class CommandeM {
 	
 	public CommandeM() {
 	}
-	public CommandeM(UtilisateurM idUtilisateur, String dateC, float total, AdresseLivraisonM idAdresse, int etat) {
+	public CommandeM(UtilisateurM idUtilisateur, float total, AdresseLivraisonM idAdresse, int etat) {
 		this.idUtilisateur = idUtilisateur;
-		this.dateC = dateC;
 		this.total = total;
 		this.idAdresse = idAdresse;
 		this.etat = etat;
 	}
-	public CommandeM(int id, UtilisateurM idUtilisateur, String dateC, float total, AdresseLivraisonM idAdresse,
-			int etat) {
+	public CommandeM(int id, UtilisateurM idUtilisateur, float total, AdresseLivraisonM idAdresse, int etat) {
 		this.id = id;
 		this.idUtilisateur = idUtilisateur;
-		this.dateC = dateC;
 		this.total = total;
 		this.idAdresse = idAdresse;
 		this.etat = etat;
@@ -68,6 +65,11 @@ public class CommandeM {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
+	@Override
+	public String toString() {
+		return "CommandeM [id=" + id + ", idUtilisateur=" + idUtilisateur + ", dateC=" + dateC + ", total=" + total
+				+ ", idAdresse=" + idAdresse + ", etat=" + etat + "]";
+	}
 	
-
+	
 }

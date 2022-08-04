@@ -73,7 +73,7 @@ public class MonPanierC extends HttpServlet {
 			panier.add(panierAdd);
 			session.setAttribute("panier", panier);
 		}
-		
+				
 		request.getRequestDispatcher("vue/frontend/monPanier.jsp").forward(request, response);
 	}
 

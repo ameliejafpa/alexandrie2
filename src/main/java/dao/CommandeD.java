@@ -19,7 +19,7 @@ public class CommandeD implements IDao<CommandeM>{
 		// TODO Auto-generated method stub
 		try {
 			
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO commande(idUtilisateur, dateC, total, idAdresse, etat) VALUES (?, now(), ?, ?, ?");
+			PreparedStatement sql = connect.prepareStatement("INSERT INTO commande(idUtilisateur, dateC, total, idAdresse, etat) VALUES (?, now(), ?, ?, ?)");
 			
 			sql.setObject(1, commande.getIdUtilisateur().getId());
 			sql.setFloat(2, commande.getTotal());
@@ -131,6 +131,20 @@ public class CommandeD implements IDao<CommandeM>{
 			e.printStackTrace();
 		}
 		return commande;
+	}
+	
+	public int findLastId() {
+		int idCommande = 0;
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT id FROM commande ORDER BY id DESC LIMIT 1");
+			ResultSet rs = sql.executeQuery();
+			if (rs.next()) {
+				idCommande = rs.getInt("id");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return idCommande;
 	}
 
 }

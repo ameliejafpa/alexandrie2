@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AdresseLivraisonD;
+import dao.CommandeD;
+import dao.DetailsCommandeD;
 import dao.UtilisateurD;
 import modele.AdresseLivraisonM;
+import modele.CommandeM;
+import modele.DetailsCommandeM;
 import modele.PanierDetailsM;
 import modele.PanierM;
 import modele.UtilisateurM;
@@ -81,7 +85,7 @@ public class PaiementC extends HttpServlet {
 			UtilisateurM utilisateur = utilisateurD.connexion(email,password);
 			if (utilisateur == null) {
 				System.out.println("pas de connexion");
-				messageConnexionNo = false;
+				messageConnexionNo = true;
 			} else {
 				System.out.println("connexion Ok");
 				session.setAttribute("userId", utilisateur.getId());
@@ -93,6 +97,31 @@ public class PaiementC extends HttpServlet {
 			
 		}
 		
+		boolean commandeOk = false;
+		
+		if (request.getParameter("valider") != null) {
+			commandeOk = true;
+			CommandeD commandeD = new CommandeD();
+			DetailsCommandeD detailsCommandeD = new DetailsCommandeD();
+			
+			//enregistrement de la commande
+			float totalPanier = panier.prixTotal();
+			UtilisateurM utilisateurM = new UtilisateurM();
+			utilisateurM.setId(userId);
+			CommandeM commandeM = new CommandeM(utilisateurM, totalPanier, adresseLivraisonM, 0);
+			commandeD.create(commandeM);
+			int idCommande = commandeD.findLastId();
+			commandeM = commandeD.findById(idCommande);
+
+			//enregistrement des détails de la commande
+			for (PanierDetailsM panierDetailsM : panier.articles) {
+				detailsCommandeD.create(new DetailsCommandeM(commandeM, panierDetailsM.getProduit(),panierDetailsM.getQuantite(),panierDetailsM.getProduit().getPrix()));
+			}
+			panier.empty();
+			session.setAttribute("panier", panier);
+		}
+		
+		request.setAttribute("commandeOk", commandeOk);
 		request.getRequestDispatcher("vue/frontend/paiement.jsp").forward(request, response);
 	}
 
