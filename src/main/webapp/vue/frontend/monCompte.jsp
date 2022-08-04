@@ -75,7 +75,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders"
-                                role="tab" aria-controls="account-orders" aria-selected="false">Orders</a>
+                                role="tab" aria-controls="account-orders" aria-selected="false">Commandes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-address"
@@ -103,35 +103,28 @@
                         <div class="tab-pane fade" id="account-orders" role="tabpanel"
                             aria-labelledby="account-orders-tab">
                             <div class="myaccount-orders">
-                                <h4 class="small-title">MY ORDERS</h4>
+                                <h4 class="small-title">Mes commandes</h4>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover">
                                         <tbody>
                                             <tr>
-                                                <th>ORDER</th>
-                                                <th>DATE</th>
-                                                <th>STATUS</th>
-                                                <th>TOTAL</th>
+                                                <th>Commande</th>
+                                                <th>Date</th>
+                                                <th>Statut</th>
+                                                <th>Total</th>
                                                 <th></th>
                                             </tr>
+                                            <c:forEach items="${commandes }" var="commande">
                                             <tr>
-                                                <td><a class="account-order-id" href="javascript:void(0)">#5364</a></td>
-                                                <td>Mar 27, 2019</td>
-                                                <td>On Hold</td>
-                                                <td>$162.00 for 2 items</td>
+                                                <td><a class="account-order-id" href="javascript:void(0)">#${commande.id }</a></td>
+                                                <td>${commande.dateC }</td>
+                                                <td>${commande.etat }</td>
+                                                <td>${commande.total } &euro;</td>
                                                 <td><a href="javascript:void(0)"
                                                         class="btn btn-secondary btn-primary-hover"><span>View</span></a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td><a class="account-order-id" href="javascript:void(0)">#5356</a></td>
-                                                <td>Mar 27, 2019</td>
-                                                <td>On Hold</td>
-                                                <td>$162.00 for 2 items</td>
-                                                <td><a href="javascript:void(0)"
-                                                        class="btn btn-secondary btn-primary-hover"><span>View</span></a>
-                                                </td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

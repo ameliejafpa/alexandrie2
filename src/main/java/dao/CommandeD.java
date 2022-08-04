@@ -146,5 +146,35 @@ public class CommandeD implements IDao<CommandeM>{
 		}
 		return idCommande;
 	}
+	
+	public ArrayList<CommandeM> findByUserId(int id) {
+		// TODO Auto-generated method stub
+		ArrayList<CommandeM> commandes = new ArrayList<>();
+
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM commande INNER JOIN utilisateur ON commande.idUtilisateur = utilisateur.id INNER JOIN adresseLivraison ON commande.idAdresse = adresseLivraison.id WHERE utilisateur.id= ?");
+			sql.setInt(1, id);
+			ResultSet rs = sql.executeQuery();
+			while (rs.next()) {
+				CommandeM commande = new CommandeM();
+				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),rs.getString("utilisateur.nom"),rs.getString("utilisateur.prenom"),rs.getString("utilisateur.dateInscription"),rs.getString("utilisateur.email"),rs.getString("utilisateur.motDePasse"));
+				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),utilisateur,rs.getString("adresseLivraison.adresse"),rs.getString("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),rs.getString("adresseLivraison.pays"));
+				
+				commande.setId(rs.getInt("commande.id"));
+				commande.setIdUtilisateur(utilisateur);
+				commande.setDateC(rs.getString("commande.dateC"));
+				commande.setTotal(rs.getFloat("commande.total"));
+				commande.setIdAdresse(adresseLivraison);
+				commande.setEtat(rs.getInt("commande.etat"));
+				
+				
+				commandes.add(commande);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return commandes;
+	}
 
 }

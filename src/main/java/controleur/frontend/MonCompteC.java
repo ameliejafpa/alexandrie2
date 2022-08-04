@@ -1,6 +1,8 @@
 package controleur.frontend;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AdresseLivraisonD;
+import dao.CommandeD;
 import dao.UtilisateurD;
 import modele.AdresseLivraisonM;
+import modele.CommandeM;
 import modele.UtilisateurM;
 
 /**
@@ -77,6 +81,12 @@ public class MonCompteC extends HttpServlet {
 		AdresseLivraisonM adresseLivraisonM = new AdresseLivraisonM();
 		adresseLivraisonM = adresseLivraisonD.findByUserId(userId);
 		request.setAttribute("adresseLivraison", adresseLivraisonM);
+		
+		//affichage de mes commandes
+		ArrayList<CommandeM> commandes = new ArrayList<>();
+		CommandeD commandeD = new CommandeD();
+		commandes = commandeD.findByUserId(userId);
+		request.setAttribute("commandes", commandes);
 		
 		request.getRequestDispatcher("vue/frontend/monCompte.jsp").forward(request, response);
 	}
