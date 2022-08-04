@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProduitD;
+import dao.SlideD;
 import modele.ProduitM;
+import modele.SlideM;
 
 /**
  * Servlet implementation class Index
@@ -37,6 +39,11 @@ public class AccueilC extends HttpServlet {
 		ArrayList<ProduitM> listeProduits = new ArrayList<>();
 		listeProduits = produitD.read();
 		request.setAttribute("listeProduits", listeProduits);
+		
+		SlideD slideD = new SlideD();
+		ArrayList<SlideM> listeSlides = new ArrayList<>();
+		listeSlides = slideD.read();
+		request.setAttribute("listeSlides", listeSlides);
 		
 		request.getRequestDispatcher("vue/frontend/accueil.jsp").forward(request, response);
 	}
