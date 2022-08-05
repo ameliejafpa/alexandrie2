@@ -53,6 +53,11 @@ public class DetailsCommandeM {
 	public void setPrix(float prix) {
 		this.prix = prix;
 	}
+	@Override
+	public String toString() {
+		return "DetailsCommandeM [id=" + id + ", idCommande=" + idCommande + ", idProduit=" + idProduit + ", quantite="
+				+ quantite + ", prix=" + prix + "]";
+	}
 	
-
+	
 }

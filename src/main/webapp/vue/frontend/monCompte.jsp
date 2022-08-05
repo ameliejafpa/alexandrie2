@@ -118,10 +118,76 @@
                                             <tr>
                                                 <td><a class="account-order-id" href="javascript:void(0)">#${commande.id }</a></td>
                                                 <td>${commande.dateC }</td>
-                                                <td>${commande.etat }</td>
-                                                <td>${commande.total } &euro;</td>
-                                                <td><a href="javascript:void(0)"
-                                                        class="btn btn-secondary btn-primary-hover"><span>View</span></a>
+                                                <td>
+	                                                <c:choose>
+	                                                	<c:when test="${commande.etat == 0}">En traitement</c:when>
+	                                                	<c:when test="${commande.etat == 1}">En cours de livraison</c:when>
+	                                                	<c:when test="${commande.etat == 2}">Livrée</c:when>
+	                                                	<c:otherwise>Erreur</c:otherwise>
+	                                                </c:choose>
+                                                </td>
+                                                <td>${commande.total }&nbsp;&euro;</td>
+                                                <td>
+                                                	<!-- Button trigger modal -->
+													<button type="button" class="btn btn-secondary btn-primary-hover" data-bs-toggle="modal" data-bs-target="#voirCommande${commande.id }">Voir</button>
+													
+													<!-- Modal -->
+													<div class="modal fade" id="voirCommande${commande.id }" tabindex="-1" aria-labelledby="voirCommande${commande.id }" aria-hidden="true">
+													  <div class="modal-dialog modal-lg modal-fullscreen-sm-down">
+													    <div class="modal-content">
+													      <div class="modal-header">
+													        <h5 class="modal-title" id="exampleModalLabel">Commande #${commande.id }</h5>
+													        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													      </div>
+													      <div class="modal-body">
+													        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">images</th>
+                                        <th class="cart-product-name">Produit</th>
+                                        <th class="product-price">Prix unitaire</th>
+                                        <th class="product-quantity">Quantité</th>
+                                        <th class="product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<c:forEach items="${listeDetailsCommandes }" var="detailsCommande">
+                                		
+                                			<c:if test="${commande.id == detailsCommande.idCommande.id}">
+		                                    <tr>
+		                                        <td class="product-thumbnail">
+		                                            <a href="produit?id=${detailsCommande.idProduit.id }">
+		                                                <img src="${detailsCommande.idProduit.image }" alt="Cart Thumbnail">
+		                                            </a>
+		                                        </td>
+		                                        <td class="product-name">
+		                                        	<a href="produit?id=${detailsCommande.idProduit.id }">${detailsCommande.idProduit.titre }</a> 
+		                                        </td>
+		                                        <td class="product-price">
+		                                        	<span class="amount">${detailsCommande.idProduit.prix }&nbsp;&euro;</span>
+		                                        </td>
+		                                        <td class="product_pro_button quantity">
+		                                            ${detailsCommande.quantite }
+		                                        </td>
+		                                        <td class="product-subtotal">
+		                                        	<span class="amount">${detailsCommande.quantite*detailsCommande.idProduit.prix }&nbsp;&euro;</span>
+		                                        </td>
+		                                        
+		                                     </tr>
+		                                     </c:if>
+	                                     
+                                     </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+													      </div>
+													      <div class="modal-footer">
+													        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+													      </div>
+													    </div>
+													  </div>
+													</div>
                                                 </td>
                                             </tr>
                                             </c:forEach>

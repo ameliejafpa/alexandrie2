@@ -12,9 +12,11 @@ import javax.servlet.http.HttpSession;
 
 import dao.AdresseLivraisonD;
 import dao.CommandeD;
+import dao.DetailsCommandeD;
 import dao.UtilisateurD;
 import modele.AdresseLivraisonM;
 import modele.CommandeM;
+import modele.DetailsCommandeM;
 import modele.UtilisateurM;
 
 /**
@@ -87,6 +89,20 @@ public class MonCompteC extends HttpServlet {
 		CommandeD commandeD = new CommandeD();
 		commandes = commandeD.findByUserId(userId);
 		request.setAttribute("commandes", commandes);
+		ArrayList<DetailsCommandeM> listeDetailsCommandes = new ArrayList<>();
+		for (CommandeM commandeM : commandes) {
+			
+			int idCommande = commandeM.getId();
+			ArrayList<DetailsCommandeM> detailsCommande = new ArrayList<>();
+			DetailsCommandeD detailsCommandeD = new DetailsCommandeD();
+			detailsCommande = detailsCommandeD.findByIdCommande(idCommande);
+			listeDetailsCommandes.addAll(detailsCommande);
+		}
+		
+		request.setAttribute("listeDetailsCommandes", listeDetailsCommandes);
+
+		
+		
 		
 		request.getRequestDispatcher("vue/frontend/monCompte.jsp").forward(request, response);
 	}
