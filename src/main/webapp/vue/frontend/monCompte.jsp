@@ -54,8 +54,8 @@
                     <div class="breadcrumbs_text">
                         <h1>Mon compte</h1>
                         <ul>
-                            <li><a href="index.html">Home </a></li>
-                            <li> // My Account</li>
+                            <li><a href="accueil">Accueil </a></li>
+                            <li> // Mon compte</li>
                         </ul>
                     </div>
                 </div>
@@ -208,6 +208,7 @@
                                         </address>
                                     </div>
                                     <div class="col-12">
+                                    	<h4 class="small-title">Modifier votre adresse de livraison</h4>
                                     	<form method="post" class="myaccount-form">
                                     <div class="myaccount-form-inner">
                                         <div class="single-input">
@@ -240,6 +241,7 @@
                         <div class="tab-pane fade" id="account-details" role="tabpanel"
                             aria-labelledby="account-details-tab">
                             <div class="myaccount-details">
+                            	<h4 class="small-title">Modifier vos informations</h4>
                                 <form method="post" class="myaccount-form">
                                     <div class="myaccount-form-inner">
                                         <div class="single-input single-input-half">
@@ -261,10 +263,6 @@
                                         <div class="single-input">
                                             <label>Nouveau mot de passe (laisser vide pour ne pas le modifier)</label>
                                             <input type="password" name="upPassword">
-                                        </div>
-                                        <div class="single-input">
-                                            <label>Confirmer le mot de passe</label>
-                                            <input type="password" name="confirmPassword">
                                         </div>
                                         <div class="single-input">
                                             <button class="btn custom-btn" type="submit" name="btnUpdate">

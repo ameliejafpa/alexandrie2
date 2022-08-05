@@ -45,15 +45,15 @@ public class MonCompteC extends HttpServlet {
 		int userId = (int) session.getAttribute("userId");
 		UtilisateurD utilisateurD = new UtilisateurD();
 		UtilisateurM utilisateur = new UtilisateurM();
+		boolean samePassword = true;
 		if (request.getParameter("btnUpdate") != null) {
 			String nom = request.getParameter("upNom");
 			String prenom = request.getParameter("upPrenom");
 			String email = request.getParameter("upEmail");
-			if (request.getParameter("password") != null) {
+			if (request.getParameter("password") != null && request.getParameter("upPassword") != null ) {
 				String oldPassword = request.getParameter("password");
-			}
-			if (request.getParameter("upPassword") != null) {
 				String newPassword = request.getParameter("upPassword");
+				
 				utilisateur = new UtilisateurM(nom,prenom,email,newPassword);
 				utilisateurD.update(utilisateur, userId);
 			} else {
