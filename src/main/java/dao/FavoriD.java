@@ -113,5 +113,18 @@ public class FavoriD implements IDao<FavoriM>{
 		}
 		return listeFavoris;
 	}
+	
+	public boolean isFavori(int idProduit, int idUser) {
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM favori WHERE idProduit = ? AND idUser = idUtilisateur");
+			sql.setInt(1, idProduit);
+			sql.setInt(2, idUser);
+			ResultSet res = sql.executeQuery();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return false;
+	}
 
 } // fin FavoriD

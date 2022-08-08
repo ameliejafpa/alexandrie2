@@ -129,7 +129,14 @@
 	                            </c:choose>
 <!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->
 								<c:if test="${isConnected }">
-									<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>
+									<c:choose>
+										<c:when test="${dejaFavori }">
+											<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>
+										</c:when>
+										<c:otherwise>
+											<button class="already_wishlist__btn" type="submit" name="btnFavori" disabled data-toggle="tooltip" data-placement="top" title="Produit déjà dans vos favoris"><i class="pe-7s-like"></i></button>
+										</c:otherwise>
+									</c:choose>
 								</c:if>
 <!-- 							<a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
 	                            <a class="serch_btn" href="#"><i class="pe-7s-search"></i></a>
@@ -150,20 +157,21 @@
                     <div class="reviews__wrapper">
 	                    <h2>Commentaires</h2>
 	                    <c:forEach items="${listeCommentaires }" var="commentaire">
-		                    <div class="customer__reviews d-flex justify-content-between mb-20">
-		                            <div class="reviews__ratting">
-		                            	<p>${commentaire.note }/5 <i class="ion-ios-star"></li></i></p>
-		                                <ul class="d-flex">
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                </ul>
-		                            </div>
+		                    <div class="customer__reviews d-flex justify-content-between mb-30">
+		                            
 		                            <div class="reviews__desc">
 		                                <h3>${commentaire.idUtilisateur.prenom } ${commentaire.idUtilisateur.nom }</h3>
-		                                <p>${commentaire.commentaire }</p>
+		                                <div>${commentaire.commentaire }</div>
+		                                <div class="reviews__ratting">
+		                            	<ul class="d-flex">
+		                                <c:forEach var="i" begin="1" end="${commentaire.note }" step="1" varStatus ="status">
+		    									<li><a href="#"><i class="ion-ios-star"></i></a></li>
+			                                </c:forEach>
+			                                <c:forEach var="i" begin="${commentaire.note +1}" end="5" step="1" varStatus ="status">
+		    									<li><a href="#"><i class="ion-android-star-outline"></i></a></li>
+			                                </c:forEach>
+		                                </ul>
+		                            </div>
 		                            </div>
 		                        
 		                    </div>

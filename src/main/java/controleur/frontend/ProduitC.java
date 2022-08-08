@@ -77,9 +77,15 @@ public class ProduitC extends HttpServlet {
 		VisiteD visiteD = new VisiteD();
 		visiteD.create(visiteM);
 		
+		//déjà favori ?
+		FavoriD favoriD= new FavoriD();
+		boolean dejaFavori = false;
+		if (dejaFavori == favoriD.isFavori(idProduit, userId)) {
+			request.setAttribute("dejaFavori", dejaFavori);
+		}
+		
 		//ajout favori
 		if (request.getParameter("btnFavori") != null) {
-			FavoriD favoriD= new FavoriD();
 			favoriD.create(new FavoriM(produit,utilisateur));
 		}
 		
