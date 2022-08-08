@@ -40,6 +40,8 @@ public class MonPanierC extends HttpServlet {
 		PanierM panier = (PanierM) session.getAttribute("panier");
 		ArrayList<PanierDetailsM> panierDetails = panier.articles;
 		
+		
+		
 		//affichage du panier
 		request.setAttribute("panierDetails", panierDetails);
 		

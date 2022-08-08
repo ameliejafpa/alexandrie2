@@ -163,10 +163,11 @@ public class ProduitD implements IDao<ProduitM> {
 	}
 
 	
-	public int totalParCategorie() {
+	public int totalParCategorie(int id) {
 		int total = 0;
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT count(*) AS total FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id");
+			PreparedStatement sql = connect.prepareStatement("SELECT count(*) AS total FROM produit INNER JOIN sousCategorie ON produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id WHERE id = ?");
+			sql.setInt(1, id);
 			ResultSet res = sql.executeQuery();
 			if (res.next()) {
 				total = res.getInt("total");

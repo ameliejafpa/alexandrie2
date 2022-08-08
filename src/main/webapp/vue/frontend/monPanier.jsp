@@ -82,7 +82,7 @@
                                         <td class="product-subtotal"><span class="amount">${article.quantite*article.produit.prix } &euro;</span></td>
                                         <td class="product_remove">
                                             <a href="monPanier?action=delete&id=${article.produit.id }">
-                                                <i class="pe-7s-close" title="Remove"></i>
+                                                <i class="pe-7s-close" title="Supprimer"></i>
                                             </a>
                                         </td>
                                      </tr>
