@@ -8,9 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.FavoriD;
+import dao.ProduitD;
 import modele.FavoriM;
+import modele.PanierDetailsM;
+import modele.PanierM;
+import modele.ProduitM;
 
 /**
  * Servlet implementation class FavoriC
@@ -43,6 +48,19 @@ public class ListeFavorisC extends HttpServlet {
 		} else if (request.getParameter("action").equalsIgnoreCase("delete")) {
 			int id = Integer.parseInt(request.getParameter("id"));
 			favoriD.delete(id);
+			response.sendRedirect(request.getContextPath()+"/listeFavoris?idUtilisateur="+idUtilisateur);
+		} else if (request.getParameter("action").equalsIgnoreCase("addToCart")) {
+			int id = Integer.parseInt(request.getParameter("id"));
+			int quantite = 1;
+			HttpSession session = request.getSession(true);
+			int userId = (int) session.getAttribute("userId");
+			ProduitM produit = new ProduitM();
+			ProduitD produitD = new ProduitD();
+			produit = produitD.findById(id);
+			PanierDetailsM panierAdd = new PanierDetailsM(produit, quantite);
+			PanierM panier = (PanierM) session.getAttribute("panier");
+			panier.add(panierAdd);
+			session.setAttribute("panier", panier);
 			response.sendRedirect(request.getContextPath()+"/listeFavoris?idUtilisateur="+idUtilisateur);
 		}
 		

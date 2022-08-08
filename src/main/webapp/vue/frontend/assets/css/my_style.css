@@ -116,3 +116,12 @@ button.already_wishlist__btn {
 	border: none;
 	cursor:default;
 }
+
+.table-content table td.cart_btn a {
+	height: auto;
+}
+
+.table-content table td.cart_btn.out_of_stock a {
+	background: #333333b5;
+	cursor:default;
+}

@@ -88,7 +88,7 @@
 		                                	<c:forEach items="${listeFavoris }" var="favori">
 		                                    <tr>
 		                                        <td class="product_remove">
-		                                            <a href="listeFavoris?idUtilisateur=${favori.idUtilisateur.id }&action=delete&id=${favori.id}">
+		                                            <a href="listeFavoris?idUtilisateur=${favori.idUtilisateur.id }&action=delete&id=${favori.idProduit.id}">
 		                                                <i class="pe-7s-close" title="Supprimer"></i>
 		                                            </a>
 		                                        </td>
@@ -97,17 +97,20 @@
 		                                        </td>
 		                                        <td class="product-name"><a href="produit?id=${favori.idProduit.id }">${favori.idProduit.titre }</a></td>
 		                                        <td class="product-price"><span class="amount">${favori.idProduit.prix }</span></td>
-		                                        <td class="product-stock-status">
 		                                        	<c:choose>
 		                                        		<c:when test="${favori.idProduit.stock > 0 }">
+		                                        		<td class="product-stock-status">
 		                                        			<span class="in-stock">En stock</span>
+		                                        		</td>
+		                                        		<td class="cart_btn"><a href="listeFavoris?idUtilisateur=${favori.idUtilisateur.id }&action=addToCart&id=${favori.idProduit.id}">Ajouter au panier</a></td>
 		                                        		</c:when>
 		                                        		<c:otherwise>
+		                                        		<td class="product-stock-status">
 		                                        			<span class="in-stock text-danger">en restockage</span>
+		                                        		</td>
+		                                        		<td class="cart_btn out_of_stock"><a href="#" disabled data-toggle="tooltip" data-placement="top" title="Produit en rupture de stock">Ajouter au panier</a></td>
 		                                        		</c:otherwise>
 		                                        	</c:choose>
-		                                        </td>
-		                                        <td class="cart_btn"><a href="#">Ajouter au panier</a></td>
 		                                    </tr>
 		                                    </c:forEach>
 		                                    
