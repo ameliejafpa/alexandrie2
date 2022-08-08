@@ -102,17 +102,13 @@ public class ProduitC extends HttpServlet {
 		
 		//affichage note moyenne
 		double noteMoyenne = 0;
-		boolean hasNoteMoyenne = false;
-		noteMoyenne = commentaireD.noteMoyenne(idProduit);
-		System.out.println(noteMoyenne);
-		request.setAttribute("noteMoyenne", noteMoyenne);
-		if (noteMoyenne != 0) {
-			hasNoteMoyenne = true;
-		}
 		
-		if (hasNoteMoyenne) {
-			request.setAttribute("hasNoteMoyenne", hasNoteMoyenne);
-		}
+		int nbrCommentaires = commentaireD.nbreComments(idProduit);
+		System.out.println(nbrCommentaires);
+		noteMoyenne = commentaireD.noteMoyenne(idProduit);
+		request.setAttribute("noteMoyenne", noteMoyenne);
+		request.setAttribute("nbrCommentaires", nbrCommentaires);
+		
 		
 		//ajout panier
 		if (request.getParameter("btnPanierAdd") != null) {

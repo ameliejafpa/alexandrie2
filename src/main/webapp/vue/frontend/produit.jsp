@@ -98,7 +98,7 @@
                         <div class="price_box">
                             <span class="current_price">${produit.prix } €</span>
                         </div>
-                        <c:if test="${hasNoteMoyenne}">
+                        <c:if test="${nbrCommentaires > 0}">
 	                        <div class="quickview__info mb-0">
 	                            <p class="product_review d-flex align-items-center">
 	                                <span class="review_icon d-flex">
@@ -109,7 +109,7 @@
     									<i class="ion-android-star-outline"></i>
 	                                </c:forEach>
 	                                </span>
-	                                <!-- <span class="review__text"> (5 reviews)</span> -->
+	                                <span class="review__text"> (${nbrCommentaires} commentaires)</span>
 	                            </p>
 	                        </div>
                         </c:if>
