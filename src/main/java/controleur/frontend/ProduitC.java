@@ -100,6 +100,20 @@ public class ProduitC extends HttpServlet {
 		listeCommentaires = commentaireD.findByIdProduct(idProduit);
 		request.setAttribute("listeCommentaires", listeCommentaires);
 		
+		//affichage note moyenne
+		double noteMoyenne = 0;
+		boolean hasNoteMoyenne = false;
+		noteMoyenne = commentaireD.noteMoyenne(idProduit);
+		System.out.println(noteMoyenne);
+		request.setAttribute("noteMoyenne", noteMoyenne);
+		if (noteMoyenne != 0) {
+			hasNoteMoyenne = true;
+		}
+		
+		if (hasNoteMoyenne) {
+			request.setAttribute("hasNoteMoyenne", hasNoteMoyenne);
+		}
+		
 		//ajout panier
 		if (request.getParameter("btnPanierAdd") != null) {
 			int quantite = Integer.valueOf(request.getParameter("panierQuantite"));

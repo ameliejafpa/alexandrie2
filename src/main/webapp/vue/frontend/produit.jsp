@@ -98,18 +98,21 @@
                         <div class="price_box">
                             <span class="current_price">${produit.prix } €</span>
                         </div>
-                        <!-- <div class="quickview__info mb-0">
-                            <p class="product_review d-flex align-items-center">
-                                <span class="review_icon d-flex">
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                </span>
-                                <span class="review__text"> (5 reviews)</span>
-                            </p>
-                        </div> -->
+                        <c:if test="${hasNoteMoyenne}">
+	                        <div class="quickview__info mb-0">
+	                            <p class="product_review d-flex align-items-center">
+	                                <span class="review_icon d-flex">
+	                                <c:forEach var="i" begin="1" end="${noteMoyenne }" step="1" varStatus ="status">
+    									<i class="ion-ios-star"></i>
+	                                </c:forEach>
+	                                <c:forEach var="i" begin="${noteMoyenne +1}" end="5" step="1" varStatus ="status">
+    									<i class="ion-android-star-outline"></i>
+	                                </c:forEach>
+	                                </span>
+	                                <!-- <span class="review__text"> (5 reviews)</span> -->
+	                            </p>
+	                        </div>
+                        </c:if>
                         <p class="product_details_desc">${produit.description }</p>
                         <form method="post" class="product_pro_button quantity d-flex align-items-center">
                         	

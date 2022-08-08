@@ -202,5 +202,7 @@ public class ProduitD implements IDao<ProduitM> {
 	    	return null;
 		}
 	}
+	
+	
 
 } // fin ProduitD
