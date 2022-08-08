@@ -203,6 +203,23 @@ public class ProduitD implements IDao<ProduitM> {
 		}
 	}
 	
+	public int nbrInStock(int id) {
+		int nbrEnStock = 0;
+		
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT stock FROM produit WHERE id = ?");
+			sql.setInt(1, id);
+			ResultSet res = sql.executeQuery();
+			if (res.next()) {
+				nbrEnStock = res.getInt("stock");
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return nbrEnStock;
+	}
+	
 	
 
 } // fin ProduitD

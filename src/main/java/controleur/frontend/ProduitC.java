@@ -109,6 +109,9 @@ public class ProduitC extends HttpServlet {
 		request.setAttribute("noteMoyenne", noteMoyenne);
 		request.setAttribute("nbrCommentaires", nbrCommentaires);
 		
+		//récupération du stock
+		int nbrEnStock = produitD.nbrInStock(idProduit);
+		session.setAttribute("nbrEnStock", nbrEnStock);
 		
 		//ajout panier
 		if (request.getParameter("btnPanierAdd") != null) {

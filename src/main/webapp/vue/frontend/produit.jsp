@@ -119,7 +119,14 @@
 	                            <div class="pro-qty border">
 	                                <input type="text" value="1" name="panierQuantite">
 	                            </div>
-	                            <button class="add_to_cart" type="submit" name="btnPanierAdd" >Ajouter au panier</button>
+	                            <c:choose>
+	                            	<c:when test="${nbrEnStock > 0 }">
+	                            		<button class="add_to_cart" type="submit" name="btnPanierAdd" >Ajouter au panier</button>
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<button class="add_to_cart_out_of_stock" name="btnPanierAdd" disabled data-toggle="tooltip" data-placement="top" title="Produit en rupture de stock">Ajouter au panier</button>
+	                            	</c:otherwise>
+	                            </c:choose>
 <!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->
 								<c:if test="${isConnected }">
 									<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>

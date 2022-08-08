@@ -86,3 +86,19 @@ button.add_to_cart:hover, button.wishlist__btn:hover, .customer__reviews .login:
 	background: #666;
 	cursor: default;
 }
+
+button.add_to_cart_out_of_stock {
+	width: auto;
+	padding: 0 37px;
+	border-radius: 25px;
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-left: 12px;
+	line-height: 53px;
+	text-align: center;
+	color: #ffffff;
+	background: #2b4174bf;
+	border: none;
+	cursor:default;
+}
