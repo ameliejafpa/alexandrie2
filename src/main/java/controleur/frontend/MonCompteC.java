@@ -46,10 +46,15 @@ public class MonCompteC extends HttpServlet {
 		UtilisateurD utilisateurD = new UtilisateurD();
 		UtilisateurM utilisateur = new UtilisateurM();
 		boolean samePassword = true;
+		boolean champVide = false;
 		if (request.getParameter("btnUpdate") != null) {
 			String nom = request.getParameter("upNom");
 			String prenom = request.getParameter("upPrenom");
 			String email = request.getParameter("upEmail");
+			if (nom == null || prenom == null || email == null) {
+				champVide = true;
+				request.setAttribute("champVide", champVide);
+			}
 			if (request.getParameter("password") != null && request.getParameter("upPassword") != null ) {
 				String oldPassword = request.getParameter("password");
 				String newPassword = request.getParameter("upPassword");

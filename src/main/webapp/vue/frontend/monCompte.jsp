@@ -243,6 +243,11 @@
                             <div class="myaccount-details">
                             	<h4 class="small-title">Modifier vos informations</h4>
                                 <form method="post" class="myaccount-form">
+                                	<c:if test="${champVide }">
+	                                	<div class="alert alert-danger" role="alert">				  
+										Les champs Prénom, Nom et Email doivent ête renseignés.
+										</div>
+                                	</c:if>
                                     <div class="myaccount-form-inner">
                                         <div class="single-input single-input-half">
                                             <label>Prénom*</label>
