@@ -85,9 +85,14 @@
                     <form id="formInscription" name="formInscription" method="post">
                         <div class="login-form">
                             <h4 class="login-title">Inscription</h4>
+                            <c:if test="${emailExiste }">
+                            	<div class="alert alert-danger" role="alert">				  
+									Cette adresse email existe déjà, veuillez vous connecter ou choisir une autre adresse.
+								</div>
+                            </c:if>
                             <c:if test="${messageInscriptionOk }">
                             	<div class="alert alert-success" role="alert">				  
-									Votre inscription a bien été prise en compte, veuillez-vous connecter
+									Votre inscription a bien été prise en compte, veuillez-vous connecter.
 								</div>
                             </c:if>
                             <div class="row">

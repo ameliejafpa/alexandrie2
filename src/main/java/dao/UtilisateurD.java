@@ -144,6 +144,29 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 		}
 		return utilisateur;
 	}
+	
+	public UtilisateurM findByEmail(String email) {
+		// TODO Auto-generated method stub
+		UtilisateurM utilisateur = new UtilisateurM();
+
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM utilisateur WHERE id=?");
+			sql.setString(1, email);
+			ResultSet rs = sql.executeQuery();
+			if (rs.next()) {
+				utilisateur.setId(rs.getInt("id"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setDateInscription(rs.getString("dateInscription"));
+				utilisateur.setMotDePasse(rs.getString("motdepasse"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return utilisateur;
+	}
 
 	public UtilisateurM connexion(String email,String password) {
 		try {

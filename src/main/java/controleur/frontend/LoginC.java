@@ -34,6 +34,7 @@ public class LoginC extends HttpServlet {
 		// TODO Auto-generated method stub
 		UtilisateurD utilisateurD = new UtilisateurD();
 		boolean messageInscriptionOk=false;
+		boolean emailExiste=false;
 		if (request.getParameter("btnInscription") != null) {
 			String password = request.getParameter("insPassword");
 			String nom = request.getParameter("insNom");
@@ -41,11 +42,21 @@ public class LoginC extends HttpServlet {
 			String email = request.getParameter("insEmail");
 			
 			UtilisateurM utilisateur = new UtilisateurM(nom,prenom,email,password);
-			utilisateurD.create(utilisateur);
-			messageInscriptionOk = true;			
+			utilisateur = utilisateurD.findByEmail(email);
+			System.out.println(utilisateur.getEmail());
+			if (utilisateur.getEmail() == null) {
+				emailExiste=true;
+				System.out.println("emailExiste");
+			} else {
+				utilisateurD.create(utilisateur);
+				messageInscriptionOk = true;
+				System.out.println("messageInscriptionOk");
+			}			
 		}
 		
 		request.setAttribute("messageInscriptionOk", messageInscriptionOk);
+		request.setAttribute("emailExiste", emailExiste);
+
 		
 		boolean connected = false;
 		boolean messageConnexionNo = false;
