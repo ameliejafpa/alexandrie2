@@ -38,6 +38,7 @@ public class LoginC extends HttpServlet {
 		boolean messageInscriptionOk=false;
 		boolean emailExiste=false;
         boolean erreurMotdepasse = false;
+        boolean champObligatoire = false;
 
 		if (request.getParameter("btnInscription") != null) {
 			String password = request.getParameter("insPassword");
@@ -53,11 +54,18 @@ public class LoginC extends HttpServlet {
 			final Pattern pattern = Pattern.compile(regex);
 	        final Matcher matcher = pattern.matcher(password);
 	        boolean matchFound = matcher.find();
+	        System.out.println(nom);
+	        
+	        if (nom.equalsIgnoreCase("") || prenom.equalsIgnoreCase("") || email.equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
+	        	champObligatoire = true;
+			}
 	        if (utilisateur2.getEmail() != null) {
 				emailExiste=true;
-			} else if (!matchFound) {
+			} 
+	        if (!matchFound) {
 				erreurMotdepasse = true;
-			} else {
+			}
+	        if (!emailExiste && !erreurMotdepasse && !champObligatoire){
 				utilisateurD.create(utilisateur);
 				messageInscriptionOk = true;
 			}
@@ -66,6 +74,8 @@ public class LoginC extends HttpServlet {
 		request.setAttribute("messageInscriptionOk", messageInscriptionOk);
 		request.setAttribute("emailExiste", emailExiste);
 		request.setAttribute("erreurMotdepasse", erreurMotdepasse);
+		request.setAttribute("champObligatoire", champObligatoire);
+
 
 
 		

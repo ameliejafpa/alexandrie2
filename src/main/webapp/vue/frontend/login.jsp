@@ -85,6 +85,11 @@
                     <form id="formInscription" name="formInscription" method="post">
                         <div class="login-form">
                             <h4 class="login-title">Inscription</h4>
+                            <c:if test="${champObligatoire }">
+                            	<div class="alert alert-danger" role="alert">				  
+									Veuillez remplir tous les champs.
+								</div>
+                            </c:if>
                             <c:if test="${emailExiste }">
                             	<div class="alert alert-danger" role="alert">				  
 									Cette adresse email existe déjà, veuillez vous connecter ou choisir une autre adresse.
@@ -100,11 +105,11 @@
                             </c:if>
                             <div class="row">
                                 <div class="col-md-6 col-12">
-                                    <label>Nom</label>
+                                    <label>Nom*</label>
                                     <input type="text" name="insNom" placeholder="Nom">
                                 </div>
                                 <div class="col-md-6 col-12">
-                                    <label>Prénom</label>
+                                    <label>Prénom*</label>
                                     <input type="text" name="insPrenom" placeholder="Prénom">
                                 </div>
                                 <div class="col-md-12">
@@ -112,7 +117,7 @@
                                     <input type="email" name="insEmail" placeholder="Adresse email">
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Mot de passe</label>
+                                    <label>Mot de passe*</label>
                                     <input type="password" name="insPassword" placeholder="Mot de passe">
                                     <div id="passwordHelpBlock" class="form-text">
 8 caractères avec au moins une minuscule, une majuscule, un caractère spécial (~!@#$%^&*()_+-=;':",.?) et un chiffre</div>
