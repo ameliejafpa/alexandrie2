@@ -89,7 +89,7 @@ public class ProductDetail extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// update stock
-		if (request.getParameter("btnUpdateStock") != null) { // probleme!!!
+		if (request.getParameter("btnUpdateStock") != null) {
 			System.out.println("date: " + request.getParameter("inputDate"));
 			System.out.println("fournisseur: " + request.getParameter("inputFournisseur"));
 			FournisseurM fM = new FournisseurM();
