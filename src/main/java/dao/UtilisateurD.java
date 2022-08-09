@@ -9,16 +9,17 @@ import java.util.ArrayList;
 import modele.UtilisateurM;
 
 public class UtilisateurD implements IDao<UtilisateurM> {
-	
+
 	Connection connect = ConnectMySql.getConnection();
 
 	@Override
 	public boolean create(UtilisateurM utilisateur) {
 		// TODO Auto-generated method stub
 		try {
-			
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO utilisateur(nom,prenom, dateInscription, email, motDePasse) VALUES (? , ?, now(), ?, SHA2(?,224))");
-			
+
+			PreparedStatement sql = connect.prepareStatement(
+					"INSERT INTO utilisateur(nom,prenom, dateInscription, email, motDePasse) VALUES (? , ?, now(), ?, SHA2(?,224))");
+
 			sql.setString(1, utilisateur.getNom());
 			sql.setString(2, utilisateur.getPrenom());
 			sql.setString(3, utilisateur.getEmail());
@@ -26,7 +27,7 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 			System.out.println(sql);
 			sql.executeUpdate();
 			return true;
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -39,17 +40,17 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM utilisateur");
 			ResultSet rs = sql.executeQuery();
-			
+
 			while (rs.next()) {
 				UtilisateurM utilisateur = new UtilisateurM();
-				
+
+				utilisateur.setId(rs.getInt("id"));
 				utilisateur.setNom(rs.getString("nom"));
 				utilisateur.setPrenom(rs.getString("prenom"));
 				utilisateur.setDateInscription(rs.getString("dateInscription"));
 				utilisateur.setEmail(rs.getString("email"));
 				utilisateur.setMotDePasse(rs.getString("motDePasse"));
-				
-				
+
 				utilisateurs.add(utilisateur);
 			}
 		} catch (Exception e) {
@@ -63,40 +64,40 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 	public boolean update(UtilisateurM utilisateur, int id) {
 		// TODO Auto-generated method stub
 		try {
-			
-			PreparedStatement sql = connect.prepareStatement("UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, motdepasse = SHA2(?,224) WHERE id = ?");
-			
+
+			PreparedStatement sql = connect.prepareStatement(
+					"UPDATE utilisateur SET nom = ?, prenom = ?, email = ?, motdepasse = SHA2(?,224) WHERE id = ?");
+
 			sql.setString(1, utilisateur.getNom());
 			sql.setString(2, utilisateur.getPrenom());
 			sql.setString(3, utilisateur.getEmail());
 			sql.setString(4, utilisateur.getMotDePasse());
 			sql.setInt(5, id);
-			
+
 			sql.executeUpdate();
 			return true;
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
-	
+
 	public boolean updateWithoutPassword(UtilisateurM utilisateur, int id) {
 		// TODO Auto-generated method stub
 		try {
-			
-			PreparedStatement sql = connect.prepareStatement("UPDATE utilisateur SET nom = ?, prenom = ?, email = ? WHERE id = ?");
-			
+
+			PreparedStatement sql = connect
+					.prepareStatement("UPDATE utilisateur SET nom = ?, prenom = ?, email = ? WHERE id = ?");
+
 			sql.setString(1, utilisateur.getNom());
 			sql.setString(2, utilisateur.getPrenom());
 			sql.setString(3, utilisateur.getEmail());
 			sql.setInt(4, id);
-			
+
 			sql.executeUpdate();
 			return true;
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -110,12 +111,12 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 			PreparedStatement sql = connect.prepareStatement("DELETE FROM utilisateur WHERE id=? AND id!=1");
 			sql.setInt(1, id);
 			sql.executeUpdate();
-			
+
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
@@ -136,9 +137,9 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 				utilisateur.setEmail(rs.getString("email"));
 				utilisateur.setDateInscription(rs.getString("dateInscription"));
 				utilisateur.setMotDePasse(rs.getString("motdepasse"));
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -168,29 +169,29 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 		return utilisateur;
 	}
 
-	public UtilisateurM connexion(String email,String password) {
+	public UtilisateurM connexion(String email, String password) {
 		try {
-		
-				PreparedStatement sql  = connect.prepareStatement("SELECT * FROM utilisateur WHERE email=? AND motDePasse=SHA2(?,224)");
-				sql.setString(1,email);
-				sql.setString(2,password);
-				ResultSet rs = sql.executeQuery();
-				UtilisateurM utilisateur = new UtilisateurM();
-				if(rs.next()) {
-					utilisateur.setId(rs.getInt( "id" ));
-					utilisateur.setNom(rs.getString( "nom" ));
-					utilisateur.setPrenom(rs.getString( "prenom" ));
-					utilisateur.setEmail(rs.getString( "email" ));
-					utilisateur.setMotDePasse(rs.getString( "motDePasse" ));
-					return utilisateur;
-				}else {
-					return null;
-				}
+
+			PreparedStatement sql = connect
+					.prepareStatement("SELECT * FROM utilisateur WHERE email=? AND motDePasse=SHA2(?,224)");
+			sql.setString(1, email);
+			sql.setString(2, password);
+			ResultSet rs = sql.executeQuery();
+			UtilisateurM utilisateur = new UtilisateurM();
+			if (rs.next()) {
+				utilisateur.setId(rs.getInt("id"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setMotDePasse(rs.getString("motDePasse"));
+				return utilisateur;
+			} else {
+				return null;
+			}
 		} catch (Exception ex) {
-        	ex.printStackTrace();
-        	return null;
-        }
+			ex.printStackTrace();
+			return null;
+		}
 	}
-	
 
 }

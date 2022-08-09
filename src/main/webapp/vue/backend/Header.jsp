@@ -35,8 +35,11 @@
   <!-- variables-->
 <c:url value="/productlistadmin" var="productList"/>
 <c:url value="/listecatadmin" var="categoryList"/>
+<c:url value="/userlistadmin" var="userList"/>
+<c:url value="/newproductadmin" var="newProduct"/>
 <c:url value="/deconnexionadmin" var="deconnexion"/>
 <c:url value="/accueiladmin" var="accueil"/>
+
 
 <!--start wrapper-->
   <div class="wrapper">
@@ -245,7 +248,7 @@
             <ul>
               <li> <a href="${productList }"><i class="bi bi-arrow-right-short"></i>liste des produits</a>
               </li>
-			  <li> <a href="#"><i class="bi bi-arrow-right-short"></i>ajout produit</a>
+			  <li> <a href="${newProduct }"><i class="bi bi-arrow-right-short"></i>ajout produit</a>
               </li>
               <li> <a href="${categoryList }"><i class="bi bi-arrow-right-short"></i>Listes categories</a>
               </li>
@@ -264,7 +267,7 @@
             <ul>
               <li> <a href="#"><i class="bi bi-arrow-right-short"></i>Liste des commandes</a>
               </li>
-              <li> <a href="#"><i class="bi bi-arrow-right-short"></i>Liste des utilisateurs</a>
+              <li> <a href="${userList }"><i class="bi bi-arrow-right-short"></i>Liste des utilisateurs</a>
               </li>
             </ul>
           </li>

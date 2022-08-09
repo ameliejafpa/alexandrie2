@@ -17,10 +17,10 @@ import modele.ProduitM;
 import modele.SousCategorieM;
 
 /**
- * Servlet implementation class ProductList
+ * Servlet implementation class NewProduct
  */
-@WebServlet("/productlistadmin")
-public class ProductList extends HttpServlet {
+@WebServlet("/newproductadmin")
+public class NewProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	CategorieD categorieD = new CategorieD();
 	SousCategorieD sousCategorieD = new SousCategorieD();
@@ -29,20 +29,17 @@ public class ProductList extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProductList() {
+	public NewProduct() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		if (request.getParameter("deleteProduit") != null) {
-			produitD.delete(Integer.valueOf(request.getParameter("deleteProduit")));
-		}
+		/*
+		 * if(request.getParameter("delete")!=null ) {
+		 * sousCategorieD.delete(Integer.valueOf(request.getParameter("delete"))); }
+		 */
 
 		ArrayList<CategorieM> categorieM = new ArrayList<CategorieM>();
 		categorieM = categorieD.read();
@@ -76,7 +73,7 @@ public class ProductList extends HttpServlet {
 			request.setAttribute("listeProduits", produitM);
 		}
 
-		request.getRequestDispatcher("/vue/backend/ProductList.jsp").forward(request, response);
+		request.getRequestDispatcher("/vue/backend/NewProduct.jsp").forward(request, response);
 	}
 
 	/**
