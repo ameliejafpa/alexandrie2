@@ -35,7 +35,7 @@
                     <div class="breadcrumbs_text">
                         <h1>Connexion | Inscription</h1>
                         <ul>
-                            <li><a href="${accueil }">Accueil </a></li>
+                            <li><a href="accueil">Accueil </a></li>
                             <li> // Connexion | Inscription</li>
                         </ul>
                     </div>
@@ -90,6 +90,9 @@
 									Cette adresse email existe déjà, veuillez vous connecter ou choisir une autre adresse.
 								</div>
                             </c:if>
+                            <c:if test="${erreurMotdepasse }">
+			                		<div class="alert alert-danger" role="alert">Mot de passe invalide, veuillez recommencer</div>
+								</c:if>
                             <c:if test="${messageInscriptionOk }">
                             	<div class="alert alert-success" role="alert">				  
 									Votre inscription a bien été prise en compte, veuillez-vous connecter.
@@ -108,9 +111,11 @@
                                     <label>Adresse email*</label>
                                     <input type="email" name="insEmail" placeholder="Adresse email">
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label>Mot de passe</label>
                                     <input type="password" name="insPassword" placeholder="Mot de passe">
+                                    <div id="passwordHelpBlock" class="form-text">
+8 caractères avec au moins une minuscule, une majuscule, un caractère spécial (~!@#$%^&*()_+-=;':",.?) et un chiffre</div>
                                 </div>
                                 <!-- <div class="col-md-6">
                                     <label>Confirmer le mot de passe</label>
