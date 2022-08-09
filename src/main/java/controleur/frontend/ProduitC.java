@@ -19,6 +19,8 @@ import dao.VisiteD;
 import modele.CommentaireM;
 import modele.FavoriM;
 import modele.ImageM;
+import modele.PanierDetailsM;
+import modele.PanierM;
 import modele.ProduitM;
 import modele.UtilisateurM;
 import modele.VisiteM;
@@ -77,10 +79,17 @@ public class ProduitC extends HttpServlet {
 		VisiteD visiteD = new VisiteD();
 		visiteD.create(visiteM);
 
-		// ajout favori
+		
+		//déjà favori ?
+		FavoriD favoriD= new FavoriD();
+		boolean dejaFavori = false;
+		if (dejaFavori == favoriD.isFavori(idProduit, userId)) {
+			request.setAttribute("dejaFavori", dejaFavori);
+		}
+		
+		//ajout favori
 		if (request.getParameter("btnFavori") != null) {
-			FavoriD favoriD = new FavoriD();
-			favoriD.create(new FavoriM(produit, utilisateur));
+			favoriD.create(new FavoriM(produit,utilisateur));
 		}
 
 		// ajout commentaire
@@ -99,6 +108,30 @@ public class ProduitC extends HttpServlet {
 		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();
 		listeCommentaires = commentaireD.findByIdProduct(idProduit);
 		request.setAttribute("listeCommentaires", listeCommentaires);
+
+		
+		//affichage note moyenne
+		double noteMoyenne = 0;
+		
+		int nbrCommentaires = commentaireD.nbreComments(idProduit);
+		System.out.println(nbrCommentaires);
+		noteMoyenne = commentaireD.noteMoyenne(idProduit);
+		request.setAttribute("noteMoyenne", noteMoyenne);
+		request.setAttribute("nbrCommentaires", nbrCommentaires);
+		
+		//récupération du stock
+		int nbrEnStock = produitD.nbrInStock(idProduit);
+		session.setAttribute("nbrEnStock", nbrEnStock);
+		
+		//ajout panier
+		if (request.getParameter("btnPanierAdd") != null) {
+			int quantite = Integer.valueOf(request.getParameter("panierQuantite"));
+			PanierDetailsM panierAdd = new PanierDetailsM(produit, quantite);
+			PanierM panier = (PanierM) session.getAttribute("panier");
+			panier.add(panierAdd);
+			session.setAttribute("panier", panier);
+		}
+		
 
 		request.getRequestDispatcher("vue/frontend/produit.jsp").forward(request, response);
 	}

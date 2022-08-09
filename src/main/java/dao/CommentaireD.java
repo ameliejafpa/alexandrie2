@@ -122,6 +122,44 @@ public class CommentaireD implements IDao<CommentaireM>{
 		return listeCommentaires;
 	}
 	
+	public int noteMoyenne(int id) {
+		int noteMoyenne = 0;
+		
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT ROUND(AVG(commentaire.note)) AS moyenne FROM commentaire INNER JOIN produit ON commentaire.idProduit = produit.id WHERE produit.id = ?");
+			sql.setInt(1, id);
+			ResultSet res = sql.executeQuery();
+			
+			if (res.next()) {
+				noteMoyenne = res.getInt("moyenne");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return noteMoyenne;
+	}
+	
+	public int nbreComments(int id) {
+		int nbrCommentaires = 0;
+		
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT COUNT(commentaire.id) AS nbrCommentaires FROM commentaire INNER JOIN produit ON commentaire.idProduit = produit.id WHERE produit.id = ?");
+			sql.setInt(1, id);
+			ResultSet res = sql.executeQuery();
+			
+			if (res.next()) {
+				nbrCommentaires = res.getInt("nbrCommentaires");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return nbrCommentaires;
+	}
+	
+	
+	
 	
 
 } // fin CommentaireD

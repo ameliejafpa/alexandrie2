@@ -67,6 +67,11 @@
                         <div class="contact_form" data-bgimg="assets/img/others/contact-form-bg-shape.png">
                             <h2>Votre demande</h2>
                             <form id="contact-form" method="post">
+                            	<c:if test="${!isConnected }">
+	                            	<div class="form_input">
+	                                    <input name="conEmail" placeholder="Email" type="text">
+	                                </div>
+                                </c:if>
                                 <div class="form_input">
                                     <input name="conSujet" placeholder="Sujet" type="text">
                                 </div>

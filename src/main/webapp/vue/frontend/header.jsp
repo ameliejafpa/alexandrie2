@@ -31,9 +31,9 @@
 	                                		</ul>
 	                                	<li>
                                 	</c:forEach>
-                                	<c:if test="${isConnected }">
+                                	
                                 	<li class="menu-item-has-children"><a href="contact">Nous contacter</a></li>
-                                	</c:if>
+                                	
                             </ul>
                         </div>
                     </div>
@@ -89,7 +89,9 @@
                 <div class="col-12">
                     <div class="main_header d-flex justify-content-between align-items-center">
                        <div class="header_logo">
-                            <a class="sticky_none" href="index.html"><img src="vue/frontend/assets/img/logo/logo_music_shop.png" alt=""></a>
+                       		<c:forEach items="${listeCoordonnees }" var="coordonnee">
+                            <a class="sticky_none" href="accueil"><img src="${coordonnee.logo }" alt=""></a>
+                            </c:forEach>
                         </div>
                         <!--main menu start-->
                         <div class="main_menu d-none d-lg-block">
@@ -107,9 +109,7 @@
 	                                		</ul>
 	                                	<li>
                                 	</c:forEach>
-                                	<c:if test="${isConnected }">
-                                    	<li><a href="contact">Nous contacter</a></li>
-                                    </c:if>
+                                    <li><a href="contact">Nous contacter</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -146,16 +146,16 @@
                 </div>
             </div>
             <c:forEach items="${panierDetails }" var="article">
-	            <div class="cart_item">
+           		<div class="cart_item">
 	                <div class="cart_img">
-	                    <a href="produit?id=${article.idProduit.id }"><img src="vue/frontend/assets/img/product/product1.png" alt=""></a>
+	                    <a href="produit?id=${article.produit.id }"><img src="${article.produit.image }" alt=""></a>
 	                </div>
 	                <div class="cart_info">
-	                    <a href="single-product.html">Primis In Faucibus</a>
-	                    <p>1 x <span> $65.00 </span></p>
+	                    <a href="produit?id=${article.produit.id }">${article.produit.titre }</a>
+	                    <p>${article.quantite } x <span>${article.produit.prix } &euro;</span></p>
 	                </div>
 	                <div class="cart_remove">
-	                    <a href="#"><i class="ion-android-close"></i></a>
+	                    <a href="monPanier?action=delete&id=${article.produit.id }"><i class="ion-android-close"></i></a>
 	                </div>
 	            </div>
             </c:forEach>
@@ -163,22 +163,19 @@
         </div>
         <div class="mini_cart_table">
             <div class="cart_table_border">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$125.00</span>
-                </div>
+                
                 <div class="cart_total mt-10">
                     <span>total:</span>
-                    <span class="price">$125.00</span>
+                    <span class="price">${panier.prixTotal() } &euro;</span>
                 </div>
             </div>
         </div>
         <div class="mini_cart_footer">
             <div class="cart_button">
-                <a href="${login }">Voir le panier</a>
+                <a href="monPanier">Voir le panier</a>
             </div>
             <div class="cart_button">
-                <a href="checkout.html"><i class="fa fa-sign-in"></i> Payer</a>
+                <a href="paiement"><i class="fa fa-sign-in"></i> Payer</a>
             </div>
         </div>
     </div>
@@ -189,8 +186,8 @@
         <div class="search_close">
             <i class="ion-close-round"></i>
         </div>
-        <form class="border-bottom" action="#">
-            <input class="border-0" placeholder="Chercher..." type="text">
-            <button type="submit"><span class="pe-7s-search"></span></button>
+        <form class="border-bottom" action="resultatsRecherche" method="GET">
+            <input class="border-0" placeholder="Chercher..." type="text" name="requete">
+            <button type="submit" name="btnRecherche"><span class="pe-7s-search"></span></button>
         </form>
     </div>

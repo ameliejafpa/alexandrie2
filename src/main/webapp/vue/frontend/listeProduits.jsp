@@ -164,18 +164,18 @@
 	                                                    <div class="product_thumb">
 	                                                        <a href="produit?id=${produit.id }"><img
 	                                                                src="${produit.image }" alt=""></a>
-	                                                        <%-- <div class="action_links">
+	                                                        <c:if test="${isConnected }">
+	                                                        <div class="action_links">
 	                                                            <ul class="d-flex justify-content-center">
-	                                                                <li class="add_to_cart"><a href="cart.html"
-	                                                                        title="Add to cart">
+	                                                                <li class="add_to_cart"><a href="listeProduits?action=addToCart&idProduit=${produit.id }"
+	                                                                        title="Ajouter au panier">
 	                                                                        <span class="pe-7s-shopbag"></span></a></li>
-	                                                                <li class="wishlist"><a href="#"
-	                                                                        title="Add to Wishlist"><span
+	                                                                <li class="wishlist"><a href="listeProduits?action=addWhishlist&idProduit=${produit.id }"
+	                                                                        title="Ajouter aux favoris"><span
 	                                                                            class="pe-7s-like"></span></a></li>
-	                                                                <li class="quick_button"><a href="produit?id=${produit.id }" title="Quick View"> <span
-	                                                                            class="pe-7s-look"></span></a></li>
 	                                                            </ul>
-	                                                        </div> --%>
+	                                                        </div>
+	                                                        </c:if>
 	                                                    </div>
 	                                                    <figcaption class="product_content text-center">
 	                                                        <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
@@ -200,7 +200,7 @@
 	                                                </div>
 	                                                <figcaption class="product_list_content">
 	                                                    <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
-	                                                    <div class="product__ratting">
+	                                                    <!-- <div class="product__ratting">
 	                                                        <ul class="d-flex">
 	                                                            <li><a href="#"><i class="ion-ios-star"></i></a></li>
 	                                                            <li><a href="#"><i class="ion-ios-star"></i></a></li>
@@ -209,25 +209,25 @@
 	                                                            <li><a href="#"><i class="ion-android-star-outline"></i></a>
 	                                                            </li>
 	                                                        </ul>
-	                                                    </div>
+	                                                    </div> -->
 	                                                    <div class="price_box">
 	                                                        <span class="current_price">${produit.prix } €</span>
 	                                                    </div>
 	                                                    <div class="product__desc">
 	                                                        <p>${produit.description }</p>
 	                                                    </div>
-	                                                    <%-- <div class="action_links product_list_action">
+	                                                    <c:if test="${isConnected }">
+	                                                    <div class="action_links product_list_action">
 	                                                        <ul class="d-flex">
-	                                                            <li class="add_to_cart"><a href="cart.html"
-	                                                                    title="Add to cart">
+	                                                            <li class="add_to_cart"><a href="listeProduits?action=addToCart&idProduit=${produit.id }"
+	                                                                    title="Ajouter au panier">
 	                                                                    <span class="pe-7s-shopbag"></span></a></li>
-	                                                            <li class="wishlist"><a href="#"
-	                                                                    title="Add to Wishlist"><span
+	                                                            <li class="wishlist"><a href="listeProduits?action=addWhishlist&idProduit=${produit.id }"
+	                                                                    title="Ajouter aux favoris"><span
 	                                                                        class="pe-7s-like"></span></a></li>
-	                                                            <li class="quick_button"><a href="produit?id=${produit.id }" title="Quick View">
-	                                                                    <span class="pe-7s-look"></span></a></li>
 	                                                        </ul>
-	                                                    </div> --%>
+	                                                    </div>
+	                                                    </c:if>
 	                                                </figcaption>
 	                                            </figure>
 	                                        </article>

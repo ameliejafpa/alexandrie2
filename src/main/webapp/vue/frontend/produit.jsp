@@ -98,28 +98,45 @@
                         <div class="price_box">
                             <span class="current_price">${produit.prix } €</span>
                         </div>
-                        <!-- <div class="quickview__info mb-0">
-                            <p class="product_review d-flex align-items-center">
-                                <span class="review_icon d-flex">
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                    <i class="ion-ios-star"></i>
-                                </span>
-                                <span class="review__text"> (5 reviews)</span>
-                            </p>
-                        </div> -->
+                        <c:if test="${nbrCommentaires > 0}">
+	                        <div class="quickview__info mb-0">
+	                            <p class="product_review d-flex align-items-center">
+	                                <span class="review_icon d-flex">
+	                                <c:forEach var="i" begin="1" end="${noteMoyenne }" step="1" varStatus ="status">
+    									<i class="ion-ios-star"></i>
+	                                </c:forEach>
+	                                <c:forEach var="i" begin="${noteMoyenne +1}" end="5" step="1" varStatus ="status">
+    									<i class="ion-android-star-outline"></i>
+	                                </c:forEach>
+	                                </span>
+	                                <span class="review__text"> (${nbrCommentaires} commentaires)</span>
+	                            </p>
+	                        </div>
+                        </c:if>
                         <p class="product_details_desc">${produit.description }</p>
                         <form method="post" class="product_pro_button quantity d-flex align-items-center">
                         	
 	                            <div class="pro-qty border">
-	                                <input type="text" value="1">
+	                                <input type="text" value="1" name="panierQuantite">
 	                            </div>
-	                            <button class="add_to_cart" type="submit" name="padd" >Ajouter au panier</button>
+	                            <c:choose>
+	                            	<c:when test="${nbrEnStock > 0 }">
+	                            		<button class="add_to_cart" type="submit" name="btnPanierAdd" >Ajouter au panier</button>
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            		<button class="add_to_cart_out_of_stock" name="btnPanierAdd" disabled data-toggle="tooltip" data-placement="top" title="Produit en rupture de stock">Ajouter au panier</button>
+	                            	</c:otherwise>
+	                            </c:choose>
 <!-- 	                        <a class="add_to_cart " href="#">add to cart</a>-->
 								<c:if test="${isConnected }">
-									<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>
+									<c:choose>
+										<c:when test="${dejaFavori }">
+											<button class="wishlist__btn" type="submit" name="btnFavori" ><i class="pe-7s-like"></i></button>
+										</c:when>
+										<c:otherwise>
+											<button class="already_wishlist__btn" type="submit" name="btnFavori" disabled data-toggle="tooltip" data-placement="top" title="Produit déjà dans vos favoris"><i class="pe-7s-like"></i></button>
+										</c:otherwise>
+									</c:choose>
 								</c:if>
 <!-- 							<a class="wishlist__btn" href="#"><i class="pe-7s-like"></i></a>
 	                            <a class="serch_btn" href="#"><i class="pe-7s-search"></i></a>
@@ -140,20 +157,21 @@
                     <div class="reviews__wrapper">
 	                    <h2>Commentaires</h2>
 	                    <c:forEach items="${listeCommentaires }" var="commentaire">
-		                    <div class="customer__reviews d-flex justify-content-between mb-20">
-		                            <div class="reviews__ratting">
-		                            	<p>${commentaire.note }/5 <i class="ion-ios-star"></li></i></p>
-		                                <ul class="d-flex">
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                    <li><a href="#"><i class="ion-ios-star"></i></a></li>
-		                                </ul>
-		                            </div>
+		                    <div class="customer__reviews d-flex justify-content-between mb-30">
+		                            
 		                            <div class="reviews__desc">
 		                                <h3>${commentaire.idUtilisateur.prenom } ${commentaire.idUtilisateur.nom }</h3>
-		                                <p>${commentaire.commentaire }</p>
+		                                <div>${commentaire.commentaire }</div>
+		                                <div class="reviews__ratting">
+		                            	<ul class="d-flex">
+		                                <c:forEach var="i" begin="1" end="${commentaire.note }" step="1" varStatus ="status">
+		    									<li><a href="#"><i class="ion-ios-star"></i></a></li>
+			                                </c:forEach>
+			                                <c:forEach var="i" begin="${commentaire.note +1}" end="5" step="1" varStatus ="status">
+		    									<li><a href="#"><i class="ion-android-star-outline"></i></a></li>
+			                                </c:forEach>
+		                                </ul>
+		                            </div>
 		                            </div>
 		                        
 		                    </div>

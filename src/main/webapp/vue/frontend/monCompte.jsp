@@ -54,8 +54,8 @@
                     <div class="breadcrumbs_text">
                         <h1>Mon compte</h1>
                         <ul>
-                            <li><a href="index.html">Home </a></li>
-                            <li> // My Account</li>
+                            <li><a href="accueil">Accueil </a></li>
+                            <li> // Mon compte</li>
                         </ul>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders"
-                                role="tab" aria-controls="account-orders" aria-selected="false">Orders</a>
+                                role="tab" aria-controls="account-orders" aria-selected="false">Commandes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-address"
@@ -103,35 +103,94 @@
                         <div class="tab-pane fade" id="account-orders" role="tabpanel"
                             aria-labelledby="account-orders-tab">
                             <div class="myaccount-orders">
-                                <h4 class="small-title">MY ORDERS</h4>
+                                <h4 class="small-title">Mes commandes</h4>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover">
                                         <tbody>
                                             <tr>
-                                                <th>ORDER</th>
-                                                <th>DATE</th>
-                                                <th>STATUS</th>
-                                                <th>TOTAL</th>
+                                                <th>Commande</th>
+                                                <th>Date</th>
+                                                <th>Statut</th>
+                                                <th>Total</th>
                                                 <th></th>
                                             </tr>
+                                            <c:forEach items="${commandes }" var="commande">
                                             <tr>
-                                                <td><a class="account-order-id" href="javascript:void(0)">#5364</a></td>
-                                                <td>Mar 27, 2019</td>
-                                                <td>On Hold</td>
-                                                <td>$162.00 for 2 items</td>
-                                                <td><a href="javascript:void(0)"
-                                                        class="btn btn-secondary btn-primary-hover"><span>View</span></a>
+                                                <td><a class="account-order-id" href="javascript:void(0)">#${commande.id }</a></td>
+                                                <td>${commande.dateC }</td>
+                                                <td>
+	                                                <c:choose>
+	                                                	<c:when test="${commande.etat == 0}">En traitement</c:when>
+	                                                	<c:when test="${commande.etat == 1}">En cours de livraison</c:when>
+	                                                	<c:when test="${commande.etat == 2}">Livrée</c:when>
+	                                                	<c:otherwise>Erreur</c:otherwise>
+	                                                </c:choose>
+                                                </td>
+                                                <td>${commande.total }&nbsp;&euro;</td>
+                                                <td>
+                                                	<!-- Button trigger modal -->
+													<button type="button" class="btn btn-secondary btn-primary-hover" data-bs-toggle="modal" data-bs-target="#voirCommande${commande.id }">Voir</button>
+													
+													<!-- Modal -->
+													<div class="modal fade" id="voirCommande${commande.id }" tabindex="-1" aria-labelledby="voirCommande${commande.id }" aria-hidden="true">
+													  <div class="modal-dialog modal-lg modal-fullscreen-sm-down">
+													    <div class="modal-content">
+													      <div class="modal-header">
+													        <h5 class="modal-title" id="exampleModalLabel">Commande #${commande.id }</h5>
+													        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													      </div>
+													      <div class="modal-body">
+													        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">images</th>
+                                        <th class="cart-product-name">Produit</th>
+                                        <th class="product-price">Prix unitaire</th>
+                                        <th class="product-quantity">Quantité</th>
+                                        <th class="product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	<c:forEach items="${listeDetailsCommandes }" var="detailsCommande">
+                                		
+                                			<c:if test="${commande.id == detailsCommande.idCommande.id}">
+		                                    <tr>
+		                                        <td class="product-thumbnail">
+		                                            <a href="produit?id=${detailsCommande.idProduit.id }">
+		                                                <img src="${detailsCommande.idProduit.image }" alt="Cart Thumbnail">
+		                                            </a>
+		                                        </td>
+		                                        <td class="product-name">
+		                                        	<a href="produit?id=${detailsCommande.idProduit.id }">${detailsCommande.idProduit.titre }</a> 
+		                                        </td>
+		                                        <td class="product-price">
+		                                        	<span class="amount">${detailsCommande.idProduit.prix }&nbsp;&euro;</span>
+		                                        </td>
+		                                        <td class="product_pro_button quantity">
+		                                            ${detailsCommande.quantite }
+		                                        </td>
+		                                        <td class="product-subtotal">
+		                                        	<span class="amount">${detailsCommande.quantite*detailsCommande.idProduit.prix }&nbsp;&euro;</span>
+		                                        </td>
+		                                        
+		                                     </tr>
+		                                     </c:if>
+	                                     
+                                     </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+													      </div>
+													      <div class="modal-footer">
+													        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+													      </div>
+													    </div>
+													  </div>
+													</div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td><a class="account-order-id" href="javascript:void(0)">#5356</a></td>
-                                                <td>Mar 27, 2019</td>
-                                                <td>On Hold</td>
-                                                <td>$162.00 for 2 items</td>
-                                                <td><a href="javascript:void(0)"
-                                                        class="btn btn-secondary btn-primary-hover"><span>View</span></a>
-                                                </td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -149,6 +208,7 @@
                                         </address>
                                     </div>
                                     <div class="col-12">
+                                    	<h4 class="small-title">Modifier votre adresse de livraison</h4>
                                     	<form method="post" class="myaccount-form">
                                     <div class="myaccount-form-inner">
                                         <div class="single-input">
@@ -181,7 +241,13 @@
                         <div class="tab-pane fade" id="account-details" role="tabpanel"
                             aria-labelledby="account-details-tab">
                             <div class="myaccount-details">
+                            	<h4 class="small-title">Modifier vos informations</h4>
                                 <form method="post" class="myaccount-form">
+                                	<c:if test="${champVide }">
+	                                	<div class="alert alert-danger" role="alert">				  
+										Les champs Prénom, Nom et Email doivent ête renseignés.
+										</div>
+                                	</c:if>
                                     <div class="myaccount-form-inner">
                                         <div class="single-input single-input-half">
                                             <label>Prénom*</label>
@@ -202,10 +268,6 @@
                                         <div class="single-input">
                                             <label>Nouveau mot de passe (laisser vide pour ne pas le modifier)</label>
                                             <input type="password" name="upPassword">
-                                        </div>
-                                        <div class="single-input">
-                                            <label>Confirmer le mot de passe</label>
-                                            <input type="password" name="confirmPassword">
                                         </div>
                                         <div class="single-input">
                                             <button class="btn custom-btn" type="submit" name="btnUpdate">

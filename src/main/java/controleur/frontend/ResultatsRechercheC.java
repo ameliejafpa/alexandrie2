@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProduitD;
-import dao.SlideD;
 import modele.ProduitM;
-import modele.SlideM;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class ResultatsRechercheC
  */
-@WebServlet("/accueil")
-public class AccueilC extends HttpServlet {
+@WebServlet("/resultatsRecherche")
+public class ResultatsRechercheC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AccueilC() {
+    public ResultatsRechercheC() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,19 +32,16 @@ public class AccueilC extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String requete = request.getParameter("requete");
+		//String[] mots = requete.split(" ");
 		ProduitD produitD = new ProduitD();
 		ArrayList<ProduitM> listeProduits = new ArrayList<>();
-		listeProduits = produitD.read();
+		//for (String mot : mots) {
+			listeProduits = produitD.search(requete);
+		//}
 		request.setAttribute("listeProduits", listeProduits);
-		
-		SlideD slideD = new SlideD();
-		ArrayList<SlideM> listeSlides = new ArrayList<>();
-		listeSlides = slideD.read();
-		request.setAttribute("listeSlides", listeSlides);
-		
-		request.getRequestDispatcher("vue/frontend/accueil.jsp").forward(request, response);
-	}
+
+		request.getRequestDispatcher("vue/frontend/resultatsRecherche.jsp").forward(request, response);	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

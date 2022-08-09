@@ -39,9 +39,9 @@
                                     <h3>Informations</h3>
                                     <div class="footer_menu">
                                         <ul>
-                                        	<c:if test="${isConnected }">
+                                        	
                                             	<li><a href="contact">Nous contacter</a></li>
-                                            </c:if>
+                                            
                                             <c:forEach items="${listeCategories}" var="categorie">
 	                                            <li><a href="listeProduits?idCategorie=${categorie.id }">${categorie.titre }</a></li>
 	                                        </c:forEach>

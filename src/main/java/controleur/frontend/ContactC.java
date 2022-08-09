@@ -41,9 +41,13 @@ public class ContactC extends HttpServlet {
 		int userId = (int) session.getAttribute("userId");
 		ContactD contactD = new ContactD();
 		if (request.getParameter("btnMessage") != null) {
+			String email = null;
+			if ((boolean) session.getAttribute("isConnected") == false) {
+				email = request.getParameter("conEmail");
+			}
 			String sujet = request.getParameter("conSujet");
 			String message = request.getParameter("conMessage");
-			contactD.create(new ContactM(new UtilisateurM(userId), sujet, message, 0));
+			contactD.create(new ContactM(new UtilisateurM(userId), email, sujet, message, 0));
 		}
 		
 		//Affichage des coordonnées

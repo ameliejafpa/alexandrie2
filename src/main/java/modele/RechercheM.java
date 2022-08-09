@@ -20,6 +20,12 @@ public class RechercheM {
 		this.dateR = dateR;
 	}
 	
+	
+	public RechercheM(UtilisateurM idUtilisateur, String motCle) {
+		super();
+		this.idUtilisateur = idUtilisateur;
+		this.motCle = motCle;
+	}
 	public int getId() {
 		return id;
 	}

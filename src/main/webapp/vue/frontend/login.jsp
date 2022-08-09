@@ -48,7 +48,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <form id="formConnexion" name="formConnexion" method="post">
+                	<form id="formConnexion" name="formConnexion" method="post">
                         <div class="login-form">
                             <h4 class="login-title">Connexion</h4>
                             <div class="row">
@@ -71,7 +71,10 @@
                                         <a href="#"> Forgotten pasward?</a>
                                     </div>
                                 </div> -->
-                                <div class="col-lg-12 pt-5">
+                                <c:if test="${messageConnexionNo }">
+			                		<div class="col-lg-12 alert alert-danger" role="alert">Adresse e-mail ou mot de passe invalide</div>
+								</c:if>
+                                <div class="col-lg-12">
                                     <button class="btn custom-btn md-size" type="submit" name="btnConnexion">Connexion</button>
                                 </div>
                             </div>
@@ -82,9 +85,14 @@
                     <form id="formInscription" name="formInscription" method="post">
                         <div class="login-form">
                             <h4 class="login-title">Inscription</h4>
+                            <c:if test="${emailExiste }">
+                            	<div class="alert alert-danger" role="alert">				  
+									Cette adresse email existe déjà, veuillez vous connecter ou choisir une autre adresse.
+								</div>
+                            </c:if>
                             <c:if test="${messageInscriptionOk }">
                             	<div class="alert alert-success" role="alert">				  
-									Votre inscription a bien été prise en compte, veuillez-vous connecter
+									Votre inscription a bien été prise en compte, veuillez-vous connecter.
 								</div>
                             </c:if>
                             <div class="row">
