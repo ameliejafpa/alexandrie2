@@ -1,7 +1,13 @@
 package controleur.frontend;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,26 +51,63 @@ public class MonCompteC extends HttpServlet {
 		int userId = (int) session.getAttribute("userId");
 		UtilisateurD utilisateurD = new UtilisateurD();
 		UtilisateurM utilisateur = new UtilisateurM();
-		boolean samePassword = true;
-		boolean champVide = false;
+		boolean messageInscriptionOk=false;
+		boolean emailExiste=false;
+        boolean erreurNewPassword = false;
+        boolean erreurOldPassword = false;
+        boolean champObligatoire = false;
 		if (request.getParameter("btnUpdate") != null) {
 			String nom = request.getParameter("upNom");
 			String prenom = request.getParameter("upPrenom");
 			String email = request.getParameter("upEmail");
-			if (nom == null || prenom == null || email == null) {
-				champVide = true;
-				request.setAttribute("champVide", champVide);
+			
+			utilisateur = utilisateurD.findByEmail(email);
+			System.out.println(utilisateurD.findById(userId).getEmail());
+			System.out.println(email);
+			System.out.println(utilisateurD.findById(userId).getEmail().equalsIgnoreCase(email));
+			if (nom.equalsIgnoreCase("") || prenom.equalsIgnoreCase("") || email.equalsIgnoreCase("")) {
+	        	champObligatoire = true;
 			}
-			if (request.getParameter("password") != null && request.getParameter("upPassword") != null ) {
-				String oldPassword = request.getParameter("password");
-				String newPassword = request.getParameter("upPassword");
+			if (utilisateur.getEmail() != null && utilisateurD.findById(userId).getEmail().equalsIgnoreCase(email) == false) {
+				emailExiste=true;
+			} 
+			String oldPassword = null;
+			String newPassword = null;
+			if (!request.getParameter("oldPassword").equalsIgnoreCase("") && !request.getParameter("newPassword").equalsIgnoreCase("") ) {
 				
-				utilisateur = new UtilisateurM(nom,prenom,email,newPassword);
-				utilisateurD.update(utilisateur, userId);
-			} else {
+				// test si mot de passe correct
+//				oldPassword = request.getParameter("oldPassword");
+//				
+//				if (encoded == utilisateurD.findById(userId).getMotDePasse()) {
+//					erreurOldPassword = true;
+//				}
+				
+				//Vérification nouveau mot de passe
+				newPassword = request.getParameter("newPassword");
+				final String regex = "^(?=.*[~!@#$%^&*()_+\\-=;':\\\",./<>?])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\\S{8}$";
+				final Pattern pattern = Pattern.compile(regex);
+		        final Matcher matcher = pattern.matcher(newPassword);
+		        boolean matchFound = matcher.find();
+		        if (!matchFound) {
+		        	erreurNewPassword = true;
+				}
+		        if (!erreurNewPassword && !champObligatoire && !emailExiste) {
+		        	utilisateur = new UtilisateurM(nom,prenom,email,newPassword);
+					utilisateurD.update(utilisateur, userId);
+					session.setAttribute("userId", utilisateur.getId());
+					session.setAttribute("userNom", utilisateur.getNom());
+					session.setAttribute("userPrenom", utilisateur.getPrenom());
+				}
+			} else if (!champObligatoire && !emailExiste) {
 				utilisateur = new UtilisateurM(nom,prenom,email);
 				utilisateurD.updateWithoutPassword(utilisateur, userId);
 			}
+			
+			request.setAttribute("messageInscriptionOk", messageInscriptionOk);
+			request.setAttribute("emailExiste", emailExiste);
+			request.setAttribute("erreurOldPassword", erreurOldPassword);
+			request.setAttribute("erreurNewPassword", erreurNewPassword);
+			request.setAttribute("champObligatoire", champObligatoire);
 		}
 		// create / update adresse de livraison
 		AdresseLivraisonD adresseLivraisonD = new AdresseLivraisonD();

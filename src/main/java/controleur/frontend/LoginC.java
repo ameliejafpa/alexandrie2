@@ -46,27 +46,26 @@ public class LoginC extends HttpServlet {
 			String prenom = request.getParameter("insPrenom");
 			String email = request.getParameter("insEmail");
 			
-			UtilisateurM utilisateur = new UtilisateurM(nom,prenom,email,password);
-			UtilisateurM utilisateur2 = new UtilisateurM();
-			utilisateur2 = utilisateurD.findByEmail(email);
+
+			UtilisateurM utilisateur = new UtilisateurM();
+			utilisateur = utilisateurD.findByEmail(email);
 			
 			final String regex = "^(?=.*[~!@#$%^&*()_+\\-=;':\\\",./<>?])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\\S{8}$";
 			final Pattern pattern = Pattern.compile(regex);
 	        final Matcher matcher = pattern.matcher(password);
 	        boolean matchFound = matcher.find();
-	        System.out.println(nom);
 	        
 	        if (nom.equalsIgnoreCase("") || prenom.equalsIgnoreCase("") || email.equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
 	        	champObligatoire = true;
 			}
-	        if (utilisateur2.getEmail() != null) {
+	        if (utilisateur.getEmail() != null) {
 				emailExiste=true;
 			} 
 	        if (!matchFound) {
 				erreurMotdepasse = true;
 			}
 	        if (!emailExiste && !erreurMotdepasse && !champObligatoire){
-				utilisateurD.create(utilisateur);
+				utilisateurD.create(new UtilisateurM(nom,prenom,email,password));
 				messageInscriptionOk = true;
 			}
 		}
