@@ -84,7 +84,7 @@
                                         <td><a href="messageadmin?idUtilisateur=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
                                         data-bs-original-title="Voir les messages"><i data-feather="mail"></i></a> 
                                         </td>
-                                        <td><a href="orderbyuseradmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        <td><a href="orderbyuseradmin?id=${user.id }&action=showByClient" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
                                         data-bs-original-title="Voir les commandes"><i data-feather="package"></i></a> 
                                         </td>
                                         <td><a href="commentadmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 

@@ -39,13 +39,17 @@
 <c:url value="/newproductadmin" var="newProduct"/>
 <c:url value="/deconnexionadmin" var="deconnexion"/>
 <c:url value="/accueiladmin" var="accueil"/>
+<c:url value="/teamadmin" var="equipe"/>
+<c:url value="/orderbyuseradmin?action=showAll" var="commandes"/>
+
 
 
 <!--start wrapper-->
   <div class="wrapper">
     <!--start top header-->
-    <header class="top-header">        
-      <nav class="navbar navbar-expand">
+<header class="top-header">        
+	<nav class="navbar navbar-expand">
+      	
         <div class="topbar-logo-header d-none d-xl-flex">
           <div>
             <img src="vue/backend/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
@@ -69,19 +73,10 @@
             <a class="nav-link" href="javascript:;">Commandes</a>
             </li>       
             <li class="nav-item">
-            <a class="nav-link" href="javascript:;">Equipe</a>
+            <a class="nav-link" href="${equipe }">Equipe</a>
             </li>       
           </ul>  
           </div>
-          
-          <div class="search-toggle-icon d-xl-none ms-auto">
-            <i class="bi bi-search"></i>
-          </div>
-          <form class="searchbar d-none d-xl-flex ms-auto">
-              <div class="position-absolute top-50 translate-middle-y search-icon ms-3"><i class="bi bi-search"></i></div>
-              <input class="form-control" type="text" placeholder="Type here to search">
-              <div class="position-absolute top-50 translate-middle-y d-block d-xl-none search-close-icon"><i class="bi bi-x-lg"></i></div>
-          </form>
           
           <!-- parametre admin  -->
           <c:if test="${isConnected==true }">        
@@ -124,103 +119,12 @@
                   </li>
               </ul>
             </li>
+            </ul>
+             </div>
           </c:if>
           <!-- fin if connected -->
 
-
-            <li class="nav-item dropdown dropdown-large">
-              <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
-                <div class="messages">
-                  <span class="notify-badge">5</span>
-                  <i class="bi bi-messenger"></i>
-                </div>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end p-0">
-                <div class="p-2 border-bottom m-2">
-                    <h5 class="h5 mb-0">Messages</h5>
-                </div>
-               <div class="header-message-list p-2">
-                  <div class="dropdown-item bg-light radius-10 mb-1">
-                    <form class="dropdown-searchbar position-relative">
-                      <div class="position-absolute top-50 start-0 translate-middle-y px-3 search-icon"><i class="bi bi-search"></i></div>
-                      <input class="form-control" type="search" placeholder="Search Messages">
-                    </form>
-                  </div>
-                   <a class="dropdown-item" href="#">
-                     <div class="d-flex align-items-center">
-                        <img src="vue/backend/assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="52" height="52">
-                        <div class="ms-3 flex-grow-1">
-                          <h6 class="mb-0 dropdown-msg-user">Amelio Joly <span class="msg-time float-end text-secondary">1 m</span></h6>
-                          <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">The standard chunk of lorem...</small>
-                        </div>
-                     </div>
-                   </a>
-                  <a class="dropdown-item" href="#">
-                    <div class="d-flex align-items-center">
-                       <img src="vue/backend/assets/images/avatars/avatar-2.png" alt="" class="rounded-circle" width="52" height="52">
-                       <div class="ms-3 flex-grow-1">
-                         <h6 class="mb-0 dropdown-msg-user">Althea Cabardo <span class="msg-time float-end text-secondary">7 m</span></h6>
-                         <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">Many desktop publishing</small>
-                       </div>
-                    </div>
-                  </a>
-              </div>
-              <div class="p-2">
-                <div><hr class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">
-                    <div class="text-center">View All Messages</div>
-                  </a>
-              </div>
-             </div>
-            </li>
-            <li class="nav-item dropdown dropdown-large d-none d-sm-block">
-              <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
-                <div class="notifications">
-                  <span class="notify-badge">8</span>
-                  <i class="bi bi-bell-fill"></i>
-                </div>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end p-0">
-                <div class="p-2 border-bottom m-2">
-                    <h5 class="h5 mb-0">Notifications</h5>
-                </div>
-                <div class="header-notifications-list p-2">
-                   <div class="dropdown-item bg-light radius-10 mb-1">
-                    <form class="dropdown-searchbar position-relative">
-                      <div class="position-absolute top-50 start-0 translate-middle-y px-3 search-icon"><i class="bi bi-search"></i></div>
-                      <input class="form-control" type="search" placeholder="Search Messages">
-                    </form>
-                    </div>
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex align-items-center">
-                         <div class="notification-box"><i class="bi bi-basket2-fill"></i></div>
-                         <div class="ms-3 flex-grow-1">
-                           <h6 class="mb-0 dropdown-msg-user">New Orders <span class="msg-time float-end text-secondary">1 m</span></h6>
-                           <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">You have recived new orders</small>
-                         </div>
-                      </div>
-                    </a>
-                   <a class="dropdown-item" href="#">
-                     <div class="d-flex align-items-center">
-                      <div class="notification-box"><i class="bi bi-people-fill"></i></div>
-                        <div class="ms-3 flex-grow-1">
-                          <h6 class="mb-0 dropdown-msg-user">New Customers <span class="msg-time float-end text-secondary">7 m</span></h6>
-                          <small class="mb-0 dropdown-msg-text text-secondary d-flex align-items-center">5 new user registered</small>
-                        </div>
-                     </div>
-                   </a>
-
-               </div>
-               <div class="p-2">
-                 <div><hr class="dropdown-divider"></div>
-                   <a class="dropdown-item" href="#">
-                     <div class="text-center">View All Notifications</div>
-                   </a>
-               </div>
-              </div>
-            </li>
-            </ul>
-            </div>
+         </div>
       </nav>
     </header>
      <!--end top header-->
@@ -265,7 +169,7 @@
               <div class="menu-title">Commandes</div>
             </a>
             <ul>
-              <li> <a href="#"><i class="bi bi-arrow-right-short"></i>Liste des commandes</a>
+              <li> <a href="${commandes }"><i class="bi bi-arrow-right-short"></i>Liste des commandes</a>
               </li>
               <li> <a href="${userList }"><i class="bi bi-arrow-right-short"></i>Liste des utilisateurs</a>
               </li>
@@ -277,6 +181,11 @@
               </div>
               <div class="menu-title">Equipe</div>
             </a>
+            <ul>
+              <li> <a href="${equipe }"><i class="bi bi-arrow-right-short"></i>Gestion de l'équipe</a>
+              </li>
+            </ul>
+            
           </li>
         </ul>
       </nav>

@@ -195,6 +195,9 @@
                      <a class="text-danger" data-bs-toggle="modal" data-bs-target="#commentproduitModal${produit.id }" data-bs-placement="bottom">
                      	<button class="btn btn-primary">voir les commentaires</button>
                      </a>
+                     <a href="orderbyuseradmin?id=${produit.id }&action=showByProduct" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                   data-bs-original-title="Voir les commandes"><button class="btn btn-primary">voir les commandes liées</button></a> 
+
                      
        <!-- modal commentaire -->
        <div class="modal fade" id="commentproduitModal${produit.id }" tabindex="-1"

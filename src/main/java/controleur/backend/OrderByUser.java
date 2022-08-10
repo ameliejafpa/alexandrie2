@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.CommandeD;
-import dao.UtilisateurD;
 import modele.CommandeM;
 
 /**
@@ -19,6 +18,8 @@ import modele.CommandeM;
 @WebServlet("/orderbyuseradmin")
 public class OrderByUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	CommandeD commandeD = new CommandeD();
+	ArrayList<CommandeM> commandeM = new ArrayList<CommandeM>();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -35,16 +36,19 @@ public class OrderByUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int idUser = Integer.parseInt(request.getParameter("id"));
+		if (request.getParameter("action").equals("showByClient")) {
+			int idUser = Integer.parseInt(request.getParameter("id"));
+			commandeM = commandeD.findByUserId(idUser);
 
-		UtilisateurD utilisateurD = new UtilisateurD();
-		request.setAttribute("user", utilisateurD.findById(idUser));
+		} else if (request.getParameter("action").equals("showByProduct")) {
+			int idProduct = Integer.parseInt(request.getParameter("id"));
+			commandeM = commandeD.findByProductId(idProduct);
 
-		CommandeD commandeD = new CommandeD();
-		ArrayList<CommandeM> commandeM = new ArrayList<CommandeM>();
+		} else if (request.getParameter("action").equals("showAll")) {
+			commandeM = commandeD.read();
+		}
 
-		// affichage tous les utilisateurs
-		commandeM = commandeD.findByUserId(idUser);
+		// affichage des commandes
 		request.setAttribute("listeCommande", commandeM);
 
 		request.getRequestDispatcher("/vue/backend/OrderByUser.jsp").forward(request, response);

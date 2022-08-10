@@ -19,6 +19,8 @@ import modele.DetailsCommandeM;
 @WebServlet("/orderdetailadmin")
 public class OrderDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	CommandeD commandeD = new CommandeD();
+	int idCommande;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -35,15 +37,13 @@ public class OrderDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		int idCommande = Integer.parseInt(request.getParameter("id"));
+		idCommande = Integer.parseInt(request.getParameter("id"));
 
-		CommandeD commandeD = new CommandeD();
 		request.setAttribute("commande", commandeD.findById(idCommande));
 
 		DetailsCommandeD detailsCommandeD = new DetailsCommandeD();
 		ArrayList<DetailsCommandeM> detailsCommandeM = new ArrayList<DetailsCommandeM>();
 
-		// affichage tous les utilisateurs
 		detailsCommandeM = detailsCommandeD.findByIdCommande(idCommande);
 		request.setAttribute("listeDetail", detailsCommandeM);
 
@@ -56,7 +56,9 @@ public class OrderDetail extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		// update du statut
+		commandeD.updateStatus(Integer.parseInt(request.getParameter("inputStatus")), idCommande);
+
 		doGet(request, response);
 	}
 
