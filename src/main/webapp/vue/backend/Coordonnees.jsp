@@ -75,7 +75,7 @@
                           <div class="row g-3">
                             <div class="col-12">
                               <label class="form-label">Nom</label>
-                              <input class="form-control form-control-lg mb-3" type="text" placeholder="nom" aria-label=".form-control-lg example" name="intputNom" value="${coordonnee.nom}">
+                              <input class="form-control form-control-lg mb-3" type="text" placeholder="nom" aria-label=".form-control-lg example" name="inputNom" value="${coordonnee.nom}">
                              </div>
                           </div>
                         </div>
@@ -86,7 +86,7 @@
                           <div class="row g-3">
                             <div class="col-12">
                               <label class="form-label">Adresse</label>
-                              <textarea class="form-control" name="inputDescr">${coordonnee.adresse}</textarea>
+                              <textarea class="form-control" name="inputAdresse">${coordonnee.adresse}</textarea>
                              </div>
                           </div>
                         </div>
@@ -97,7 +97,7 @@
                           <div class="row g-3">
                             <div class="col-12">
                               <label class="form-label">Téléphone</label>
-                              <input class="form-control form-control-lg mb-3" type="text" placeholder="nom" aria-label=".form-control-lg example" name="intputNom" value="${coordonnee.telephone}">
+                              <input class="form-control form-control-lg mb-3" type="text" placeholder="nom" aria-label=".form-control-lg example" name="inputTelephone" value="${coordonnee.telephone}">
                              </div>
                           </div>
                         </div>
@@ -108,7 +108,7 @@
                           <div class="row g-3">
                             <div class="col-12">
                               <label class="form-label">Email</label>
-                              <input class="form-control form-control-lg mb-3" type="text" placeholder="nom" aria-label=".form-control-lg example" name="intputNom" value="${coordonnee.email}">
+                              <input class="form-control form-control-lg mb-3" type="text" placeholder="nom" aria-label=".form-control-lg example" name="inputEmail" value="${coordonnee.email}">
                              </div>
                           </div>
                         </div>
@@ -120,12 +120,12 @@
                             <div class="col-4">
                              <label class="form-label">Logo</label>
                              <input type="file" class="form-control"
-                                 name="inputImage1">
+                                 name="inputLogo">
                          </div>
                           </div>
                         </div>
                       </div>
-                      
+                      <input type=hidden name="inputId" value="${coordonnee.id}">
                       <div class="card shadow-none border">
                         <div class="card-body">
                         <div class="text-start">
