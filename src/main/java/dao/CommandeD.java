@@ -19,9 +19,8 @@ public class CommandeD implements IDao<CommandeM> {
 		// TODO Auto-generated method stub
 		try {
 
-			
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO commande(idUtilisateur, dateC, total, idAdresse, etat) VALUES (?, now(), ?, ?, ?)");
-			
+			PreparedStatement sql = connect.prepareStatement(
+					"INSERT INTO commande(idUtilisateur, dateC, total, idAdresse, etat) VALUES (?, now(), ?, ?, ?)");
 
 			sql.setObject(1, commande.getIdUtilisateur().getId());
 			sql.setFloat(2, commande.getTotal());
@@ -51,14 +50,13 @@ public class CommandeD implements IDao<CommandeM> {
 				CommandeM commande = new CommandeM();
 
 				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),
-        rs.getString("utilisateur.nom"),rs.getString("utilisateur.prenom"),
-        rs.getString("utilisateur.dateInscription"),rs.getString("utilisateur.email"),
-        rs.getString("utilisateur.motDePasse"));
+						rs.getString("utilisateur.nom"), rs.getString("utilisateur.prenom"),
+						rs.getString("utilisateur.dateInscription"), rs.getString("utilisateur.email"),
+						rs.getString("utilisateur.motDePasse"));
 				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),
-        utilisateur,rs.getString("adresseLivraison.adresse"),
-        rs.getString("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),
-        rs.getString("adresseLivraison.pays"));
-				
+						utilisateur, rs.getString("adresseLivraison.adresse"),
+						rs.getString("adresseLivraison.codePostal"), rs.getString("adresseLivraison.ville"),
+						rs.getString("adresseLivraison.pays"));
 
 				commande.setId(rs.getInt("commande.id"));
 				commande.setIdUtilisateur(utilisateur);
@@ -99,6 +97,22 @@ public class CommandeD implements IDao<CommandeM> {
 		return false;
 	}
 
+	public boolean updateStatus(int etat, int id) {
+		// TODO Auto-generated method stub
+		try {
+			PreparedStatement sql = connect.prepareStatement("UPDATE commande SET  etat = ? WHERE id = ?");
+			sql.setInt(1, etat);
+			sql.setInt(2, id);
+			sql.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	@Override
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
@@ -127,16 +141,14 @@ public class CommandeD implements IDao<CommandeM> {
 			ResultSet rs = sql.executeQuery();
 			if (rs.next()) {
 
-				
 				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),
-        rs.getString("utilisateur.nom"),rs.getString("utilisateur.prenom"),
-        rs.getString("utilisateur.dateInscription"),rs.getString("utilisateur.email"),
-        rs.getString("utilisateur.motDePasse"));
+						rs.getString("utilisateur.nom"), rs.getString("utilisateur.prenom"),
+						rs.getString("utilisateur.dateInscription"), rs.getString("utilisateur.email"),
+						rs.getString("utilisateur.motDePasse"));
 				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),
-        utilisateur,rs.getString("adresseLivraison.adresse"),
-        rs.getString("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),
-        rs.getString("adresseLivraison.pays"));
-				
+						utilisateur, rs.getString("adresseLivraison.adresse"),
+						rs.getString("adresseLivraison.codePostal"), rs.getString("adresseLivraison.ville"),
+						rs.getString("adresseLivraison.pays"));
 
 				commande.setId(rs.getInt("commande.id"));
 				commande.setIdUtilisateur(utilisateur);
@@ -151,7 +163,7 @@ public class CommandeD implements IDao<CommandeM> {
 		}
 		return commande;
 	}
-	
+
 	public int findLastId() {
 		int idCommande = 0;
 		try {
@@ -165,35 +177,67 @@ public class CommandeD implements IDao<CommandeM> {
 		}
 		return idCommande;
 	}
-	
-	public ArrayList<CommandeM> findByUserId(int id) {
-		// TODO Auto-generated method stub
-		ArrayList<CommandeM> commandes = new ArrayList<>();
 
+	public ArrayList<CommandeM> findByUserId(int id) {
+		ArrayList<CommandeM> commandes = new ArrayList<>();
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT * FROM commande INNER JOIN utilisateur ON commande.idUtilisateur = utilisateur.id INNER JOIN adresseLivraison ON commande.idAdresse = adresseLivraison.id WHERE utilisateur.id= ?");
+			PreparedStatement sql = connect.prepareStatement(
+					"SELECT * FROM commande INNER JOIN utilisateur ON commande.idUtilisateur = utilisateur.id INNER JOIN adresseLivraison ON commande.idAdresse = adresseLivraison.id WHERE utilisateur.id= ?");
 			sql.setInt(1, id);
 			ResultSet rs = sql.executeQuery();
 			while (rs.next()) {
 				CommandeM commande = new CommandeM();
-				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),rs.getString("utilisateur.nom"),rs.getString("utilisateur.prenom"),rs.getString("utilisateur.dateInscription"),rs.getString("utilisateur.email"),rs.getString("utilisateur.motDePasse"));
-				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),utilisateur,rs.getString("adresseLivraison.adresse"),rs.getString("adresseLivraison.codePostal"),rs.getString("adresseLivraison.ville"),rs.getString("adresseLivraison.pays"));
-				
+				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),
+						rs.getString("utilisateur.nom"), rs.getString("utilisateur.prenom"),
+						rs.getString("utilisateur.dateInscription"), rs.getString("utilisateur.email"),
+						rs.getString("utilisateur.motDePasse"));
+				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),
+						utilisateur, rs.getString("adresseLivraison.adresse"),
+						rs.getString("adresseLivraison.codePostal"), rs.getString("adresseLivraison.ville"),
+						rs.getString("adresseLivraison.pays"));
 				commande.setId(rs.getInt("commande.id"));
 				commande.setIdUtilisateur(utilisateur);
 				commande.setDateC(rs.getString("commande.dateC"));
 				commande.setTotal(rs.getFloat("commande.total"));
 				commande.setIdAdresse(adresseLivraison);
 				commande.setEtat(rs.getInt("commande.etat"));
-				
-				
 				commandes.add(commande);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return commandes;
-	}
+	} // fin findByUserId
 
-}
+	public ArrayList<CommandeM> findByProductId(int id) {
+		ArrayList<CommandeM> commandes = new ArrayList<>();
+		try {
+			PreparedStatement sql = connect.prepareStatement(
+					"SELECT * FROM commande INNER JOIN utilisateur ON commande.idUtilisateur = utilisateur.id INNER JOIN adresseLivraison ON commande.idAdresse = adresseLivraison.id INNER JOIN detailscommande ON commande.id = detailscommande.idCommande WHERE detailscommande.idProduit = ?");
+			sql.setInt(1, id);
+			ResultSet rs = sql.executeQuery();
+			while (rs.next()) {
+				CommandeM commande = new CommandeM();
+				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),
+						rs.getString("utilisateur.nom"), rs.getString("utilisateur.prenom"),
+						rs.getString("utilisateur.dateInscription"), rs.getString("utilisateur.email"),
+						rs.getString("utilisateur.motDePasse"));
+				AdresseLivraisonM adresseLivraison = new AdresseLivraisonM(rs.getInt("adresseLivraison.id"),
+						utilisateur, rs.getString("adresseLivraison.adresse"),
+						rs.getString("adresseLivraison.codePostal"), rs.getString("adresseLivraison.ville"),
+						rs.getString("adresseLivraison.pays"));
+				commande.setId(rs.getInt("commande.id"));
+				commande.setIdUtilisateur(utilisateur);
+				commande.setDateC(rs.getString("commande.dateC"));
+				commande.setTotal(rs.getFloat("commande.total"));
+				commande.setIdAdresse(adresseLivraison);
+				commande.setEtat(rs.getInt("commande.etat"));
+				commandes.add(commande);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return commandes;
+	} // fin findByUserId
+
+} // fin commandeD
