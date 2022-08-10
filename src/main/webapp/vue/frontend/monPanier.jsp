@@ -51,7 +51,9 @@
                 <div class="col-12">
                 	<c:choose>
                 		<c:when test="${panier.count() == 0 }">
-                			<div>Votre panier est vide .</div>
+                			<div class="alert alert-light" role="alert">
+							  Votre panier est vide.
+							</div>
                 		</c:when>
                 		<c:otherwise>
                 			<form action="#">
