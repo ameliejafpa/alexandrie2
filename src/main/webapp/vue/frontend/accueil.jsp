@@ -32,12 +32,12 @@
     <div class="product_section mb-80 wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="1.1s">
         <div class="container">
             <div class="section_title text-center mb-55">
-                <h2>Nos meilleures ventes</h2>
+                <h2>Nos offres</h2>
             </div>
             <div class="row product_slick slick_navigation slick__activation" data-slick='{
-                "slidesToShow": 4,
+                "slidesToShow": 1,
                 "slidesToScroll": 1,
-                "arrows": true,
+                "arrows": false,
                 "dots": false,
                 "autoplay": true,
                 "speed": 3000,
@@ -66,9 +66,6 @@
                                     </ul>
                                 </div> -->
                             </div>
-                            <figcaption class="product_content text-center">
-                                <h4><a href="${slide.url }">${slide.titre }</a></h4>
-                            </figcaption>
                         </figure>
                     </article>
                 </div>
