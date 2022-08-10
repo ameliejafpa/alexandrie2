@@ -29,7 +29,7 @@
   <link href="vue/backend/assets/css/semi-dark.css" rel="stylesheet" />
   <link href="vue/backend/assets/css/header-colors.css" rel="stylesheet" />
 
-  <title>Liste des utilisateurs</title>
+  <title>Liste des commandes</title>
   
 </head>
 
@@ -47,7 +47,7 @@
     <div class="card-header py-3">
         <div class="row align-items-center m-0">
          <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-         	<h6 class="mb-0">Liste des Utilisateurs</h6>
+         	<h6 class="mb-0">Liste des commandes de ${user.prenom } ${user.nom }</h6>
          </div>
         </div>
     </div>
@@ -63,32 +63,32 @@
                         <table class="table align-middle table-striped">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Email</th>
-                                    <th>Nom</th>
-                                    <th>Prénom</th>
-                                    <th>Date inscription</th>
-                                    <th>Messages</th>
-                                    <th>Commandes</th>
-                                    <th>Commentaires</th>
+                                    <th>Id commande</th>
+                                    <th>Date commande</th>
+                                    <th>Total</th>
+                                    <th>Statut</th>
+                                    <th>Detail</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${listeUsers }" var="user">
+                                <c:forEach items="${listeCommande }" var="commande">
                                     <tr>
-                                        <td><span>${user.id }</span></td>
-                                        <td><span>${user.email }</span></td>
-                                        <td><span>${user.nom }</span></td>
-                                        <td><span>${user.prenom }</span></td>
-                                        <td><span>${user.dateInscription }</span></td>
-                                        <td><a href="messageadmin?idUtilisateur=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
-                                        data-bs-original-title="Voir les messages"><i data-feather="mail"></i></a> 
-                                        </td>
-                                        <td><a href="orderbyuseradmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
-                                        data-bs-original-title="Voir les commandes"><i data-feather="package"></i></a> 
-                                        </td>
-                                        <td><a href="commentadmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
-                                        data-bs-original-title="Voir les commentaires"><i data-feather="heart"></i></a> 
+                                        <td><span>${commande.id }</span></td>
+                                        <td><span>${commande.dateC }</span></td>
+                                        <td><span>${commande.total } EUR</span></td>
+                                        <c:if test="${commande.etat ==0 }">
+                                        <td><span class="badge rounded-pill bg-warning text-dark">A valider</span></td>
+                                        </c:if>
+                                        <c:if test="${commande.etat ==1 }">
+                                        <td><span class="badge rounded-pill bg-secondary">En cours de livraison</span></td>
+                                        </c:if>
+                                        <c:if test="${commande.etat ==2 }">
+                                        <td><span class="badge rounded-pill bg-success">Livrée!</span></td>
+                                        </c:if>
+
+                                        <td><a href="orderdetailadmin?id=${commande.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        data-bs-original-title="Details de la commande"><i data-feather="eye"></i></a> 
                                         </td>
                                     </tr>
                                 </c:forEach>

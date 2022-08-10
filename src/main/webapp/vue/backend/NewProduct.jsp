@@ -42,35 +42,30 @@
   <div class="wrapper">
        <!--start content-->
           <main class="page-content">
-
-
+         <form method="post" action="newproductadmin">
               <div class="row">
                  <div class="col-lg-12 mx-auto">
                   <div class="card">
                     <div class="card-header py-3 bg-transparent"> 
                       <div class="d-sm-flex align-items-center">
                         <h5 class="mb-2 mb-sm-0">Nouveau produit</h5>
-                        <div class="ms-auto">
-                        <a href="${retourliste }"><button type="button" class="btn btn-secondary">Annuler</button></a>
-                        <a href="#"><button type="button" class="btn btn-primary">Ajouter le produit</button></a>       
-                        </div>
                       </div>
                      </div>
-                    <div class="card-body">
-                       <div class="row g-3">
+                    <div class="card-body">       
+                       <div class="row g-3"> 
                          <div class="col-12 col-lg-8">
                             <div class="card shadow-none bg-light border">
                               <div class="card-body">
-                                <form class="row g-3">
+                                <div class="row g-3">
                                   <div class="col-12">
                                     <label class="form-label">Nom du produit</label>
-                                    <input type="text" class="form-control" placeholder="Product title">
+                                    <input type="text" class="form-control" placeholder="Product title" name="intputTitre">
                                   </div>
                                   <div class="col-12">
                                     <label class="form-label">Description du produit</label>
-                                    <textarea class="form-control" placeholder="Full description" rows="4" cols="4" style="height: 287px;"></textarea>
+                                    <textarea class="form-control" placeholder="Full description" rows="4" cols="4" style="height: 287px;" name="inputDescr"></textarea>
                                   </div>
-                                </form>
+                                </div>
                               </div>
                             </div>
                          </div>
@@ -89,33 +84,26 @@
 		                          </div>
                                     <div class="col-12">
                                       <label class="form-label">Prix</label>
-                                      <input type="text" class="form-control" placeholder="Price">
+                                      <input type="text" class="form-control" placeholder="Price" name="inputPrix">
                                     </div>
                                   <div class="col-12">
                                     <label class="form-label">Image principale</label>
-                                    <input class="form-control" type="file">
-                                  </div>
+                                    <input class="form-control" type="file" name="inputImage">
+                                  </div>  
                                   <div class="col-12">
-                                    <label class="form-label">2eme image</label>
-                                    <input class="form-control" type="file">
-                                  </div>
-                                  <div class="col-12">
-                                    <label class="form-label">3eme image</label>
-                                    <input class="form-control" type="file">
-                                  </div>
-                                    
-
+                                  <a href="${retourliste }"><button type="button" class="btn btn-secondary">Annuler</button></a>
+                                  <button class="btn btn-primary" type="submit" name="btnAjout">Ajouter le produit</button>                           
+                                  </div>        
                                   </div><!--end row-->
                               </div>
                             </div>  
                         </div>
-
                        </div><!--end row-->
                      </div>
                     </div>
                  </div>
               </div><!--end row-->
-
+			 </form>
           </main>
        <!--end page main-->
 

@@ -89,7 +89,7 @@ public class ProductDetail extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// update stock
-		if (request.getParameter("btnUpdateStock") != null) { // probleme!!!
+		if (request.getParameter("btnUpdateStock") != null) {
 			System.out.println("date: " + request.getParameter("inputDate"));
 			System.out.println("fournisseur: " + request.getParameter("inputFournisseur"));
 			FournisseurM fM = new FournisseurM();
@@ -102,25 +102,28 @@ public class ProductDetail extends HttpServlet {
 			produitD.updateStock(newStock, idProduit);
 		}
 
-		// update produit
-		/*
-		 * ProduitM produitUp = new ProduitM();
-		 * produitUp.setTitre(request.getParameter("intputTitre"));
-		 * produitUp.setDescription(request.getParameter("inputDescr"));
-		 * produitUp.setPrix(Float.valueOf(request.getParameter("inputPrix")));
-		 * produitUp.setStock(Integer.valueOf(request.getParameter("inputStock")));
-		 * produitUp.setStockMinimum(Integer.valueOf(request.getParameter(
-		 * "inputStockMin"))); produitUp.setIdSousCategorie(new
-		 * SousCategorieM(Integer.valueOf(request.getParameter("inputSousCat")))); if
-		 * (request.getParameter("inputImage1") != null) {
-		 * produitUp.setImage("vue/img/produit/" + request.getParameter("inputImage"));
-		 * } else { produitUp.setImage(produit.getImage()); } produitD.update(produitUp,
-		 * idProduit); // update images
-		 * 
-		 * if (request.getParameter("inputImage2") != null) { imageD.update(null,
-		 * idProduit); produitUp.setImage("vue/img/produit/" +
-		 * request.getParameter("inputImage")); }
-		 */
+		if (request.getParameter("btnUpdateProduit") != null) {
+			System.out.println("ca marche?");
+			ProduitM produitUp = new ProduitM();
+			produitUp.setTitre(request.getParameter("intputTitre"));
+			produitUp.setDescription(request.getParameter("inputDescr"));
+			produitUp.setPrix(Float.valueOf(request.getParameter("inputPrix")));
+			produitUp.setStockMinimum(Integer.valueOf(request.getParameter("inputStockMin")));
+			produitUp.setIdSousCategorie(new SousCategorieM(Integer.valueOf(request.getParameter("inputSousCat"))));
+			if (request.getParameter("inputImage1").isEmpty() == true) {
+				produitUp.setImage(produit.getImage());
+
+			} else {
+				produitUp.setImage("vue/img/produit/" + request.getParameter("inputImage1"));
+			}
+			produitD.update(produitUp, idProduit); // update images
+
+		}
+
+		// if (request.getParameter("inputImage2") != null) {
+		// imageD.update(null, idProduit);
+		// produitUp.setImage("vue/img/produit/" + request.getParameter("inputImage"));
+		// }
 
 		doGet(request, response);
 	}
