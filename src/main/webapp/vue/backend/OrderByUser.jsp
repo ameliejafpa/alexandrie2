@@ -47,7 +47,7 @@
     <div class="card-header py-3">
         <div class="row align-items-center m-0">
          <div class="col-md-3 col-12 me-auto mb-md-0 mb-3">
-         	<h6 class="mb-0">Liste des commandes de ${user.prenom } ${user.nom }</h6>
+         	<h6 class="mb-0">Liste des commandes</h6>
          </div>
         </div>
     </div>
@@ -65,6 +65,7 @@
                                 <tr>
                                     <th>Id commande</th>
                                     <th>Date commande</th>
+                                    <th>Client</th>
                                     <th>Total</th>
                                     <th>Statut</th>
                                     <th>Detail</th>
@@ -76,6 +77,7 @@
                                     <tr>
                                         <td><span>${commande.id }</span></td>
                                         <td><span>${commande.dateC }</span></td>
+                                        <td><span>${commande.idUtilisateur.prenom} ${commande.idUtilisateur.nom}</span></td>
                                         <td><span>${commande.total } EUR</span></td>
                                         <c:if test="${commande.etat ==0 }">
                                         <td><span class="badge rounded-pill bg-warning text-dark">A valider</span></td>
