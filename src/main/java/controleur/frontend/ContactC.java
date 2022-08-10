@@ -47,7 +47,7 @@ public class ContactC extends HttpServlet {
 			}
 			String sujet = request.getParameter("conSujet");
 			String message = request.getParameter("conMessage");
-			contactD.create(new ContactM(new UtilisateurM(userId), email, sujet, message, 0));
+			contactD.create(new ContactM(new UtilisateurM(userId), sujet, message, 0));
 		}
 		
 		//Affichage des coordonnées

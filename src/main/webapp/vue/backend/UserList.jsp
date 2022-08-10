@@ -34,7 +34,6 @@
 </head>
 
 <body>
-<c:url value="/newproductadmin" var="newproduct"/>
 
 
 <!--start wrapper-->
@@ -82,7 +81,7 @@
                                         <td><span>${user.nom }</span></td>
                                         <td><span>${user.prenom }</span></td>
                                         <td><span>${user.dateInscription }</span></td>
-                                        <td><a href="messageadmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        <td><a href="messageadmin?idUtilisateur=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
                                         data-bs-original-title="Voir les messages"><i data-feather="mail"></i></a> 
                                         </td>
                                         <td><a href="orderadmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
