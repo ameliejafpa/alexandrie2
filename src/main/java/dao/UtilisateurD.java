@@ -151,7 +151,7 @@ public class UtilisateurD implements IDao<UtilisateurM> {
 		UtilisateurM utilisateur = new UtilisateurM();
 
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT * FROM utilisateur WHERE id=?");
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM utilisateur WHERE email=?");
 			sql.setString(1, email);
 			ResultSet rs = sql.executeQuery();
 			if (rs.next()) {

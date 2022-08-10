@@ -42,7 +42,7 @@ public class ListeProduitsC extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-				
+		ProduitD produitD = new ProduitD();		
 		ArrayList<ProduitM> listeProduits = new ArrayList<>();
 		if (request.getParameter("idCategorie") != null) {
 			int idCategorie = Integer.parseInt(request.getParameter("idCategorie"));

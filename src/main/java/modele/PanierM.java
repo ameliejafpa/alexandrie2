@@ -37,11 +37,11 @@ public class PanierM {
 		}
 	}
 	
-	public void update(PanierDetailsM p) {
+	public void update(PanierDetailsM p, int quantite) {
 		for(PanierDetailsM panierDetails:articles) {
 			if(panierDetails.getProduit().getId()==p.getProduit().getId()) {
 				
-				panierDetails.setQuantite(p.getQuantite());
+				panierDetails.setQuantite(quantite);
 			}
 		}
 	}

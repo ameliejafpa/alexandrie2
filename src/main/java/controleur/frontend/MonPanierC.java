@@ -41,7 +41,6 @@ public class MonPanierC extends HttpServlet {
 		ArrayList<PanierDetailsM> panierDetails = panier.articles;
 		
 		
-		
 		//affichage du panier
 		request.setAttribute("panierDetails", panierDetails);
 		
@@ -59,21 +58,22 @@ public class MonPanierC extends HttpServlet {
 		}
 		
 		//modification du panier
-		if (request.getParameter("btnUpdteCart") != null) {
-			Iterator<PanierDetailsM> it = panierDetails.iterator();
-			int i = 0;
-			while (it.hasNext()) {
+		if (request.getParameter("btnUpdateCart") != null) {
+			
+			int nbreArticles = panier.count();
+//			panier.empty();
+			for (int i = 0; i < nbreArticles; i++) {
 				int quantite = Integer.valueOf(request.getParameter("quantiteProduit" + i));
-				System.out.println(quantite);
-				//type type = (type) it.next();
-				i++;
+				int idProduit = Integer.valueOf(request.getParameter("idProduit" + i));
+				ProduitM produit = new ProduitM();
+				produit.setId(idProduit);
+				PanierDetailsM panierAdd = new PanierDetailsM(produit, quantite);
+				panier = (PanierM) session.getAttribute("panier");
+				
+				panier.update(panierAdd, quantite);
 			}
-			ProduitM produit = new ProduitM();
-			int quantite = Integer.valueOf(request.getParameter("panierQuantite"));
-			PanierDetailsM panierAdd = new PanierDetailsM(produit, quantite);
-			panier = (PanierM) session.getAttribute("panier");
-			panier.add(panierAdd);
 			session.setAttribute("panier", panier);
+			
 		}
 				
 		request.getRequestDispatcher("vue/frontend/monPanier.jsp").forward(request, response);

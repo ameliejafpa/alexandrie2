@@ -243,11 +243,24 @@
                             <div class="myaccount-details">
                             	<h4 class="small-title">Modifier vos informations</h4>
                                 <form method="post" class="myaccount-form">
-                                	<c:if test="${champVide }">
-	                                	<div class="alert alert-danger" role="alert">				  
-										Les champs Prénom, Nom et Email doivent ête renseignés.
+                                	<c:if test="${champObligatoire }">
+		                            	<div class="alert alert-danger" role="alert">				  
+											Veuillez remplir tous les champs.
 										</div>
-                                	</c:if>
+		                            </c:if>
+		                            <c:if test="${emailExiste }">
+		                            	<div class="alert alert-danger" role="alert">				  
+											Cette adresse email existe déjà, veuillez vous connecter ou choisir une autre adresse.
+										</div>
+		                            </c:if>
+		                            <c:if test="${erreurNewPassword }">
+					                		<div class="alert alert-danger" role="alert">Mot de passe invalide, veuillez recommencer</div>
+										</c:if>
+		                            <c:if test="${messageInscriptionOk }">
+		                            	<div class="alert alert-success" role="alert">				  
+											Votre inscription a bien été prise en compte, veuillez-vous connecter.
+										</div>
+		                            </c:if>
                                     <div class="myaccount-form-inner">
                                         <div class="single-input single-input-half">
                                             <label>Prénom*</label>
@@ -263,11 +276,13 @@
                                         </div>
                                         <div class="single-input">
                                             <label>Mot de passe actuel(laisser vide pour ne pas le modifier)</label>
-                                            <input type="password" name="password">
+                                            <input type="password" name="oldPassword">
                                         </div>
                                         <div class="single-input">
                                             <label>Nouveau mot de passe (laisser vide pour ne pas le modifier)</label>
-                                            <input type="password" name="upPassword">
+                                            <input type="password" name="newPassword">
+                                            <div id="passwordHelpBlock" class="form-text">
+8 caractères avec au moins une minuscule, une majuscule, un caractère spécial (~!@#$%^&*()_+-=;':",.?) et un chiffre</div>
                                         </div>
                                         <div class="single-input">
                                             <button class="btn custom-btn" type="submit" name="btnUpdate">

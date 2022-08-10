@@ -1,6 +1,8 @@
 package controleur.frontend;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,27 +37,45 @@ public class LoginC extends HttpServlet {
 		UtilisateurD utilisateurD = new UtilisateurD();
 		boolean messageInscriptionOk=false;
 		boolean emailExiste=false;
+        boolean erreurMotdepasse = false;
+        boolean champObligatoire = false;
+
 		if (request.getParameter("btnInscription") != null) {
 			String password = request.getParameter("insPassword");
 			String nom = request.getParameter("insNom");
 			String prenom = request.getParameter("insPrenom");
 			String email = request.getParameter("insEmail");
 			
-			UtilisateurM utilisateur = new UtilisateurM(nom,prenom,email,password);
+
+			UtilisateurM utilisateur = new UtilisateurM();
 			utilisateur = utilisateurD.findByEmail(email);
-			System.out.println(utilisateur.getEmail());
-			if (utilisateur.getEmail() == null) {
+			
+			final String regex = "^(?=.*[~!@#$%^&*()_+\\-=;':\\\",./<>?])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])\\S{8}$";
+			final Pattern pattern = Pattern.compile(regex);
+	        final Matcher matcher = pattern.matcher(password);
+	        boolean matchFound = matcher.find();
+	        
+	        if (nom.equalsIgnoreCase("") || prenom.equalsIgnoreCase("") || email.equalsIgnoreCase("") || password.equalsIgnoreCase("")) {
+	        	champObligatoire = true;
+			}
+	        if (utilisateur.getEmail() != null) {
 				emailExiste=true;
-				System.out.println("emailExiste");
-			} else {
-				utilisateurD.create(utilisateur);
+			} 
+	        if (!matchFound) {
+				erreurMotdepasse = true;
+			}
+	        if (!emailExiste && !erreurMotdepasse && !champObligatoire){
+				utilisateurD.create(new UtilisateurM(nom,prenom,email,password));
 				messageInscriptionOk = true;
-				System.out.println("messageInscriptionOk");
-			}			
+			}
 		}
 		
 		request.setAttribute("messageInscriptionOk", messageInscriptionOk);
 		request.setAttribute("emailExiste", emailExiste);
+		request.setAttribute("erreurMotdepasse", erreurMotdepasse);
+		request.setAttribute("champObligatoire", champObligatoire);
+
+
 
 		
 		boolean connected = false;
