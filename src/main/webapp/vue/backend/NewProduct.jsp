@@ -49,15 +49,10 @@
                     <div class="card-header py-3 bg-transparent"> 
                       <div class="d-sm-flex align-items-center">
                         <h5 class="mb-2 mb-sm-0">Nouveau produit</h5>
-                        <div class="ms-auto">
-                        <a href="${retourliste }"><button type="button" class="btn btn-secondary">Annuler</button></a>
-                        
-                        <button type="button" class="btn btn-primary" >Ajouter le produit</button>     
-                        </div>
                       </div>
                      </div>
                     <div class="card-body">       
-                       <div class="row g-3">
+                       <div class="row g-3"> 
                          <div class="col-12 col-lg-8">
                             <div class="card shadow-none bg-light border">
                               <div class="card-body">
@@ -96,9 +91,9 @@
                                     <input class="form-control" type="file" name="inputImage">
                                   </div>  
                                   <div class="col-12">
-                                  <button type="button" class="btn btn-primary" type="submit" name="btnAjout">Ajouter le produit</button>                           
-                                  </div>  
-                        
+                                  <a href="${retourliste }"><button type="button" class="btn btn-secondary">Annuler</button></a>
+                                  <button class="btn btn-primary" type="submit" name="btnAjout">Ajouter le produit</button>                           
+                                  </div>        
                                   </div><!--end row-->
                               </div>
                             </div>  

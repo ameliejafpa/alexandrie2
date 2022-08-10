@@ -61,19 +61,20 @@
                 
                 <!-- info article -->
                 <div class="col-12 col-lg-6">
+                <form method="post" >
                 <div class="card shadow-sm border-0">
                   <div class="card-body">
-                     <form class="row g-3">
+                     <div class="row g-3">
                       <div class="card shadow-none border">
                         <div class="card-header">
                           <input class="form-control form-control-lg mb-3" type="text" placeholder="nom article" aria-label=".form-control-lg example" name="intputTitre" value="${produit.titre}">
                         </div>
                       </div>
-                      </form>
+                      </div>
                       
                  <div class="card shadow-none border">
                   <div class="card-body">
-                     <form class="row g-3">
+                     <div class="row g-3">
                          <div class="col-3">
                             <label class="form-label">Prix</label>
                             <input type="number" step="0.01" class="form-control" placeholder="prix"
@@ -93,24 +94,24 @@
                             <input type="number" step="1" class="form-control" placeholder="prix"
                                 name="inputStockMin" value="${produit.stockMinimum }">
                         </div>     
-                       </form>
+                       </div>
                    </div>
                 </div>
 
                       <div class="card shadow-none border">
                         <div class="card-body">
-                          <form class="row g-3">
+                          <div class="row g-3">
                             <div class="col-12">
                               <label class="form-label">Description du produit</label>
-                              <textarea class="form-control" rows="4" cols="4" name="inputDescr" style="height:480px;">${produit.description}</textarea>
+                              <textarea class="form-control" name="inputDescr">${produit.description}</textarea>
                              </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
                       
                       <div class="card shadow-none border">
                         <div class="card-body">
-                          <form class="row g-3">
+                          <div class="row g-3">
                             <div class="col-4">
                              <label class="form-label">Image 1</label>
                              <input type="file" class="form-control"
@@ -126,7 +127,7 @@
                              <input type="file" class="form-control" placeholder="chemin de l'image"
                                  name="inputImage3">
                          </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
                       
@@ -134,7 +135,7 @@
                         <div class="card-body">
                         <div class="text-start">
 
-                        	<button type="button" class="btn btn-primary px-4">Save Changes</button>
+                        	<button type="submit" class="btn btn-primary px-4" name="btnUpdateProduit">Save Changes</button>
                         	<a href="${retourliste }"><button type="button" class="btn btn-secondary">Annuler</button></a>
                      	 </div>    
                         </div>
@@ -142,6 +143,8 @@
 
                   </div>
                 </div>
+                
+                </form>
               </div>
               
               <!-- modif stock -->
@@ -190,7 +193,7 @@
                 <div class="card shadow-sm border-0">
                   <div class="card-body">
                      <a class="text-danger" data-bs-toggle="modal" data-bs-target="#commentproduitModal${produit.id }" data-bs-placement="bottom">
-                     	<button type="button" class="btn btn-primary">voir les commentaires</button>
+                     	<button class="btn btn-primary">voir les commentaires</button>
                      </a>
                      
        <!-- modal commentaire -->
