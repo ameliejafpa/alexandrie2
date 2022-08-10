@@ -105,16 +105,7 @@
 			                                    <figure>
 			                                        <div class="product_thumb">
 			                                            <a href="produit?id=${produit.id }"><img src="${produit.image }" alt=""></a>
-			                                            <div class="action_links">
-			                                                <ul class="d-flex justify-content-center">
-			                                                    <li class="add_to_cart"><a href="cart.html" title="Add to cart">
-			                                                            <span class="pe-7s-shopbag"></span></a></li>
-			                                                    <li class="wishlist"><a href="wishlist.html"
-			                                                            title="Add to Wishlist"><span class="pe-7s-like"></span></a>
-			                                                    </li>
-			                                                    
-			                                                </ul>
-			                                            </div>
+			                                            
 			                                        </div>
 			                                        <figcaption class="product_content text-center">
 			                                            <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
@@ -140,16 +131,7 @@
 			                                    <figure>
 			                                        <div class="product_thumb">
 			                                            <a href="produit?id=${produit.id }"><img src="${produit.image }" alt=""></a>
-			                                            <div class="action_links">
-			                                                <ul class="d-flex justify-content-center">
-			                                                    <li class="add_to_cart"><a href="cart.html" title="Add to cart">
-			                                                            <span class="pe-7s-shopbag"></span></a></li>
-			                                                    <li class="wishlist"><a href="wishlist.html"
-			                                                            title="Add to Wishlist"><span class="pe-7s-like"></span></a>
-			                                                    </li>
-			                                                    
-			                                                </ul>
-			                                            </div>
+			                                            
 			                                        </div>
 			                                        <figcaption class="product_content text-center">
 			                                            <h4><a href="produit?id=${produit.id }">${produit.titre }</a></h4>
