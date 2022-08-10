@@ -20,6 +20,10 @@ import modele.UtilisateurM;
 @WebServlet("/messageadmin")
 public class MessageAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	ContactD contactD = new ContactD();
+	UtilisateurM utilisateurM = new UtilisateurM();
+
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,10 +37,8 @@ public class MessageAdmin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ContactD contactD = new ContactD();
 		ArrayList<ContactM> listeMessages = new ArrayList<>();
 		UtilisateurD utilisateurD = new UtilisateurD();
-		UtilisateurM utilisateurM = new UtilisateurM();
 		int idUtilisateur = Integer.parseInt(request.getParameter("idUtilisateur"));
 		listeMessages = contactD.findByIdUser(idUtilisateur);
 		utilisateurM = utilisateurD.findById(idUtilisateur);
@@ -59,6 +61,13 @@ public class MessageAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if (request.getParameter("lu") != null) {
+			int etat = 1;
+			int id = Integer.parseInt(request.getParameter("id"));
+			String sujet = contactD.findById(id).getSujet();
+			String message = contactD.findById(id).getMessage();
+			contactD.update(new ContactM(utilisateurM,sujet,message,etat), id);
+		}
 		doGet(request, response);
 	}
 
