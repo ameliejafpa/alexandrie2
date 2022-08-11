@@ -31,15 +31,16 @@
 <body>
   
   <!-- variables-->
+<c:url value="/accueiladmin" var="accueil"/>
 <c:url value="/productlistadmin" var="productList"/>
 <c:url value="/listecatadmin" var="categoryList"/>
-<c:url value="/userlistadmin" var="userList"/>
 <c:url value="/newproductadmin" var="newProduct"/>
-<c:url value="/deconnexionadmin" var="deconnexion"/>
-<c:url value="/accueiladmin" var="accueil"/>
+<c:url value="/fournisseuradmin" var="fournisseur"/>
+<c:url value="/orderbyuseradmin?action=showAll" var="commandes"/>
+<c:url value="/userlistadmin" var="userList"/>
 <c:url value="/teamadmin" var="equipe"/>
 <c:url value="/coordonneesadmin" var="coordonnees"/>
-<c:url value="/orderbyuseradmin?action=showAll" var="commandes"/>
+<c:url value="/deconnexionadmin" var="deconnexion"/>
 
 
 
@@ -88,7 +89,7 @@
               </li>
               <li> <a href="#"><i class="bi bi-arrow-right-short"></i>stocks</a>
               </li>
-              <li> <a href="#"><i class="bi bi-arrow-right-short"></i>fournisseurs</a>
+              <li> <a href="${fournisseur}"><i class="bi bi-arrow-right-short"></i>fournisseurs</a>
               </li>
             </ul>
           </li>

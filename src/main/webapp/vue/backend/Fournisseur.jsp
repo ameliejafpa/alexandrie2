@@ -28,7 +28,7 @@
   <link href="vue/backend/assets/css/semi-dark.css" rel="stylesheet" />
   <link href="vue/backend/assets/css/header-colors.css" rel="stylesheet" />
 
-  <title>Equipe</title>
+  <title>Fournisseurs</title>
 </head>
 
 <body>
@@ -36,68 +36,54 @@
 
 <div class="card">
 <div class="card-header py-3">
-	<h6 class="mb-0">Ajouter une catégorie / sous-catégorie</h6>
+	<h6 class="mb-0">Ajouter / éditer un fournisseur</h6>
 </div>
 <div class="card-body">
 <div class="row"> 
 
 <!-- formulaire ajout -->  
-<c:if test="${showAdmin==null}">
+<c:if test="${showFour==null}">
 <div class="col-12 col-lg-4 d-flex">
 <div class="card border shadow-none w-100">
     <div class="card-body">
-      <form class="row g-3" method="post" action="teamadmin">
+      <form class="row g-3" method="post" action="fournisseuradmin">
         <div class="col-12">
           <label class="form-label">Nom</label>
           <input type="text" class="form-control" placeholder="nom" name="inputName">
         </div>
-        <div class="col-12">
-          <label class="form-label">Email</label>
-          <input type="text" class="form-control" placeholder="email" name="inputEmail" >
-        </div>
-        <div class="col-12">
-          <label class="form-label">Privilege</label>
-          <input type="text" class="form-control" placeholder="privilege" name="inputPrivilege" >
-        </div>
+
        <div class="col-12">
          <div class="d-grid">
-           <button class="btn btn-primary">Ajouter le membre</button>
+           <button type="submit" class="btn btn-primary">Ajouter le fournisseur</button>
          </div>
        </div>
       </form>                        
     </div>
   </div>
-</div> <!-- fin formulaire ajout  -->
-</c:if>
+</div> 
+</c:if><!-- fin formulaire ajout -->
 
 <!-- formulaire edit -->  
-<c:if test="${showAdmin!=null}">
+<c:if test="${showFour!=null}">
 <div class="col-12 col-lg-4 d-flex">
 <div class="card border shadow-none w-100">
     <div class="card-body">
-      <form class="row g-3" method="post" action="teamadmin">
+      <form class="row g-3" method="post" action="fournisseuradmin">
         <div class="col-12">
           <label class="form-label">Nom</label>
-          <input type="text" class="form-control" placeholder="nom" name="inputName" value="${showAdmin.nom }">
+          <input type="text" class="form-control" placeholder="nom" name="inputName" value="${showFour.nom }">
         </div>
-        <div class="col-12">
-          <label class="form-label">Email</label>
-          <input type="text" class="form-control" placeholder="email" name="inputEmail" value="${showAdmin.email }" >
-        </div>
-        <div class="col-12">
-          <label class="form-label">Privilege</label>
-          <input type="text" class="form-control" placeholder="privilege" name="inputPrivilege" value="${showAdmin.privilege }">
-        </div>
+
        <div class="col-12">
          <div class="d-grid">
-           <button class="btn btn-primary" name="inputId" value="${showAdmin.id }">Editer le membre</button>
+           <button class="btn btn-primary" name="inputId" value="${showFour.id }">Modifier le fournisseur</button>
          </div>
        </div>
       </form>                        
     </div>
   </div>
-</div> <!-- fin formulaire edit  -->
-</c:if>
+</div> 
+</c:if><!-- fin formulaire edit -->
         
 <!-- liste utilisateurs -->
 <div class="col-12 col-lg-8 d-flex">
@@ -109,35 +95,31 @@
                <tr>
                  <th>id</th>
                  <th>nom</th>
-                 <th>email</th>
-                 <th>privilege</th>
                  <th>Action</th>
                </tr>
              </thead>
              <tbody>
              
-<c:forEach items="${listeAdmin}" var ="admin">
+<c:forEach items="${listeFour}" var ="fournisseur">
   <tr>
-      <td>${admin.id }</td>
-      <td>${admin.nom }</td>
-      <td>${admin.email }</td>
-      <td>${admin.privilege }</td>
+      <td>${fournisseur.id }</td>
+      <td>${fournisseur.nom }</td>
       <td>
           <div class="d-flex align-items-center gap-3 fs-6">
-              <a href="teamadmin?updateAdmin=${admin.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateAdmin"><i class="bi bi-pencil-fill"></i></a>
+              <a href="fournisseuradmin?updateFour=${fournisseur.id}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateFour"><i class="bi bi-pencil-fill"></i></a>
               <!-- declencheur modal suppression -->
-              <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteAdminModal${admin.id }"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
+              <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteFourModal${fournisseur.id }"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
           </div>
       </td>
   </tr>	
   <!-- modal suppression catégorie-->
-  <div class="modal fade" id="deleteAdminModal${admin.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="deleteFourModal${fournisseur.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
           <div class="modal-content">
-              <div class="modal-body">Voulez-vous confirmer la suppression de ${admin.nom } ?</div>
+              <div class="modal-body">Voulez-vous confirmer la suppression de ${fournisseur.nom } ?</div>
               <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                  <a href="teamadmin?deleteAdmin=${admin.id }"><button type="button" class="btn btn-primary" name="deleteAdmin">Confirmer</button></a>
+                  <a href="fournisseuradmin?deleteFour=${fournisseur.id }"><button type="button" class="btn btn-primary" name="deleteFour">Confirmer</button></a>
               </div>
           </div>
       </div>
