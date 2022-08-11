@@ -37,7 +37,7 @@ public class Accueil extends HttpServlet {
 		ProduitD produitD = new ProduitD();
 		request.setAttribute("alerteProduit", produitD.alerteStock());
 
-		// verif connexion : si pas connecté, redirection automatique vers la page de
+		// verif connexion : si pas connectï¿½, redirection automatique vers la page de
 		// connexion
 		HttpSession session = request.getSession(true);
 		if (session.getAttribute("isConnected") == null || (boolean) session.getAttribute("isConnected") == false) {

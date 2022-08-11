@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CategorieD;
 import dao.ProduitD;
@@ -40,7 +41,17 @@ public class NewProduct extends HttpServlet {
 		sousCategorieM = sousCategorieD.read();
 		request.setAttribute("listeSousCategorie", sousCategorieM);
 
-		request.getRequestDispatcher("/vue/backend/NewProduct.jsp").forward(request, response);
+		
+		// verif connexion : si pas connect�, redirection automatique vers la page de
+		// connexion
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("isConnected") == null || (boolean) session.getAttribute("isConnected") == false) {
+			System.out.println("is false");
+			response.sendRedirect("connectionadmin");
+		} else {
+			System.out.println(session.getAttribute("isConnected"));
+			request.getRequestDispatcher("/vue/backend/NewProduct.jsp").forward(request, response);
+		}
 	}
 
 	/**
