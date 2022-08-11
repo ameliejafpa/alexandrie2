@@ -34,12 +34,6 @@
 
 <body>
 
-
-<!--start wrapper-->
-<div class="wrapper">
-
-<!--start content-->
-<main class="page-content"> 
 <div class="card">
 
 	<!--  header contenu -->

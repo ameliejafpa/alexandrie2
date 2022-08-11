@@ -38,97 +38,17 @@
 <c:url value="/deconnexionadmin" var="deconnexion"/>
 <c:url value="/accueiladmin" var="accueil"/>
 <c:url value="/teamadmin" var="equipe"/>
+<c:url value="/coordonneesadmin" var="coordonnees"/>
 <c:url value="/orderbyuseradmin?action=showAll" var="commandes"/>
 
 
 
 <!--start wrapper-->
   <div class="wrapper">
-    <!--start top header-->
-<header class="top-header">        
-	<nav class="navbar navbar-expand">
-      	
-        <div class="topbar-logo-header d-none d-xl-flex">
-          <div>
-            <img src="vue/backend/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
-          </div>
-          <div>
-            <h4 class="logo-text">Alexandrie</h4>
-          </div>
-        </div>
-        <div class="mobile-toggle-icon d-xl-none">
-            <i class="bi bi-list"></i>
-          </div>
-          <div class="top-navbar d-none d-xl-block ms-3">
-          <ul class="navbar-nav align-items-center">
-            <li class="nav-item">
-            <a class="nav-link" href="${accueil }">Accueil</a>
-            </li>      
-            <li class="nav-item">
-            <a class="nav-link" href="javascript:;">Produits</a>
-            </li>       
-            <li class="nav-item">
-            <a class="nav-link" href="javascript:;">Commandes</a>
-            </li>       
-            <li class="nav-item">
-            <a class="nav-link" href="${equipe }">Equipe</a>
-            </li>       
-          </ul>  
-          </div>
-          
-          <!-- parametre admin  -->
-          <c:if test="${isConnected==true }">        
-          <div class="top-navbar-right ms-3">
-            <ul class="navbar-nav align-items-center">
-            <li class="nav-item dropdown dropdown-large">
-              <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
-                <div class="user-setting d-flex align-items-center gap-1">
-                  <div class="apps-icon-box mb-1 text-white bg-danger bg-gradient messages">${sessionNom.charAt(0) }</div>
-                </div>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li>
-                   <a class="dropdown-item" href="#">
-                     <div class="d-flex align-items-center">
-                        <div class="ms-3">
-                          <h6 class="mb-0 dropdown-user-name">${sessionNom }</h6>
-                          <small class="mb-0 dropdown-user-designation text-secondary">${sessionPrivilege }</small>
-                        </div>
-                     </div>
-                   </a>
-                 </li>
-                 <li><hr class="dropdown-divider"></li>
-                 <li>
-                    <a class="dropdown-item" href="#">
-                       <div class="d-flex align-items-center">
-                         <div class="setting-icon"><i class="bi bi-person-fill"></i></div>
-                         <div class="setting-text ms-3"><span>Profil</span></div>
-                       </div>
-                     </a>
-                  </li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li>
-                    <a class="dropdown-item" href="${deconnexion }">
-                       <div class="d-flex align-items-center">
-                         <div class="setting-icon"><i class="bi bi-lock-fill"></i></div>
-                         <div class="setting-text ms-3"><span>Deconnexion</span></div>
-                       </div>
-                     </a>
-                  </li>
-              </ul>
-            </li>
-            </ul>
-             </div>
-          </c:if>
-          <!-- fin if connected -->
 
-         </div>
-      </nav>
-    </header>
-     <!--end top header-->
      
       <!--start navigation-->
-     <div class="nav-container">
+     <div class="nav-container" style="top: 0px;">
       <div class="mobile-topbar-header">
         <div>
           <img src="vue/backend/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
@@ -139,8 +59,20 @@
         <div class="toggle-icon ms-auto"><i class="bi bi-chevron-double-left"></i>
         </div>
       </div>
-      <nav class="topbar-nav">
+      <nav class="topbar-nav" >
         <ul class="metismenu" id="menu">
+        <li>
+             <div class="topbar-logo-header d-none d-xl-flex">
+             <a href="${accueil }">
+          <div>
+            <img src="vue/backend/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+          </div>
+          <div>
+            <h4 class="logo-text">Alexandrie</h4>
+          </div>
+          </a>
+        </div>
+        </li>
           <li>
             <a href="javascript:;" class="has-arrow">
               <div class="parent-icon"><i class="bi bi-house-door"></i>
@@ -177,16 +109,46 @@
             <a href="javascript:;" class="has-arrow">
               <div class="parent-icon"><i class="bi bi-grid"></i>
               </div>
-              <div class="menu-title">Equipe</div>
+              <div class="menu-title">Gestion</div>
             </a>
             <ul>
-              <li> <a href="${equipe }"><i class="bi bi-arrow-right-short"></i>Gestion de l'équipe</a>
+              <li> <a href="${equipe }"><i class="bi bi-arrow-right-short"></i>Equipe</a>
               </li>
-            </ul>
-            
+              <li> <a href="${coordonnees }"><i class="bi bi-arrow-right-short"></i>Coordonnées</a>
+              </li>
+            </ul>       
           </li>
+          
+          <!-- session -->
+                              <!-- parametre admin  -->
+          <c:if test="${isConnected==true }"> 
+          <li>
+            <a href="javascript:;" class="has-arrow">
+              <div class="parent-icon"><i class="bi bi-grid"></i>
+              </div>
+              <div class="menu-title">Profil</div>
+            </a>
+            <ul>
+              <li> 
+              	<h6 class="mb-0 dropdown-user-name">${sessionNom }</h6>
+                <small class="mb-0 dropdown-user-designation text-secondary">${sessionPrivilege }</small>
+              </li>
+              <li>
+              	<a href="${profil}"><i class="bi bi-arrow-right-short"></i>profil</a>
+              </li>
+              <li>
+              	<a href="${deconnexion}"><i class="bi bi-arrow-right-short"></i>Deconnexion</a>
+              </li>
+            </ul>       
+          </li>
+          </c:if>
+          <!-- fin if connected -->
+  
         </ul>
       </nav>
     </div>
     <!--end navigation-->  
+    
+       <!--start content-->
+     <main class="page-content" style="top: 0px;margin-top: 90px;"> 
 

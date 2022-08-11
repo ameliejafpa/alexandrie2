@@ -34,12 +34,6 @@
 <body>
 <c:url value="/productlistadmin" var="retourliste"/>
 
-  <!--start wrapper-->
-  <div class="wrapper">
-
-    <!--start content-->
-     <main class="page-content"> 
-
     <div class="card">
 
         <div class="card-body">

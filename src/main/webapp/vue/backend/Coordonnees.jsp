@@ -33,20 +33,6 @@
 
 <body>
 
-  <!--start wrapper-->
-  <div class="wrapper">
-  
-          <!--Start Back To Top Button-->
-        <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
-        <!--End Back To Top Button-->
-        
-
-  </div>
-  <!--end wrapper-->
-  
-  <!--start content-->
-     <main class="page-content"> 
-
     <div class="card">
 
         <div class="card-body">
@@ -144,6 +130,10 @@
 	</div>
  </main>
        <!--end page main-->
+                 <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+        <!--End Back To Top Button-->
+        
 
 
   <!-- Bootstrap bundle JS -->

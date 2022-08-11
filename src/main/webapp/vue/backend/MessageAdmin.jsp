@@ -34,10 +34,6 @@
 
 <body>
 
-<!--start wrapper-->
-<div class="wrapper">
-	<!--start content-->
-	<main class="page-content">
 		<h6 class="mb-0 text-uppercase">${utilisateur.nom } ${utilisateur.prenom }</h6>
 	    <hr>
 	    <div class="card radius-10">
