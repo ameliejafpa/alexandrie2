@@ -12,8 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Add site Favicon -->
-    <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-192x192.png"
+    <link rel="icon" href="https://thumbs.dreamstime.com/b/avec-le-phare-de-guitare-sur-la-mascotte-plage-123970559.jpg" sizes="32x32" />
+    <link rel="icon" href="https://thumbs.dreamstime.com/b/avec-le-phare-de-guitare-sur-la-mascotte-plage-123970559.jpg"
         sizes="192x192" />
     <link rel="apple-touch-icon" href="https://hasthemes.com/wp-content/uploads/2019/04/cropped-favicon-180x180.png" />
     <meta name="msapplication-TileImage"

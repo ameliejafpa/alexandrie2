@@ -50,12 +50,12 @@
                     <div class="col-12 col-lg-3 col-6 col-md-3">
                       <select class="form-select" name="inputStatus">
                         	<c:if test="${commande.etat==0}">
-                        		<option selected value=${commande.etat }>A valider</option>
+                        		<option selected value=${commande.etat }>À valider</option>
                         		<option value=1>En cours de livraison</option>
                         	</c:if>
                         	<c:if test="${commande.etat==1}">
                         		<option selected value=${commande.etat }>En cours de livraison</option>
-                        		<option>Livrée!</option>
+                        		<option value=2>Livrée!</option>
                         	</c:if>
                         	<c:if test="${commande.etat==2}">
                         		<option selected value=${commande.etat }>Livrée!</option>
