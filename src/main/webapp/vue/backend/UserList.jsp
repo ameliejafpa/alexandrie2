@@ -21,8 +21,7 @@
   <link href="vue/backend/assets/css/icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <!-- loader-->
-	<link href="vue/backend/assets/css/pace.min.css" rel="stylesheet" />
+
   <!--Theme Styles-->
   <link href="vue/backend/assets/css/dark-theme.css" rel="stylesheet" />
   <link href="vue/backend/assets/css/light-theme.css" rel="stylesheet" />
@@ -71,6 +70,9 @@
                                     <th>Messages</th>
                                     <th>Commandes</th>
                                     <th>Commentaires</th>
+                                    <th>Adresses</th>
+                                    <th>Recherches</th>
+                                    <th>Visites</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,6 +91,15 @@
                                         </td>
                                         <td><a href="commentadmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
                                         data-bs-original-title="Voir les commentaires"><i data-feather="heart"></i></a> 
+                                        </td>
+                                        <td><a href="#?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        data-bs-original-title="Adresses enregistrées"><i data-feather="home"></i></a> 
+                                        </td>
+                                        <td><a href="#?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        data-bs-original-title="Historique des recherches"><i data-feather="search"></i></a> 
+                                        </td>
+                                        <td><a href="#?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        data-bs-original-title="Historique des visites"><i data-feather="globe"></i></a> 
                                         </td>
                                     </tr>
                                 </c:forEach>

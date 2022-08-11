@@ -242,4 +242,30 @@ public class ProduitD implements IDao<ProduitM> {
 		return nbrEnStock;
 	}
 
+	public ArrayList<ProduitM> alerteStock() {
+		ArrayList<ProduitM> listeProduit = new ArrayList<>();
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM produit INNER JOIN sousCategorie ON "
+
+					+ "produit.idSousCategorie=sousCategorie.id INNER JOIN categorie ON sousCategorie.idCategorie=categorie.id "
+					+ "WHERE produit.stock<produit.stockMinimum");
+			ResultSet res = sql.executeQuery();
+			System.out.println(sql);
+
+			while (res.next()) {
+				ProduitM produit = new ProduitM(res.getInt("produit.id"), res.getString("produit.titre"),
+						res.getString("produit.description"), res.getFloat("produit.prix"),
+						res.getString("produit.image"),
+						new SousCategorieM(res.getInt("sousCategorie.id"), res.getString("sousCategorie.titre"),
+								new CategorieM(res.getInt("categorie.id"), res.getString("categorie.titre"))),
+						res.getInt("produit.stock"), res.getInt("produit.stockMinimum"));
+				listeProduit.add(produit);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listeProduit;
+
+	}
+
 } // fin ProduitD
