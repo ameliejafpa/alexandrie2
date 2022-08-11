@@ -97,10 +97,10 @@
                             <div class="widget_category">
                                 <ul>
                                 	
-                                    <li><a href="listeProduits">Tous <span>(${total })</span></a></li>
+                                    <li><a href="listeProduits">Tous <%-- <span>(${total })</span> --%></a></li>
                                     <c:forEach items="${listeCategories}" var="categorie">
                                     <li class="menu-item-has-children">
-                                    	<a href="listeProduits?idCategorie=${categorie.id }">${categorie.titre } <span>(${total })</span></a>
+                                    	<a href="listeProduits?idCategorie=${categorie.id }">${categorie.titre } <%-- <span>(${total })</span> --%></a>
                                     	<%-- <ul class="sub-menu">
                                 			<c:forEach items="${listeSousCategories}" var="sousCategorie">
                                 				<c:if test="${sousCategorie.idCategorie.id == categorie.id }">
