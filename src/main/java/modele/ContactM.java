@@ -3,20 +3,19 @@ package modele;
 public class ContactM {
 	private int id;
 	private UtilisateurM idUtilisateur;
-	private String email;
 	private String sujet;
 	private String message;
 	private int etat;
 	
 	public ContactM() {
 	}
-	public ContactM(UtilisateurM idUtilisateur, String email, String sujet, String message, int etat) {
+	public ContactM(UtilisateurM idUtilisateur, String sujet, String message, int etat) {
 		this.idUtilisateur = idUtilisateur;
 		this.sujet = sujet;
 		this.message = message;
 		this.etat = etat;
 	}
-	public ContactM(int id, UtilisateurM idUtilisateur, String email, String sujet, String message, int etat) {
+	public ContactM(int id, UtilisateurM idUtilisateur, String sujet, String message, int etat) {
 		this.id = id;
 		this.idUtilisateur = idUtilisateur;
 		this.sujet = sujet;
@@ -35,12 +34,6 @@ public class ContactM {
 	}
 	public void setIdUtilisateur(UtilisateurM idUtilisateur) {
 		this.idUtilisateur = idUtilisateur;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getSujet() {
 		return sujet;

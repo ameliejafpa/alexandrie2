@@ -75,16 +75,6 @@ public class HeaderC extends HttpServlet {
 		listeCoordonnees = coordonneeD.read();
 		request.setAttribute("listeCoordonnees", listeCoordonnees);	
 		
-		//création recherche
-		if (request.getParameter("btnRecherche") != null) {
-			String recherche = request.getParameter("requete");
-			int userId = (int) session.getAttribute("userId");
-			RechercheD rechercheD = new RechercheD();
-			RechercheM rechercheM = new RechercheM(new UtilisateurM(userId),recherche);
-			//request.setAttribute("requete", rechercheD.create(rechercheM));
-			rechercheD.create(rechercheM);
-			response.sendRedirect(request.getContextPath() + "/resultatsRecherche");
-		}
 		
 		//affichage mini panier
 		PanierM panier = (PanierM) session.getAttribute("panier");

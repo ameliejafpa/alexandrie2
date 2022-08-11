@@ -8,9 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ProduitD;
+import dao.RechercheD;
 import modele.ProduitM;
+import modele.RechercheM;
+import modele.UtilisateurM;
 
 /**
  * Servlet implementation class ResultatsRechercheC
@@ -32,6 +36,16 @@ public class ResultatsRechercheC extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession(true);
+
+		//Enregistrement de la recherche
+		String recherche = request.getParameter("requete");
+		int userId = (int) session.getAttribute("userId");
+		RechercheD rechercheD = new RechercheD();
+		RechercheM rechercheM = new RechercheM(new UtilisateurM(userId),recherche);
+		rechercheD.create(rechercheM);
+		
+		//Affichage résultats de la recherche
 		String requete = request.getParameter("requete");
 		//String[] mots = requete.split(" ");
 		ProduitD produitD = new ProduitD();

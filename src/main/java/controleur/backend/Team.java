@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.AdministrateurD;
 import modele.AdministrateurM;
@@ -50,7 +51,16 @@ public class Team extends HttpServlet {
 		administrateurM = administrateurD.read();
 		request.setAttribute("listeAdmin", administrateurM);
 
-		request.getRequestDispatcher("/vue/backend/Team.jsp").forward(request, response);
+		// verif connexion : si pas connect�, redirection automatique vers la page de
+		// connexion
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("isConnected") == null || (boolean) session.getAttribute("isConnected") == false) {
+			System.out.println("is false");
+			response.sendRedirect("connectionadmin");
+		} else {
+			System.out.println(session.getAttribute("isConnected"));
+			request.getRequestDispatcher("/vue/backend/Team.jsp").forward(request, response);
+		}
 	}
 
 	/**

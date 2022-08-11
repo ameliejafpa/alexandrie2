@@ -21,8 +21,7 @@
   <link href="vue/backend/assets/css/icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <!-- loader-->
-	<link href="vue/backend/assets/css/pace.min.css" rel="stylesheet" />
+
   <!--Theme Styles-->
   <link href="vue/backend/assets/css/dark-theme.css" rel="stylesheet" />
   <link href="vue/backend/assets/css/light-theme.css" rel="stylesheet" />
@@ -34,12 +33,6 @@
 
 <body>
 <c:url value="/productlistadmin" var="retourliste"/>
-
-  <!--start wrapper-->
-  <div class="wrapper">
-
-    <!--start content-->
-     <main class="page-content"> 
 
     <div class="card">
 
@@ -61,19 +54,21 @@
                 
                 <!-- info article -->
                 <div class="col-12 col-lg-6">
+                
                 <div class="card shadow-sm border-0">
                   <div class="card-body">
-                     <form class="row g-3">
+                  	<form method="post" >
+                     <div class="row g-3">
                       <div class="card shadow-none border">
                         <div class="card-header">
                           <input class="form-control form-control-lg mb-3" type="text" placeholder="nom article" aria-label=".form-control-lg example" name="intputTitre" value="${produit.titre}">
                         </div>
                       </div>
-                      </form>
+                      </div>
                       
                  <div class="card shadow-none border">
                   <div class="card-body">
-                     <form class="row g-3">
+                     <div class="row g-3">
                          <div class="col-3">
                             <label class="form-label">Prix</label>
                             <input type="number" step="0.01" class="form-control" placeholder="prix"
@@ -93,24 +88,24 @@
                             <input type="number" step="1" class="form-control" placeholder="prix"
                                 name="inputStockMin" value="${produit.stockMinimum }">
                         </div>     
-                       </form>
+                       </div>
                    </div>
                 </div>
 
                       <div class="card shadow-none border">
                         <div class="card-body">
-                          <form class="row g-3">
+                          <div class="row g-3">
                             <div class="col-12">
                               <label class="form-label">Description du produit</label>
-                              <textarea class="form-control" rows="4" cols="4" name="inputDescr" style="height:480px;">${produit.description}</textarea>
+                              <textarea class="form-control" name="inputDescr">${produit.description}</textarea>
                              </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
                       
                       <div class="card shadow-none border">
                         <div class="card-body">
-                          <form class="row g-3">
+                          <div class="row g-3">
                             <div class="col-4">
                              <label class="form-label">Image 1</label>
                              <input type="file" class="form-control"
@@ -126,7 +121,7 @@
                              <input type="file" class="form-control" placeholder="chemin de l'image"
                                  name="inputImage3">
                          </div>
-                          </form>
+                          </div>
                         </div>
                       </div>
                       
@@ -134,14 +129,70 @@
                         <div class="card-body">
                         <div class="text-start">
 
-                        	<button type="button" class="btn btn-primary px-4">Save Changes</button>
+                        	<button type="submit" class="btn btn-primary px-4" name="btnUpdateProduit">Save Changes</button>
                         	<a href="${retourliste }"><button type="button" class="btn btn-secondary">Annuler</button></a>
                      	 </div>    
                         </div>
                       </div>
-
+					</form>
                   </div>
                 </div>
+                <!-- commentaires du produit -->
+                 <div class="card shadow-sm border-0">
+                  <div class="card-body">
+                  	<div class="row g-3">
+                      <div class="card shadow-none border">
+                        <div class="card-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Liste des commentaires</h5>
+                        </div>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                          <div class="row g-3">
+                            <div class="col-12">
+                              <table class="table align-middle table-striped">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Note</th>
+                                            <th>Commentaire</th>
+                                            <th>Supprimer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${listeCommentaires }" var="commentaire">
+                                            <tr>
+                                                <td><span>${commentaire.idUtilisateur.prenom } ${commentaire.idUtilisateur.nom }</span></td>
+                                                <td><span>${commentaire.note }/5</span></td>
+                                                <td><span>${commentaire.commentaire }</span></td>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-3 fs-6">
+                                                        <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteCommentModal${produit.id }"  data-bs-original-title="Delete" aria-label="Delete" >
+                                                            <i class="bi bi-trash-fill"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- modal suppression commentairee-->
+										  <div class="modal fade" id="deleteCommentModal${produit.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										      <div class="modal-dialog">
+										          <div class="modal-content">
+										              <div class="modal-body">Voulez-vous supprimer le commentaire ?</div>
+										              <div class="modal-footer">
+										                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+										                  <a href="productdetailadmin?id=${produit.id }&idComment=${commentaire.id }&deleteComment" type="button" class="btn btn-primary" name="deleteComment">Confirmer</a>
+										              </div>
+										          </div>
+										      </div>
+										  </div><!-- fin modal -->
+
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                             </div>
+                          </div>
+                        </div>
+                 </div>
               </div>
               
               <!-- modif stock -->
@@ -186,57 +237,13 @@
                   </div>
                 </div>
               
-              <!-- affiche commentaires -->
+              <!-- bouton commandes liées -->
                 <div class="card shadow-sm border-0">
                   <div class="card-body">
-                     <a class="text-danger" data-bs-toggle="modal" data-bs-target="#commentproduitModal${produit.id }" data-bs-placement="bottom">
-                     	<button type="button" class="btn btn-primary">voir les commentaires</button>
-                     </a>
                      
-       <!-- modal commentaire -->
-       <div class="modal fade" id="commentproduitModal${produit.id }" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-	        <div class="modal-dialog">
-	            <div class="modal-content">
-     				<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Liste des commentaires</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-	                <div class="modal-body">
-	                	<table class="table align-middle table-striped">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>User</th>
-                                            <th>Note</th>
-                                            <th>Commentaire</th>
-                                            <th>Supprimer</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${listeCommentaires }" var="commentaire">
-                                            <tr>
-                                                <td><span>${commentaire.idUtilisateur.nom }</span></td>
-                                                <td><span>${commentaire.note }</span></td>
-                                                <td><span>${commentaire.commentaire }</span></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center gap-3 fs-6">   
-                                                        <a href="productdetailadmin?id=${produit.id }&action=deleteComment"
-                                                        class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" name="deleteComment">
-                                                            <i class="bi bi-trash-fill"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                     <a href="orderbyuseradmin?id=${produit.id }&action=showByProduct" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                   data-bs-original-title="Voir les commandes"><button class="btn btn-primary">voir les commandes liées</button></a> 
 
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-	                </div>
-	                
-	            </div>
-	        </div>
-    	</div>
-                     
-                  
                   </div>
                 </div>
               </div>

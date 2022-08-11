@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CategorieD;
 import dao.CommentaireD;
@@ -53,6 +54,12 @@ public class ProductDetail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//suppression d'un commentaire
+		if (request.getParameter("deleteComment") != null) {
+			commentaireD.delete(Integer.valueOf(request.getParameter("idComment")));
+		}
+		
 		// afichage du produit
 		ProduitD produitD = new ProduitD();
 		idProduit = Integer.parseInt(request.getParameter("id"));
@@ -78,7 +85,17 @@ public class ProductDetail extends HttpServlet {
 		listeCommentaires = commentaireD.findByIdProduct(idProduit);
 		request.setAttribute("listeCommentaires", listeCommentaires);
 
-		request.getRequestDispatcher("/vue/backend/ProductDetail.jsp").forward(request, response);
+		
+		// verif connexion : si pas connect�, redirection automatique vers la page de
+		// connexion
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("isConnected") == null || (boolean) session.getAttribute("isConnected") == false) {
+			System.out.println("is false");
+			response.sendRedirect("connectionadmin");
+		} else {
+			System.out.println(session.getAttribute("isConnected"));
+			request.getRequestDispatcher("/vue/backend/ProductDetail.jsp").forward(request, response);
+		}
 
 	}
 
@@ -89,7 +106,7 @@ public class ProductDetail extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// update stock
-		if (request.getParameter("btnUpdateStock") != null) { // probleme!!!
+		if (request.getParameter("btnUpdateStock") != null) {
 			System.out.println("date: " + request.getParameter("inputDate"));
 			System.out.println("fournisseur: " + request.getParameter("inputFournisseur"));
 			FournisseurM fM = new FournisseurM();
@@ -102,25 +119,27 @@ public class ProductDetail extends HttpServlet {
 			produitD.updateStock(newStock, idProduit);
 		}
 
-		// update produit
-		/*
-		 * ProduitM produitUp = new ProduitM();
-		 * produitUp.setTitre(request.getParameter("intputTitre"));
-		 * produitUp.setDescription(request.getParameter("inputDescr"));
-		 * produitUp.setPrix(Float.valueOf(request.getParameter("inputPrix")));
-		 * produitUp.setStock(Integer.valueOf(request.getParameter("inputStock")));
-		 * produitUp.setStockMinimum(Integer.valueOf(request.getParameter(
-		 * "inputStockMin"))); produitUp.setIdSousCategorie(new
-		 * SousCategorieM(Integer.valueOf(request.getParameter("inputSousCat")))); if
-		 * (request.getParameter("inputImage1") != null) {
-		 * produitUp.setImage("vue/img/produit/" + request.getParameter("inputImage"));
-		 * } else { produitUp.setImage(produit.getImage()); } produitD.update(produitUp,
-		 * idProduit); // update images
-		 * 
-		 * if (request.getParameter("inputImage2") != null) { imageD.update(null,
-		 * idProduit); produitUp.setImage("vue/img/produit/" +
-		 * request.getParameter("inputImage")); }
-		 */
+		if (request.getParameter("btnUpdateProduit") != null) {
+			ProduitM produitUp = new ProduitM();
+			produitUp.setTitre(request.getParameter("intputTitre"));
+			produitUp.setDescription(request.getParameter("inputDescr"));
+			produitUp.setPrix(Float.valueOf(request.getParameter("inputPrix")));
+			produitUp.setStockMinimum(Integer.valueOf(request.getParameter("inputStockMin")));
+			produitUp.setIdSousCategorie(new SousCategorieM(Integer.valueOf(request.getParameter("inputSousCat"))));
+			if (request.getParameter("inputImage1").isEmpty() == true) {
+				produitUp.setImage(produit.getImage());
+
+			} else {
+				produitUp.setImage("vue/img/produit/" + request.getParameter("inputImage1"));
+			}
+			produitD.update(produitUp, idProduit); // update images
+
+		}
+		
+		// if (request.getParameter("inputImage2") != null) {
+		// imageD.update(null, idProduit);
+		// produitUp.setImage("vue/img/produit/" + request.getParameter("inputImage"));
+		// }
 
 		doGet(request, response);
 	}

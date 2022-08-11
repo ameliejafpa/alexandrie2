@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UtilisateurD;
-import modele.UtilisateurM;
+import dao.CoordonneeD;
+import modele.CoordonneeM;
 
 /**
- * Servlet implementation class UserList
+ * Servlet implementation class Coordonnees
  */
-@WebServlet("/userlistadmin")
-public class UserList extends HttpServlet {
+@WebServlet("/coordonneesadmin")
+public class Coordonnees extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	CoordonneeD coordonneeD = new CoordonneeD();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public UserList() {
+	public Coordonnees() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,13 +35,10 @@ public class UserList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		UtilisateurD utilisateurD = new UtilisateurD();
-		ArrayList<UtilisateurM> utilisateurM = new ArrayList<UtilisateurM>();
-
-		// affichage tous les utilisateurs
-		utilisateurM = utilisateurD.read();
-		request.setAttribute("listeUsers", utilisateurM);
+		// TODO Auto-generated method stub
+		ArrayList<CoordonneeM> listeCoordonnees = new ArrayList<>();
+		listeCoordonnees = coordonneeD.read();
+		request.setAttribute("listeCoordonnees", listeCoordonnees);
 
 		// verif connexion : si pas connect�, redirection automatique vers la page de
 		// connexion
@@ -50,9 +48,9 @@ public class UserList extends HttpServlet {
 			response.sendRedirect("connectionadmin");
 		} else {
 			System.out.println(session.getAttribute("isConnected"));
-			request.getRequestDispatcher("/vue/backend/UserList.jsp").forward(request, response);
+			request.getRequestDispatcher("/vue/backend/Coordonnees.jsp").forward(request, response);
 		}
-	} // fin doGet
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -61,6 +59,22 @@ public class UserList extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		if (request.getParameter("btnUpdateCoordonnee") != null) {
+			int id = Integer.parseInt(request.getParameter("inputId"));
+			String nom = String.valueOf(request.getParameter("inputNom"));
+			String adresse = String.valueOf(request.getParameter("inputAdresse"));
+			String telephone = String.valueOf(request.getParameter("inputTelephone"));
+			String email = String.valueOf(request.getParameter("inputEmail"));
+			String logo = null;
+			if (request.getParameter("inputLogo").isEmpty() == true) {
+				logo = String.valueOf(request.getParameter("inputLogo"));
+
+			} else {
+				logo = "vue/img/" + request.getParameter("inputLogo");
+			}
+			
+			coordonneeD.update(new CoordonneeM(nom, adresse, telephone, email, logo), id);
+		}
 		doGet(request, response);
 	}
 

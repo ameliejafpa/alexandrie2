@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.CategorieD;
 import dao.ProduitD;
@@ -65,7 +66,7 @@ public class ProductList extends HttpServlet {
 			produitM = produitD.readBySubCategory(Integer.valueOf(request.getParameter("sortSousCategorie")));
 			request.setAttribute("listeProduits", produitM);
 		}
-		// affichage produits catégorie
+		// affichage produits catï¿½gorie
 		else if (request.getParameter("sortCategorie") != null) {
 			produitM = produitD.readByCategory(Integer.valueOf(request.getParameter("sortCategorie")));
 			request.setAttribute("listeProduits", produitM);
@@ -76,7 +77,16 @@ public class ProductList extends HttpServlet {
 			request.setAttribute("listeProduits", produitM);
 		}
 
-		request.getRequestDispatcher("/vue/backend/ProductList.jsp").forward(request, response);
+		// verif connexion : si pas connectï¿½, redirection automatique vers la page de
+		// connexion
+		HttpSession session = request.getSession(true);
+		if (session.getAttribute("isConnected") == null || (boolean) session.getAttribute("isConnected") == false) {
+			System.out.println("is false");
+			response.sendRedirect("connectionadmin");
+		} else {
+			System.out.println(session.getAttribute("isConnected"));
+			request.getRequestDispatcher("/vue/backend/ProductList.jsp").forward(request, response);
+		}
 	}
 
 	/**

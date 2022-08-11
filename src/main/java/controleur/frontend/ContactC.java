@@ -22,47 +22,54 @@ import modele.UtilisateurM;
 @WebServlet("/contact")
 public class ContactC extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ContactC() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ContactC() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// récupération du message
 		HttpSession session = request.getSession(true);
 		int userId = (int) session.getAttribute("userId");
 		ContactD contactD = new ContactD();
+		String message;
 		if (request.getParameter("btnMessage") != null) {
 			String email = null;
 			if ((boolean) session.getAttribute("isConnected") == false) {
-				email = request.getParameter("conEmail");
+				message = request.getParameter("conEmail") + " - " + request.getParameter("conMessage");
+			} else {
+				message = request.getParameter("conEmail") + " - " + request.getParameter("conMessage");
+
 			}
 			String sujet = request.getParameter("conSujet");
-			String message = request.getParameter("conMessage");
-			contactD.create(new ContactM(new UtilisateurM(userId), email, sujet, message, 0));
+			contactD.create(new ContactM(new UtilisateurM(userId), sujet, message, 0));
 		}
-		
-		//Affichage des coordonnées
+
+		// Affichage des coordonnées
 		ArrayList<CoordonneeM> listeCoordonnees = new ArrayList<>();
 		CoordonneeD coordonneeD = new CoordonneeD();
 		listeCoordonnees = coordonneeD.read();
-		request.setAttribute("listeCoordonnees", listeCoordonnees);		
-		
+		request.setAttribute("listeCoordonnees", listeCoordonnees);
+
 		request.getRequestDispatcher("vue/frontend/contact.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

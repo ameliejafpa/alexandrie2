@@ -126,5 +126,32 @@ public class ContactD implements IDao<ContactM>{
 		}
 		return contact;
 	}
+	
+	public ArrayList<ContactM> findByIdUser(int id) {
+		// TODO Auto-generated method stub
+		ArrayList<ContactM> contacts = new ArrayList<>();
+		try {
+			PreparedStatement sql = connect.prepareStatement("SELECT * FROM contact INNER JOIN utilisateur ON contact.idUtilisateur = utilisateur.id WHERE contact.idUtilisateur= ?");
+			sql.setInt(1, id);
+			ResultSet rs = sql.executeQuery();
+			while (rs.next()) {
+				ContactM contact = new ContactM();
+				UtilisateurM utilisateur = new UtilisateurM(rs.getInt("utilisateur.id"),rs.getString("nom"),rs.getString("prenom"),rs.getString("dateInscription"),rs.getString("email"),rs.getString("motDePasse")	);
+				
+				contact.setId(rs.getInt("contact.id"));
+				contact.setIdUtilisateur(utilisateur);
+				contact.setSujet(rs.getString("sujet"));
+				contact.setMessage(rs.getString("message"));
+				contact.setEtat(rs.getInt("etat"));
+				
+				
+				contacts.add(contact);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return contacts;
+	}
 
 }

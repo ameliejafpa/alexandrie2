@@ -15,8 +15,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-  <!-- loader-->
-	<link href="vue/backend/assets/css/pace.min.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -34,8 +32,7 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title">Sign In</h5>
-                    <p class="card-text mb-5">See your growth and get consulting support!</p>
+                    <h5 class="card-title">Connexion</h5>
                     
                     <!--formulaire de connexion-->
                     <form class="form-body" method="post"> 
@@ -44,25 +41,28 @@
                       </div>           
                         <div class="row g-3">    
                           <div class="col-12">
-                            <label for="inputEmailAddress" class="form-label">Email Address</label>
+                            <label for="inputEmailAddress" class="form-label">Adresse Email</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
-                              <input type="email" class="form-control radius-30 ps-5" id="inputEmailAddress" placeholder="Email Address" name="inputEmail">
+                              <input type="email" class="form-control radius-30 ps-5" id="inputEmailAddress" placeholder="Adresse Email" name="inputEmail">
                             </div>
                           </div> 
                           <div class="col-12">
-                            <label for="inputChoosePassword" class="form-label">Enter Password</label>
+                            <label for="inputChoosePassword" class="form-label">Mot de passe</label>
                             <div class="ms-auto position-relative">
                               <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" placeholder="Enter Password" name="inputPassword"> 
+                              <input type="password" class="form-control radius-30 ps-5" id="inputChoosePassword" placeholder="Mot de passe" name="inputPassword"> 
                             </div>
                           </div>
-                          <div class="col-6 text-end">
+                          <!-- <div class="col-6 text-end">
                          	 <a href="authentication-forgot-password.html">Forgot Password ?</a>
-                          </div>
+                          </div> -->
+                          <c:if test="${messageConnexionNo }">
+			                		<div class="col-lg-12 alert alert-danger" role="alert">Adresse email ou mot de passe invalide</div>
+								</c:if>
                           <div class="col-12">
                             <div class="d-grid">
-                              <button type="submit" class="btn btn-primary radius-30">Sign In</button>
+                              <button type="submit" class="btn btn-primary radius-30" name="btnConnexion">Connexion</button>
                             </div>
                           </div>                
                         </div>

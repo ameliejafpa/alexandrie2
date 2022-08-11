@@ -21,8 +21,7 @@
   <link href="vue/backend/assets/css/icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-  <!-- loader-->
-	<link href="vue/backend/assets/css/pace.min.css" rel="stylesheet" />
+
   <!--Theme Styles-->
   <link href="vue/backend/assets/css/dark-theme.css" rel="stylesheet" />
   <link href="vue/backend/assets/css/light-theme.css" rel="stylesheet" />
@@ -33,27 +32,6 @@
 </head>
 
 <body>
-
-
-  <!--start wrapper-->
-  <div class="wrapper">
-
-       <!--start content-->
-          <main class="page-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-              <div class="breadcrumb-title pe-3">eCommerce</div>
-              <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Categories</li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-            <!--end breadcrumb-->
 
               <div class="card">
                 <div class="card-header py-3">
@@ -164,90 +142,74 @@
                                    <th>Action</th>
                                  </tr>
                                </thead>
-                                <tbody>
-								    <!-- lister les categories -->
-								    <c:forEach items="${listeCategorie}" var ="categorie">
-								        <tr>
-								            <td><input class="form-check-input" type="checkbox"></td>
-								            <td>${categorie.titre }</td>
-								            <td></td>
-								            <td>
-								                <div class="d-flex align-items-center gap-3 fs-6">
-								                    <a href="listecatadmin?updateCategorie=${categorie.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateCategorie"><i class="bi bi-pencil-fill"></i></a>
-								                    <!-- declencheur modal suppression -->
-								                    <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteCatModal${categorie.id }"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
-								                </div>
-								            </td>
-								        </tr>	
-								        <!-- modal suppression catégorie-->
-								        <div class="modal fade" id="deleteCatModal${categorie.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								            <div class="modal-dialog">
-								                <div class="modal-content">
-								                    <div class="modal-body">Voulez-vous confirmer la suppression de ${categorie.titre } ?</div>
-								                    <div class="modal-footer">
-								                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-								                        <a href="listecatadmin?deleteCategorie=${categorie.id }"><button type="button" class="btn btn-primary" name="deleteCategorie">Confirmer</button></a>
-								                    </div>
-								                </div>
-								            </div>
-								        </div>	        
-								        <!-- lister les sous categories -->
-								        <c:forEach items="${listeSousCategorie}" var ="sousCategorie">
-								            <c:if test="${sousCategorie.idCategorie.id == categorie.id }">	
-								                <tr>
-								                    <td><input class="form-check-input" type="checkbox"></td>
-								                    <td>${sousCategorie.idCategorie.titre }</td>
-								                    <td>${sousCategorie.titre }</td>
-								                    <td>
-								                        <div class="d-flex align-items-center gap-3 fs-6">
-								                            <a href="listecatadmin?updateSousCat=${sousCategorie.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateSousCat"><i class="bi bi-pencil-fill"></i></a>
-								                            <!-- declencheur modal suppression -->
-								                            <a  class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteSousCatModal${sousCategorie.id }" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>     
-								                        </div>
-								                    </td>
-								                </tr>
-								                <!-- modal suppression catégorie-->                
-								                <div class="modal fade" id="deleteSousCatModal${sousCategorie.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								                    <div class="modal-dialog">
-								                        <div class="modal-content">
-								                            <div class="modal-body">Voulez-vous confirmer la suppression de ${sousCategorie.titre }  ?</div>
-								                            <div class="modal-footer">
-								                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-								                                <a href="listecatadmin?deleteSousCategorie=${sousCategorie.id }"><button type="button" class="btn btn-primary" name="deleteSousCategorie">Confirmer</button></a>
-								                            </div>
-								                        </div>
-								                    </div>
-								                </div>																
-								            </c:if>
-								        </c:forEach> <!-- fin liste sous categories-->
-								    </c:forEach> <!-- fin liste categories-->
-                                 </tbody>
+<tbody>
+<!-- lister les categories -->
+<c:forEach items="${listeCategorie}" var ="categorie">
+    <tr>
+        <td><input class="form-check-input" type="checkbox"></td>
+        <td>${categorie.titre }</td>
+        <td></td>
+        <td>
+            <div class="d-flex align-items-center gap-3 fs-6">
+                <a href="listecatadmin?updateCategorie=${categorie.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateCategorie"><i class="bi bi-pencil-fill"></i></a>
+                <!-- declencheur modal suppression -->
+                <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteCatModal${categorie.id }"  data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>
+            </div>
+        </td>
+    </tr>	
+    <!-- modal suppression catégorie-->
+    <div class="modal fade" id="deleteCatModal${categorie.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">Voulez-vous confirmer la suppression de ${categorie.titre } ?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <a href="listecatadmin?deleteCategorie=${categorie.id }"><button type="button" class="btn btn-primary" name="deleteCategorie">Confirmer</button></a>
+                </div>
+            </div>
+        </div>
+    </div>	        
+    <!-- lister les sous categories -->
+    <c:forEach items="${listeSousCategorie}" var ="sousCategorie">
+        <c:if test="${sousCategorie.idCategorie.id == categorie.id }">	
+            <tr>
+                <td><input class="form-check-input" type="checkbox"></td>
+                <td>${sousCategorie.idCategorie.titre }</td>
+                <td>${sousCategorie.titre }</td>
+                <td>
+                    <div class="d-flex align-items-center gap-3 fs-6">
+                        <a href="listecatadmin?updateSousCat=${sousCategorie.id }" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-original-title="Edit info" aria-label="Edit" name="updateSousCat"><i class="bi bi-pencil-fill"></i></a>
+                        <!-- declencheur modal suppression -->
+                        <a  class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteSousCatModal${sousCategorie.id }" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a>     
+                    </div>
+                </td>
+            </tr>
+            <!-- modal suppression catégorie-->                
+            <div class="modal fade" id="deleteSousCatModal${sousCategorie.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">Voulez-vous confirmer la suppression de ${sousCategorie.titre }  ?</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <a href="listecatadmin?deleteSousCategorie=${sousCategorie.id }"><button type="button" class="btn btn-primary" name="deleteSousCategorie">Confirmer</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>																
+        </c:if>
+    </c:forEach> <!-- fin liste sous categories-->
+</c:forEach> <!-- fin liste categories-->
+</tbody>
                              </table>
                           </div>
-                          <nav class="float-end mt-0" aria-label="Page navigation">
-                            <ul class="pagination">
-                              <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item"><a class="page-link" href="#">2</a></li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                          </nav>
                         </div>
                       </div>
                     </div>
                    </div><!--end row-->
                 </div>
               </div>
-              
-
           </main>
        <!--end page main-->
-
-
-       <!--start overlay-->
-        <div class="overlay nav-toggle-icon"></div>
-       <!--end overlay-->
 
         <!--Start Back To Top Button-->
         <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>

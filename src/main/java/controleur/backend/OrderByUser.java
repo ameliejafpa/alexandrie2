@@ -10,38 +10,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CategorieD;
-import dao.ProduitD;
-import dao.SousCategorieD;
-import modele.ProduitM;
-import modele.SousCategorieM;
+import dao.CommandeD;
+import modele.CommandeM;
 
 /**
- * Servlet implementation class NewProduct
+ * Servlet implementation class OrderByUser
  */
-@WebServlet("/newproductadmin")
-public class NewProduct extends HttpServlet {
+@WebServlet("/orderbyuseradmin")
+public class OrderByUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	CategorieD categorieD = new CategorieD();
-	SousCategorieD sousCategorieD = new SousCategorieD();
-	ProduitD produitD = new ProduitD();
+	CommandeD commandeD = new CommandeD();
+	ArrayList<CommandeM> commandeM = new ArrayList<CommandeM>();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NewProduct() {
+	public OrderByUser() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<SousCategorieM> sousCategorieM = new ArrayList<SousCategorieM>();
-		sousCategorieM = sousCategorieD.read();
-		request.setAttribute("listeSousCategorie", sousCategorieM);
+		if (request.getParameter("action").equals("showByClient")) {
+			int idUser = Integer.parseInt(request.getParameter("id"));
+			commandeM = commandeD.findByUserId(idUser);
 
-		
+		} else if (request.getParameter("action").equals("showByProduct")) {
+			int idProduct = Integer.parseInt(request.getParameter("id"));
+			commandeM = commandeD.findByProductId(idProduct);
+
+		} else if (request.getParameter("action").equals("showAll")) {
+			commandeM = commandeD.read();
+		}
+
+		// affichage des commandes
+		request.setAttribute("listeCommande", commandeM);
+
 		// verif connexion : si pas connect�, redirection automatique vers la page de
 		// connexion
 		HttpSession session = request.getSession(true);
@@ -50,7 +60,7 @@ public class NewProduct extends HttpServlet {
 			response.sendRedirect("connectionadmin");
 		} else {
 			System.out.println(session.getAttribute("isConnected"));
-			request.getRequestDispatcher("/vue/backend/NewProduct.jsp").forward(request, response);
+			request.getRequestDispatcher("/vue/backend/OrderByUser.jsp").forward(request, response);
 		}
 	}
 
@@ -60,17 +70,8 @@ public class NewProduct extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		if (request.getParameter("btnAjout") != null) {
-			System.out.println("envoi formulaire");
-			produitD.create(new ProduitM(request.getParameter("intputTitre"), request.getParameter("inputDescr"),
-					Float.valueOf(request.getParameter("inputPrix")),
-					"vue/img/produit/" + request.getParameter("inputImage"),
-					new SousCategorieM(Integer.valueOf(request.getParameter("inputSousCat"))), 0, 0));
-			response.sendRedirect(request.getContextPath() + "/productlistadmin");
-		} else {
-			doGet(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

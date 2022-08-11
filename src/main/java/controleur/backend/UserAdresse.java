@@ -10,38 +10,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CategorieD;
-import dao.ProduitD;
-import dao.SousCategorieD;
-import modele.ProduitM;
-import modele.SousCategorieM;
+import dao.AdresseLivraisonD;
+import dao.UtilisateurD;
+import modele.AdresseLivraisonM;
 
 /**
- * Servlet implementation class NewProduct
+ * Servlet implementation class UserAdresse
  */
-@WebServlet("/newproductadmin")
-public class NewProduct extends HttpServlet {
+@WebServlet("/adressesadmin")
+public class UserAdresse extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	CategorieD categorieD = new CategorieD();
-	SousCategorieD sousCategorieD = new SousCategorieD();
-	ProduitD produitD = new ProduitD();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public NewProduct() {
+	public UserAdresse() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		ArrayList<SousCategorieM> sousCategorieM = new ArrayList<SousCategorieM>();
-		sousCategorieM = sousCategorieD.read();
-		request.setAttribute("listeSousCategorie", sousCategorieM);
+		int idUser = Integer.parseInt(request.getParameter("id"));
+		UtilisateurD utilisateurD = new UtilisateurD();
+		request.setAttribute("user", utilisateurD.findById(idUser));
 
-		
+		AdresseLivraisonD adresseLivraisonD = new AdresseLivraisonD();
+		ArrayList<AdresseLivraisonM> adresseLivraisonM = new ArrayList<AdresseLivraisonM>();
+		adresseLivraisonM = adresseLivraisonD.findByUserIdArray(idUser);
+
+		// affichage des commandes
+		request.setAttribute("listeAdresse", adresseLivraisonM);
+
 		// verif connexion : si pas connect�, redirection automatique vers la page de
 		// connexion
 		HttpSession session = request.getSession(true);
@@ -50,9 +55,9 @@ public class NewProduct extends HttpServlet {
 			response.sendRedirect("connectionadmin");
 		} else {
 			System.out.println(session.getAttribute("isConnected"));
-			request.getRequestDispatcher("/vue/backend/NewProduct.jsp").forward(request, response);
+			request.getRequestDispatcher("/vue/backend/UserAdresse.jsp").forward(request, response);
 		}
-	}
+	} // fin doGet
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -60,17 +65,8 @@ public class NewProduct extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		if (request.getParameter("btnAjout") != null) {
-			System.out.println("envoi formulaire");
-			produitD.create(new ProduitM(request.getParameter("intputTitre"), request.getParameter("inputDescr"),
-					Float.valueOf(request.getParameter("inputPrix")),
-					"vue/img/produit/" + request.getParameter("inputImage"),
-					new SousCategorieM(Integer.valueOf(request.getParameter("inputSousCat"))), 0, 0));
-			response.sendRedirect(request.getContextPath() + "/productlistadmin");
-		} else {
-			doGet(request, response);
-		}
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
