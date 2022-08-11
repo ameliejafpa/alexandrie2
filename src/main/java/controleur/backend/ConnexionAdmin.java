@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.AdministrateurD;
 import modele.AdministrateurM;
+import modele.UtilisateurM;
 
 /**
  * Servlet implementation class ConnexionAdmin
@@ -44,7 +45,13 @@ public class ConnexionAdmin extends HttpServlet {
 		AdministrateurM administrateur = new AdministrateurM();
 		//System.out.println(request.getParameter("inputEmail"));
 		//System.out.println(request.getParameter("inputPassword"));
-		if (administrateurD.login(request.getParameter("inputEmail"), request.getParameter("inputPassword"), administrateur)!=null) {
+		
+		boolean messageConnexionNo = false;
+		
+		if (administrateurD.login(request.getParameter("inputEmail"), request.getParameter("inputPassword"), administrateur)==null) {
+			messageConnexionNo = true;
+
+		} else {
 			//active la session
 			HttpSession session = request.getSession(true);
 			session.setAttribute("sessionId", administrateur.getId());
@@ -56,9 +63,13 @@ public class ConnexionAdmin extends HttpServlet {
 			//redirige vers l'accueil
 			response.sendRedirect(request.getContextPath()+"/accueiladmin");		
 		} 
-		else {
+		request.setAttribute("messageConnexionNo", messageConnexionNo);
+
+		
+		if (!connected) {
 			doGet(request, response);
 		}
+		
 				
 	} // fin do post
 
