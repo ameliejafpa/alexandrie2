@@ -95,6 +95,7 @@ public class LoginC extends HttpServlet {
 				session.setAttribute("userId", utilisateur.getId());
 				session.setAttribute("userNom", utilisateur.getNom());
 				session.setAttribute("userPrenom", utilisateur.getPrenom());
+				session.setAttribute("userEmail", utilisateur.getEmail());
 				session.setAttribute("isConnected", true);
 				connected = true;
 				response.sendRedirect(request.getContextPath() + "/accueil");

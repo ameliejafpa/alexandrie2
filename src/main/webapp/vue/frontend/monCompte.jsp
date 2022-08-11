@@ -206,7 +206,20 @@
                                         <address>
                                             ${adresseLivraison.adresse }<br>${adresseLivraison.codePostal } ${adresseLivraison.ville }<br>${adresseLivraison.pays }
                                         </address>
+                                        <%-- <div class=d-flex>
+	                                        <div class="single-input single-input-half">
+	                                            <button class="btn custom-btn" type="submit" name="btnUpdateAdresse">
+	                                                <span>Modifier</span>
+	                                            </button>
+	                                        </div>
+	                                        <div class="single-input single-input-half">
+	                                            <a href="monCompte?deleteAdresse&id=${adresseLivraison.id }" type="button" class="btn custom-btn" name="btnDeleteAdresse">
+	                                                <span>Supprimer</span>
+	                                            </a>
+	                                        </div>
+                                        </div> --%>
                                     </div>
+                               
                                     <div class="col-12">
                                     	<h4 class="small-title">Modifier votre adresse de livraison</h4>
                                     	<form method="post" class="myaccount-form">
@@ -228,7 +241,7 @@
                                             <input type="text" name="pays" value="France">
                                         </div>
                                         <div class="single-input">
-                                            <button class="btn custom-btn" type="submit" name="btnAdresse">
+                                            <button class="btn custom-btn" type="submit" name="btnAddAdresse">
                                                 <span>Enregistrer</span>
                                             </button>
                                         </div>
@@ -254,6 +267,9 @@
 										</div>
 		                            </c:if>
 		                            <c:if test="${erreurNewPassword }">
+					                		<div class="alert alert-danger" role="alert">Nouveau mot de passe invalide, veuillez recommencer</div>
+										</c:if>
+									<c:if test="${erreurOldPassword }">
 					                		<div class="alert alert-danger" role="alert">Mot de passe invalide, veuillez recommencer</div>
 										</c:if>
 		                            <c:if test="${messageInscriptionOk }">
@@ -264,15 +280,15 @@
                                     <div class="myaccount-form-inner">
                                         <div class="single-input single-input-half">
                                             <label>Prénom*</label>
-                                            <input type="text" name="upPrenom">
+                                            <input type="text" name="upPrenom" value="${userPrenom }">
                                         </div>
                                         <div class="single-input single-input-half">
                                             <label>Nom*</label>
-                                            <input type="text" name="upNom">
+                                            <input type="text" name="upNom" value="${userNom }">
                                         </div>
                                         <div class="single-input">
                                             <label>Email*</label>
-                                            <input type="email" name="upEmail">
+                                            <input type="email" name="upEmail" value="${userEmail }">
                                         </div>
                                         <div class="single-input">
                                             <label>Mot de passe actuel(laisser vide pour ne pas le modifier)</label>

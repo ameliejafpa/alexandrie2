@@ -1,11 +1,7 @@
 package controleur.frontend;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,9 +58,7 @@ public class MonCompteC extends HttpServlet {
 			String email = request.getParameter("upEmail");
 			
 			utilisateur = utilisateurD.findByEmail(email);
-			System.out.println(utilisateurD.findById(userId).getEmail());
-			System.out.println(email);
-			System.out.println(utilisateurD.findById(userId).getEmail().equalsIgnoreCase(email));
+			
 			if (nom.equalsIgnoreCase("") || prenom.equalsIgnoreCase("") || email.equalsIgnoreCase("")) {
 	        	champObligatoire = true;
 			}
@@ -76,11 +70,11 @@ public class MonCompteC extends HttpServlet {
 			if (!request.getParameter("oldPassword").equalsIgnoreCase("") && !request.getParameter("newPassword").equalsIgnoreCase("") ) {
 				
 				// test si mot de passe correct
-//				oldPassword = request.getParameter("oldPassword");
-//				
-//				if (encoded == utilisateurD.findById(userId).getMotDePasse()) {
-//					erreurOldPassword = true;
-//				}
+				oldPassword = request.getParameter("oldPassword");
+				
+				if (utilisateurD.connexion(email, oldPassword) == null) {
+					erreurOldPassword = true;
+				}
 				
 				//Vérification nouveau mot de passe
 				newPassword = request.getParameter("newPassword");
@@ -91,12 +85,13 @@ public class MonCompteC extends HttpServlet {
 		        if (!matchFound) {
 		        	erreurNewPassword = true;
 				}
-		        if (!erreurNewPassword && !champObligatoire && !emailExiste) {
+		        if (!erreurNewPassword && !champObligatoire && !emailExiste && !erreurOldPassword) {
 		        	utilisateur = new UtilisateurM(nom,prenom,email,newPassword);
 					utilisateurD.update(utilisateur, userId);
 					session.setAttribute("userId", utilisateur.getId());
 					session.setAttribute("userNom", utilisateur.getNom());
 					session.setAttribute("userPrenom", utilisateur.getPrenom());
+					session.setAttribute("userEmail", utilisateur.getEmail());
 				}
 			} else if (!champObligatoire && !emailExiste) {
 				utilisateur = new UtilisateurM(nom,prenom,email);
@@ -109,10 +104,10 @@ public class MonCompteC extends HttpServlet {
 			request.setAttribute("erreurNewPassword", erreurNewPassword);
 			request.setAttribute("champObligatoire", champObligatoire);
 		}
-		// create / update adresse de livraison
+		// create adresse de livraison
 		AdresseLivraisonD adresseLivraisonD = new AdresseLivraisonD();
 
-		if (request.getParameter("btnAdresse") != null) {
+		if (request.getParameter("btnAddAdresse") != null) {
 			String adresse = request.getParameter("adresse");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
@@ -126,6 +121,14 @@ public class MonCompteC extends HttpServlet {
 				System.out.println("test");
 			}
 		}
+		
+		// update adresse de livraison
+		
+		// delete adresse de livraison
+//		if (request.getParameter("btnAddAdresse") != null) {
+//			
+//		}
+		
 		
 		//affichage de l'adresse de livraison
 		AdresseLivraisonM adresseLivraisonM = new AdresseLivraisonM();
