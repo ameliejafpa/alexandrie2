@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en" class="light-theme">
+<jsp:include page="/header"/>
 <head>
 
   <title>Accueil</title>
@@ -9,10 +10,9 @@
 </head>
 <body>
 
-<jsp:include page="/header"/>
 
-   <!--start content-->
-     <main class="page-content"> 
+
+ 
         <div class="row">
           <div class="col col-lg-9 mx-auto">
             <h6 class="mb-0 text-uppercase">Alerte stock insuffisant</h6>

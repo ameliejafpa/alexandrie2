@@ -33,12 +33,6 @@
 
 <body>
 
- <!--start wrapper-->
-  <div class="wrapper">
-
-       <!--start content-->
-          <main class="page-content">
-
               <div class="card">
                 <div class="card-header py-3"> 
                   <div class="row g-3 align-items-center">

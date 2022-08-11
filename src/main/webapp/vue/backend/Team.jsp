@@ -34,12 +34,6 @@
 <body>
 
 
-<!--start wrapper-->
-<div class="wrapper">
-
- <!--start content-->
-<main class="page-content">
-
 <div class="card">
 <div class="card-header py-3">
 	<h6 class="mb-0">Ajouter une catégorie / sous-catégorie</h6>

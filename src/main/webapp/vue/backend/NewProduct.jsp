@@ -35,10 +35,6 @@
 
 <c:url value="/productlistadmin" var="retourliste"/>
 
-  <!--start wrapper-->
-  <div class="wrapper">
-       <!--start content-->
-          <main class="page-content">
          <form method="post" action="newproductadmin">
               <div class="row">
                  <div class="col-lg-12 mx-auto">

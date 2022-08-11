@@ -36,12 +36,6 @@
 <c:url value="/newproductadmin" var="newproduct"/>
 
 
-  <!--start wrapper-->
-  <div class="wrapper">
-
-    <!--start content-->
-     <main class="page-content"> 
-
     <div class="card">
     	<!--  header contenu -->
         <div class="card-header py-3">
