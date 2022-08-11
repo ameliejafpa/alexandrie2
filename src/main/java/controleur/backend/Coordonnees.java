@@ -55,7 +55,14 @@ public class Coordonnees extends HttpServlet {
 			String adresse = String.valueOf(request.getParameter("inputAdresse"));
 			String telephone = String.valueOf(request.getParameter("inputTelephone"));
 			String email = String.valueOf(request.getParameter("inputEmail"));
-			String logo = String.valueOf(request.getParameter("inputLogo"));
+			String logo = null;
+			if (request.getParameter("inputLogo").isEmpty() == true) {
+				logo = String.valueOf(request.getParameter("inputLogo"));
+
+			} else {
+				logo = "vue/img/" + request.getParameter("inputLogo");
+			}
+			
 			coordonneeD.update(new CoordonneeM(nom, adresse, telephone, email, logo), id);
 		}
 		doGet(request, response);
