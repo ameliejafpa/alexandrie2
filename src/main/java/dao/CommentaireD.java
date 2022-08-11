@@ -5,29 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import modele.CommentaireM;
-import modele.ImageM;
 import modele.ProduitM;
 import modele.UtilisateurM;
 
-public class CommentaireD implements IDao<CommentaireM>{
+public class CommentaireD implements IDao<CommentaireM> {
 	Connection connect = ConnectMySql.getConnection();
 
 	@Override
 	public boolean create(CommentaireM commentaire) {
-		try {	
-			PreparedStatement sql = connect.prepareStatement("INSERT INTO commentaire (commentaire,note,idProduit,idUtilisateur) "
-					+ "VALUES (?,?,?,?)");
-			sql.setString(1, commentaire.getCommentaire()); 
-			sql.setInt(2, commentaire.getNote()); 
-			sql.setInt(3, commentaire.getIdProduit().getId()); 
-			sql.setInt(4, commentaire.getIdUtilisateur().getId()); 
-			sql.executeUpdate(); 
+		try {
+			PreparedStatement sql = connect.prepareStatement(
+					"INSERT INTO commentaire (commentaire,note,idProduit,idUtilisateur) " + "VALUES (?,?,?,?)");
+			sql.setString(1, commentaire.getCommentaire());
+			sql.setInt(2, commentaire.getNote());
+			sql.setInt(3, commentaire.getIdProduit().getId());
+			sql.setInt(4, commentaire.getIdUtilisateur().getId());
+			sql.executeUpdate();
 			return true;
-		} 
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
 		return false;
 	}
 
@@ -37,17 +36,17 @@ public class CommentaireD implements IDao<CommentaireM>{
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM commentaire INNER JOIN produit ON "
 					+ "commentaire.idProduit=produit.id INNER JOIN commentaire.idUtilisateur=utilisateur.id ");
-			ResultSet res = sql.executeQuery(); 			
+			ResultSet res = sql.executeQuery();
 			while (res.next()) {
-				CommentaireM commentaire = new CommentaireM(res.getInt("commentaire.id"), res.getString("commentaire.commentaire"), 
-						res.getInt("commentaire.note"), new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")),
-						new UtilisateurM(res.getInt("utilisateur.id"),res.getString("nom"),res.getString("prenom"),res.getString("dateInscription"),
-								res.getString("email"),res.getString("motDePasse")));
+				CommentaireM commentaire = new CommentaireM(res.getInt("commentaire.id"),
+						res.getString("commentaire.commentaire"), res.getInt("commentaire.note"),
+						new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")),
+						new UtilisateurM(res.getInt("utilisateur.id"), res.getString("nom"), res.getString("prenom"),
+								res.getString("dateInscription"), res.getString("email"), res.getString("motDePasse")));
 				listeCommentaire.add(commentaire);
-			}			
-		} 
-		catch (SQLException e) {
-			e.printStackTrace();	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return listeCommentaire;
 	}
@@ -55,17 +54,16 @@ public class CommentaireD implements IDao<CommentaireM>{
 	@Override
 	public boolean update(CommentaireM commentaire, int id) {
 		try {
-			PreparedStatement sql = connect.prepareStatement("UPDATE commentaire SET commentaire=?, note=?, idProduit=?, "
-					+ "idUtilisateur=? WHERE id=?");		
-			sql.setString(1, commentaire.getCommentaire()); 
-			sql.setInt(2, commentaire.getNote()); 
-			sql.setInt(3, commentaire.getIdProduit().getId()); 
-			sql.setInt(4, commentaire.getIdUtilisateur().getId());  
-			sql.setInt(5, id);		
-			sql.executeUpdate();		
-			return true;		
-		}
-		catch (SQLException e) {
+			PreparedStatement sql = connect.prepareStatement(
+					"UPDATE commentaire SET commentaire=?, note=?, idProduit=?, " + "idUtilisateur=? WHERE id=?");
+			sql.setString(1, commentaire.getCommentaire());
+			sql.setInt(2, commentaire.getNote());
+			sql.setInt(3, commentaire.getIdProduit().getId());
+			sql.setInt(4, commentaire.getIdUtilisateur().getId());
+			sql.setInt(5, id);
+			sql.executeUpdate();
+			return true;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -74,12 +72,11 @@ public class CommentaireD implements IDao<CommentaireM>{
 	@Override
 	public boolean delete(int id) {
 		try {
-			PreparedStatement sql = connect.prepareStatement("DELETE FROM commentaire WHERE id = ?");	
-			sql.setInt(1,id);	
-			sql.executeUpdate();		
-			return true;			
-		} 
-		catch (SQLException e) {
+			PreparedStatement sql = connect.prepareStatement("DELETE FROM commentaire WHERE id = ?");
+			sql.setInt(1, id);
+			sql.executeUpdate();
+			return true;
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -87,79 +84,103 @@ public class CommentaireD implements IDao<CommentaireM>{
 
 	@Override
 	public CommentaireM findById(int id) {
-		CommentaireM commentaire = null;		
+		CommentaireM commentaire = null;
 		try {
 			PreparedStatement sql = connect.prepareStatement("SELECT * FROM commentaire INNER JOIN produit ON "
 					+ "commentaire.idProduit=produit.id INNER JOIN commentaire.idUtilisateur=utilisateur.id "
-					+ "WHERE commentaire.id= "+id+"");			
-			ResultSet res = sql.executeQuery();			
-			if(res.next()) {
-				commentaire =  new CommentaireM(res.getInt("commentaire.id"), res.getString("commentaire.commentaire"),
-						res.getInt("commentaire.note"), new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")),
-						new UtilisateurM(res.getInt("utilisateur.id"),res.getString("nom"),res.getString("prenom"),res.getString("dateInscription"),
-								res.getString("email"),res.getString("motDePasse")));	
+					+ "WHERE commentaire.id= " + id + "");
+			ResultSet res = sql.executeQuery();
+			if (res.next()) {
+				commentaire = new CommentaireM(res.getInt("commentaire.id"), res.getString("commentaire.commentaire"),
+						res.getInt("commentaire.note"),
+						new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")),
+						new UtilisateurM(res.getInt("utilisateur.id"), res.getString("nom"), res.getString("prenom"),
+								res.getString("dateInscription"), res.getString("email"), res.getString("motDePasse")));
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return commentaire;
 	}
-	
+
 	public ArrayList<CommentaireM> findByIdProduct(int id) {
-		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();		
+		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT * FROM commentaire INNER JOIN produit ON commentaire.idProduit=produit.id INNER JOIN utilisateur ON commentaire.idUtilisateur = utilisateur.id WHERE produit.id= ?");	
-			sql.setInt(1,id);	
-			ResultSet res = sql.executeQuery();			
-			while(res.next()) {
-				CommentaireM commentaire = new CommentaireM(res.getInt("commentaire.id"),res.getString("commentaire.commentaire"),
-						res.getInt("commentaire.note"), new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")), new UtilisateurM(res.getInt("utilisateur.id"),res.getString("nom"),res.getString("prenom"),res.getString("dateInscription"), res.getString("email"),res.getString("motDePasse")));
-				listeCommentaires.add(commentaire);		
+			PreparedStatement sql = connect.prepareStatement(
+					"SELECT * FROM commentaire INNER JOIN produit ON commentaire.idProduit=produit.id INNER JOIN utilisateur ON commentaire.idUtilisateur = utilisateur.id WHERE produit.id= ?");
+			sql.setInt(1, id);
+			ResultSet res = sql.executeQuery();
+			while (res.next()) {
+				CommentaireM commentaire = new CommentaireM(res.getInt("commentaire.id"),
+						res.getString("commentaire.commentaire"), res.getInt("commentaire.note"),
+						new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")),
+						new UtilisateurM(res.getInt("utilisateur.id"), res.getString("nom"), res.getString("prenom"),
+								res.getString("dateInscription"), res.getString("email"), res.getString("motDePasse")));
+				listeCommentaires.add(commentaire);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return listeCommentaires;
 	}
-	
-	public int noteMoyenne(int id) {
-		int noteMoyenne = 0;
-		
+
+	public ArrayList<CommentaireM> findByUserId(int id) {
+		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT ROUND(AVG(commentaire.note)) AS moyenne FROM commentaire INNER JOIN produit ON commentaire.idProduit = produit.id WHERE produit.id = ?");
+			PreparedStatement sql = connect.prepareStatement(
+					"SELECT * FROM commentaire INNER JOIN produit ON commentaire.idProduit=produit.id INNER JOIN utilisateur ON commentaire.idUtilisateur = utilisateur.id WHERE utilisateur.id= ?");
 			sql.setInt(1, id);
 			ResultSet res = sql.executeQuery();
-			
+			while (res.next()) {
+				CommentaireM commentaire = new CommentaireM(res.getInt("commentaire.id"),
+						res.getString("commentaire.commentaire"), res.getInt("commentaire.note"),
+						new ProduitM(res.getInt("produit.id"), res.getString("produit.titre")),
+						new UtilisateurM(res.getInt("utilisateur.id"), res.getString("nom"), res.getString("prenom"),
+								res.getString("dateInscription"), res.getString("email"), res.getString("motDePasse")));
+				listeCommentaires.add(commentaire);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listeCommentaires;
+	}
+
+	public int noteMoyenne(int id) {
+		int noteMoyenne = 0;
+
+		try {
+			PreparedStatement sql = connect.prepareStatement(
+					"SELECT ROUND(AVG(commentaire.note)) AS moyenne FROM commentaire INNER JOIN produit ON commentaire.idProduit = produit.id WHERE produit.id = ?");
+			sql.setInt(1, id);
+			ResultSet res = sql.executeQuery();
+
 			if (res.next()) {
 				noteMoyenne = res.getInt("moyenne");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 		return noteMoyenne;
 	}
-	
+
 	public int nbreComments(int id) {
 		int nbrCommentaires = 0;
-		
+
 		try {
-			PreparedStatement sql = connect.prepareStatement("SELECT COUNT(commentaire.id) AS nbrCommentaires FROM commentaire INNER JOIN produit ON commentaire.idProduit = produit.id WHERE produit.id = ?");
+			PreparedStatement sql = connect.prepareStatement(
+					"SELECT COUNT(commentaire.id) AS nbrCommentaires FROM commentaire INNER JOIN produit ON commentaire.idProduit = produit.id WHERE produit.id = ?");
 			sql.setInt(1, id);
 			ResultSet res = sql.executeQuery();
-			
+
 			if (res.next()) {
 				nbrCommentaires = res.getInt("nbrCommentaires");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 		return nbrCommentaires;
 	}
-	
-	
-	
-	
 
 } // fin CommentaireD
