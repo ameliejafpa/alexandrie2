@@ -61,9 +61,10 @@
                 
                 <!-- info article -->
                 <div class="col-12 col-lg-6">
-                <form method="post" >
+                
                 <div class="card shadow-sm border-0">
                   <div class="card-body">
+                  	<form method="post" >
                      <div class="row g-3">
                       <div class="card shadow-none border">
                         <div class="card-header">
@@ -140,11 +141,65 @@
                      	 </div>    
                         </div>
                       </div>
-
+					</form>
                   </div>
                 </div>
-                
-                </form>
+                <!-- commentaires du produit -->
+                 <div class="card shadow-sm border-0">
+                  <div class="card-body">
+                  	<div class="row g-3">
+                      <div class="card shadow-none border">
+                        <div class="card-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Liste des commentaires</h5>
+                        </div>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                          <div class="row g-3">
+                            <div class="col-12">
+                              <table class="table align-middle table-striped">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Note</th>
+                                            <th>Commentaire</th>
+                                            <th>Supprimer</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${listeCommentaires }" var="commentaire">
+                                            <tr>
+                                                <td><span>${commentaire.idUtilisateur.prenom } ${commentaire.idUtilisateur.nom }</span></td>
+                                                <td><span>${commentaire.note }/5</span></td>
+                                                <td><span>${commentaire.commentaire }</span></td>
+                                                <td>
+                                                    <div class="d-flex align-items-center gap-3 fs-6">
+                                                        <a class="text-danger" data-bs-placement="bottom" data-bs-toggle="modal" data-bs-target="#deleteCommentModal${produit.id }"  data-bs-original-title="Delete" aria-label="Delete" >
+                                                            <i class="bi bi-trash-fill"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- modal suppression commentairee-->
+										  <div class="modal fade" id="deleteCommentModal${produit.id }" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										      <div class="modal-dialog">
+										          <div class="modal-content">
+										              <div class="modal-body">Voulez-vous supprimer le commentaire ?</div>
+										              <div class="modal-footer">
+										                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+										                  <a href="productdetailadmin?id=${produit.id }&idComment=${commentaire.id }&deleteComment" type="button" class="btn btn-primary" name="deleteComment">Confirmer</a>
+										              </div>
+										          </div>
+										      </div>
+										  </div><!-- fin modal -->
+
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                             </div>
+                          </div>
+                        </div>
+                 </div>
               </div>
               
               <!-- modif stock -->
@@ -189,60 +244,13 @@
                   </div>
                 </div>
               
-              <!-- affiche commentaires -->
+              <!-- bouton commandes liées -->
                 <div class="card shadow-sm border-0">
                   <div class="card-body">
-                     <a class="text-danger" data-bs-toggle="modal" data-bs-target="#commentproduitModal${produit.id }" data-bs-placement="bottom">
-                     	<button class="btn btn-primary">voir les commentaires</button>
-                     </a>
+                     
                      <a href="orderbyuseradmin?id=${produit.id }&action=showByProduct" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
                    data-bs-original-title="Voir les commandes"><button class="btn btn-primary">voir les commandes liées</button></a> 
 
-                     
-       <!-- modal commentaire -->
-       <div class="modal fade" id="commentproduitModal${produit.id }" tabindex="-1"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-	        <div class="modal-dialog">
-	            <div class="modal-content">
-     				<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Liste des commentaires</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-	                <div class="modal-body">
-	                	<table class="table align-middle table-striped">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>User</th>
-                                            <th>Note</th>
-                                            <th>Commentaire</th>
-                                            <th>Supprimer</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${listeCommentaires }" var="commentaire">
-                                            <tr>
-                                                <td><span>${commentaire.idUtilisateur.nom }</span></td>
-                                                <td><span>${commentaire.note }</span></td>
-                                                <td><span>${commentaire.commentaire }</span></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center gap-3 fs-6">   
-                                                        <a href="productdetailadmin?id=${produit.id }&action=deleteComment"
-                                                        class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" name="deleteComment">
-                                                            <i class="bi bi-trash-fill"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-	                </div>
-	                
-	            </div>
-	        </div>
-    	</div>
-                     
-                  
                   </div>
                 </div>
               </div>

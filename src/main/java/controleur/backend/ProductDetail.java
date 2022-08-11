@@ -53,6 +53,12 @@ public class ProductDetail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		//suppression d'un commentaire
+		if (request.getParameter("deleteComment") != null) {
+			commentaireD.delete(Integer.valueOf(request.getParameter("idComment")));
+		}
+		
 		// afichage du produit
 		ProduitD produitD = new ProduitD();
 		idProduit = Integer.parseInt(request.getParameter("id"));
@@ -77,6 +83,8 @@ public class ProductDetail extends HttpServlet {
 		ArrayList<CommentaireM> listeCommentaires = new ArrayList<>();
 		listeCommentaires = commentaireD.findByIdProduct(idProduit);
 		request.setAttribute("listeCommentaires", listeCommentaires);
+
+		
 
 		request.getRequestDispatcher("/vue/backend/ProductDetail.jsp").forward(request, response);
 
@@ -103,7 +111,6 @@ public class ProductDetail extends HttpServlet {
 		}
 
 		if (request.getParameter("btnUpdateProduit") != null) {
-			System.out.println("ca marche?");
 			ProduitM produitUp = new ProduitM();
 			produitUp.setTitre(request.getParameter("intputTitre"));
 			produitUp.setDescription(request.getParameter("inputDescr"));
@@ -119,7 +126,7 @@ public class ProductDetail extends HttpServlet {
 			produitD.update(produitUp, idProduit); // update images
 
 		}
-
+		
 		// if (request.getParameter("inputImage2") != null) {
 		// imageD.update(null, idProduit);
 		// produitUp.setImage("vue/img/produit/" + request.getParameter("inputImage"));
