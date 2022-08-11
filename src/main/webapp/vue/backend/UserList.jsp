@@ -86,7 +86,7 @@
                                         <td><a href="commentadmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
                                         data-bs-original-title="Voir les commentaires"><i data-feather="heart"></i></a> 
                                         </td>
-                                        <td><a href="#?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
+                                        <td><a href="adressesadmin?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
                                         data-bs-original-title="Adresses enregistrées"><i data-feather="home"></i></a> 
                                         </td>
                                         <td><a href="#?id=${user.id }" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" 
